@@ -4590,6 +4590,82 @@ body:not(.film-active) .timer-orbit { filter: drop-shadow(0 0 20px rgba(178, 108
 
 body:not(.film-active) .app-footer { border-color: var(--line); color: var(--muted); }
 
+/* Fix legacy product rules that previously forced pale panels and dark text. */
+body:not(.film-active) .hero-row h1,
+body:not(.film-active) .decision-panel h2,
+body:not(.film-active) .training-banner :where(h2, h3),
+body:not(.film-active) .training-banner-copy > strong,
+body:not(.film-active) .decision-dial .score-number {
+  color: #ffffff;
+}
+
+body:not(.film-active) .hero-row .subcopy,
+body:not(.film-active) .decision-panel p,
+body:not(.film-active) .training-banner p,
+body:not(.film-active) .training-banner-status small,
+body:not(.film-active) .score-out-of,
+body:not(.film-active) .updated {
+  color: #c6b8df;
+}
+
+body:not(.film-active) .training-banner {
+  background: #241149;
+  border-color: var(--line);
+  border-radius: 12px;
+  box-shadow: var(--shadow-soft);
+}
+
+body:not(.film-active) .training-progress,
+body:not(.film-active) .confidence-track,
+body:not(.film-active) .history-track {
+  background: rgba(255, 255, 255, .12);
+}
+
+body:not(.film-active) .readiness-card {
+  background: #211044;
+  border-color: var(--line);
+  box-shadow: var(--shadow);
+}
+
+body:not(.film-active) .score-panel {
+  background: #180b33;
+  border-color: var(--line);
+}
+
+body:not(.film-active) .decision-panel {
+  background: #281552;
+}
+
+body:not(.film-active) .decision-confidence,
+body:not(.film-active) .monitor-stat,
+body:not(.film-active) .monitor-grid > div,
+body:not(.film-active) .decision-timeline > div {
+  background: rgba(255, 255, 255, .07);
+  color: var(--text);
+}
+
+body:not(.film-active) .dial-spectrum::after {
+  background: #1d0e3b;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12);
+}
+
+body:not(.film-active) .dial-marker { background: #ffffff; border-color: #1d0e3b; }
+
+body:not(.film-active) .source-card,
+body:not(.film-active) .timer-card,
+body:not(.film-active) .live-monitor,
+body:not(.film-active) .daily-story-card,
+body:not(.film-active) .baseline-card,
+body:not(.film-active) .weekly-hero-card,
+body:not(.film-active) .weekly-stat-card,
+body:not(.film-active) .history-card,
+body:not(.film-active) .all-outcomes,
+body:not(.film-active) .single-insight {
+  background: #211044;
+  border-color: var(--line);
+  box-shadow: var(--shadow);
+}
+
   </style>
 </head>
 <body>
