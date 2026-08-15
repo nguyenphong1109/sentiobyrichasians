@@ -4768,3 +4768,60 @@ body:not(.film-active) .dial-zones span { color: var(--sentio-muted); }
 
 body:not(.film-active) .toast { background: #2c155b; border-color: var(--line); color: #fff; }
 body:not(.film-active) .app-footer { background: transparent; border-color: var(--line); }
+
+/* Neon readiness dial and the last legacy light surfaces. */
+body:not(.film-active) .dial-spectrum {
+  background: conic-gradient(from -90deg, #ff6f9b 0 34%, #ffc34f 34% 67%, #39e7b5 67% 100%);
+  box-shadow: 0 0 0 1px rgba(255,255,255,.12), 0 0 24px rgba(185,108,255,.25), 0 14px 34px rgba(0,0,0,.42);
+}
+
+body:not(.film-active) .dial-spectrum::after {
+  background: #180a31;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.12), inset 0 0 28px rgba(185,108,255,.10);
+}
+
+body:not(.film-active) .dial-marker {
+  background: #ffffff;
+  border-color: #180a31;
+  box-shadow: 0 0 0 2px rgba(255,255,255,.2), 0 0 14px rgba(255,255,255,.9);
+}
+
+body:not(.film-active) .dial-zones .recover i { background: #ff82aa; box-shadow: 0 0 9px rgba(255,130,170,.55); }
+body:not(.film-active) .dial-zones .light i { background: #ffd166; box-shadow: 0 0 9px rgba(255,209,102,.55); }
+body:not(.film-active) .dial-zones .deep i { background: #51edbd; box-shadow: 0 0 9px rgba(81,237,189,.55); }
+
+body:not(.film-active) :is(.signal-detail-toggle, .insight-toggle) {
+  background: #24124a;
+  border-color: var(--line);
+  color: var(--sentio-cyan);
+  box-shadow: none;
+}
+
+body:not(.film-active) :is(.signal-detail-toggle:hover, .insight-toggle:hover) {
+  background: rgba(185,108,255,.18);
+}
+
+body:not(.film-active) .fusion-summary,
+body:not(.film-active) .fusion-summary[data-tone="attention"],
+body:not(.film-active) .dynamic-reasoning-detail {
+  background: #24124a;
+  border-color: var(--line);
+  border-left-color: var(--sentio-cyan);
+  color: var(--sentio-text);
+}
+
+body:not(.film-active) .dynamic-reasoning-detail p,
+body:not(.film-active) .fusion-summary :is(p, small, span) {
+  color: var(--sentio-muted);
+}
+
+body:not(.film-active) .insight-toggle small { color: var(--sentio-muted); }
+
+body:not(.film-active) .nudge-card,
+body:not(.film-active) .story-conclusion,
+body:not(.film-active) .outcome-card,
+body:not(.film-active) .self-awareness-card {
+  background: #24124a;
+  border-color: var(--line);
+  color: var(--sentio-text);
+}
