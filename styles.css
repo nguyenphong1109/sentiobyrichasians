@@ -4378,3 +4378,30 @@ body:not(.film-active) .film-button {
   .weekly-print-report .print-report-insights li { margin: 8px 0; }
   .weekly-print-report .print-report-footer { border-top: 1px solid #dce6f0; padding-top: 12px; font-size: 10px; }
 }
+
+/* --- Sentio AI chip (Today view) --- */
+.ai-chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; background: linear-gradient(135deg, rgba(49,87,213,.10), rgba(91,46,178,.12)); border: 1px solid rgba(49,87,213,.22); color: #2a3f6a; font-size: 11px; font-weight: 600; letter-spacing: .02em; }
+.ai-chip[hidden] { display: none; }
+.ai-chip-dot { width: 7px; height: 7px; border-radius: 50%; background: #3157d5; box-shadow: 0 0 0 3px rgba(49,87,213,.18); }
+.ai-chip-label { font-weight: 700; color: #3157d5; }
+.ai-chip-status { color: var(--muted); font-weight: 600; }
+
+/* --- Sentio AI status panel (Why sheet) --- */
+.ai-status-card { margin-top: 16px; padding: 16px; border-radius: 16px; background: linear-gradient(135deg, #f4f7ff, #fbf6ff); border: 1px solid rgba(49,87,213,.18); }
+.ai-status-card[hidden] { display: none; }
+.ai-status-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.ai-badge { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 10px; background: linear-gradient(135deg, #3157d5, #5b2eb2); color: #fff; font-weight: 800; font-size: 13px; letter-spacing: .04em; }
+.ai-status-head .card-label, .ai-confidence .card-label { display: block; color: var(--muted); font-size: 10px; }
+.ai-status-head strong { font-size: 16px; }
+.ai-confidence { margin-left: auto; text-align: right; }
+.ai-confidence strong { font-size: 15px; }
+.ai-confidence-bar { display: block; width: 90px; height: 6px; border-radius: 3px; background: rgba(49,87,213,.15); overflow: hidden; margin-top: 6px; }
+.ai-confidence-fill { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #3157d5, #8b5cf6); border-radius: 3px; transition: width .4s ease; }
+.ai-explanation { margin: 12px 0 0; font-size: 12.5px; line-height: 1.55; color: #3a4660; }
+@media (prefers-color-scheme: dark) {
+  .ai-chip { background: linear-gradient(135deg, rgba(120,150,255,.14), rgba(150,110,255,.14)); border-color: rgba(120,150,255,.3); color: #c3cef0; }
+  .ai-chip-label { color: #9fb4ff; }
+  .ai-chip-dot { background: #8fb4ff; box-shadow: 0 0 0 3px rgba(120,150,255,.18); }
+  .ai-status-card { background: linear-gradient(135deg, rgba(49,87,213,.10), rgba(91,46,178,.10)); border-color: rgba(120,150,255,.2); }
+  .ai-explanation { color: #aab8d6; }
+}
