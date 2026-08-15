@@ -186,8 +186,8 @@ const companionTranslations = {
 Object.entries(companionTranslations).forEach(([lang, values]) => Object.assign(translations[lang] || (translations[lang] = {}), values));
 
 const productTranslations = {
-  vi: { quickCheckin:'Check-in nhanh', checkinHelp:'Một chạm giúp Sentio hiểu trạng thái chủ quan của bạn tốt hơn.', moodGreat:'Rất ổn', moodOkay:'Bình thường', moodTired:'Hơi mệt', skipForNow:'Để sau', currentMission:'Nhiệm vụ hiện tại', stayWithOneThing:'Ở lại với một việc.', thisWeek:'Tuần này', progressTitleNew:'Bạn đang học đúng nhịp hơn.', progressSubtitleNew:'Những thay đổi nhỏ trong quá trình học, không phải lời hứa về điểm số.', biggestChange:'Thay đổi nổi bật nhất', averageReadiness:'Readiness trung bình', consistentDays:'Ngày giữ đúng nhịp', outOfSeven:'trên 7 ngày', recentRhythm:'Nhịp gần đây', stableMore:'Ổn định hơn', analyzingSignals:'Đang đọc tín hiệu hôm nay…', readyResult:'Sẵn sàng.', todayQuestion:'Bạn cảm thấy thế nào hôm nay?' },
-  en: { quickCheckin:'Quick check-in', checkinHelp:'One tap helps Sentio understand how you feel today.', moodGreat:'Great', moodOkay:'Okay', moodTired:'Tired', skipForNow:'Not now', currentMission:'Current mission', stayWithOneThing:'Stay with one thing.', thisWeek:'This week', progressTitleNew:'You are learning at a better rhythm.', progressSubtitleNew:'Small improvements in the learning process, not promises about grades.', biggestChange:'Biggest change', averageReadiness:'Average readiness', consistentDays:'Well-timed days', outOfSeven:'out of 7 days', recentRhythm:'Recent rhythm', stableMore:'More stable', analyzingSignals:'Reading today’s signals…', readyResult:'Ready.', todayQuestion:'How do you feel today?' },
+  vi: { quickCheckin:'Check-in nhanh', checkinHelp:'Một chạm giúp Sentio hiểu trạng thái chủ quan của bạn tốt hơn.', moodGreat:'Rất ổn', moodOkay:'Bình thường', moodTired:'Hơi mệt', skipForNow:'Để sau', selfReportFactorLabel:'Tự đánh giá hôm nay', selfReportDetail:'Bạn tự báo cáo: {mood}', currentMission:'Nhiệm vụ hiện tại', stayWithOneThing:'Ở lại với một việc.', thisWeek:'Tuần này', progressTitleNew:'Bạn đang học đúng nhịp hơn.', progressSubtitleNew:'Những thay đổi nhỏ trong quá trình học, không phải lời hứa về điểm số.', biggestChange:'Thay đổi nổi bật nhất', averageReadiness:'Readiness trung bình', consistentDays:'Ngày giữ đúng nhịp', outOfSeven:'trên 7 ngày', recentRhythm:'Nhịp gần đây', stableMore:'Ổn định hơn', analyzingSignals:'Đang đọc tín hiệu hôm nay…', readyResult:'Sẵn sàng.', todayQuestion:'Bạn cảm thấy thế nào hôm nay?' },
+  en: { quickCheckin:'Quick check-in', checkinHelp:'One tap helps Sentio understand how you feel today.', moodGreat:'Great', moodOkay:'Okay', moodTired:'Tired', skipForNow:'Not now', selfReportFactorLabel:'Today\'s self-report', selfReportDetail:'You reported: {mood}', currentMission:'Current mission', stayWithOneThing:'Stay with one thing.', thisWeek:'This week', progressTitleNew:'You are learning at a better rhythm.', progressSubtitleNew:'Small improvements in the learning process, not promises about grades.', biggestChange:'Biggest change', averageReadiness:'Average readiness', consistentDays:'Well-timed days', outOfSeven:'out of 7 days', recentRhythm:'Recent rhythm', stableMore:'More stable', analyzingSignals:'Reading today’s signals…', readyResult:'Ready.', todayQuestion:'How do you feel today?' },
   es: { quickCheckin:'Registro rápido', checkinHelp:'Un toque ayuda a Sentio a entender cómo te sientes hoy.', moodGreat:'Muy bien', moodOkay:'Normal', moodTired:'Cansado', skipForNow:'Ahora no', currentMission:'Misión actual', stayWithOneThing:'Quédate con una sola tarea.', thisWeek:'Esta semana', progressTitleNew:'Estás aprendiendo con un ritmo mejor.', progressSubtitleNew:'Pequeñas mejoras en el proceso, no promesas sobre notas.', biggestChange:'Mayor cambio', averageReadiness:'Preparación media', consistentDays:'Días con buen ritmo', outOfSeven:'de 7 días', recentRhythm:'Ritmo reciente', stableMore:'Más estable', analyzingSignals:'Leyendo las señales de hoy…', readyResult:'Listo.', todayQuestion:'¿Cómo te sientes hoy?' },
   fr: { quickCheckin:'Check-in rapide', checkinHelp:'Un geste aide Sentio à comprendre votre état du jour.', moodGreat:'Très bien', moodOkay:'Normal', moodTired:'Fatigué', skipForNow:'Plus tard', currentMission:'Mission actuelle', stayWithOneThing:'Restez sur une seule tâche.', thisWeek:'Cette semaine', progressTitleNew:'Votre rythme d’apprentissage s’améliore.', progressSubtitleNew:'De petits progrès dans le processus, sans promesse sur les notes.', biggestChange:'Changement principal', averageReadiness:'Readiness moyenne', consistentDays:'Jours bien rythmés', outOfSeven:'sur 7 jours', recentRhythm:'Rythme récent', stableMore:'Plus stable', analyzingSignals:'Lecture des signaux du jour…', readyResult:'Prêt.', todayQuestion:'Comment vous sentez-vous aujourd’hui ?' },
   zh: { quickCheckin:'快速签到', checkinHelp:'轻触一下，帮助 Sentio 更好地理解你今天的主观状态。', moodGreat:'很好', moodOkay:'一般', moodTired:'有点累', skipForNow:'稍后再说', currentMission:'当前任务', stayWithOneThing:'只专注一件事。', thisWeek:'本周', progressTitleNew:'你的学习节律正在改善。', progressSubtitleNew:'关注学习过程中的小变化，不承诺分数提升。', biggestChange:'最大变化', averageReadiness:'平均准备度', consistentDays:'节律良好的天数', outOfSeven:'共 7 天', recentRhythm:'近期节律', stableMore:'更加稳定', analyzingSignals:'正在读取今天的信号…', readyResult:'已就绪。', todayQuestion:'你今天感觉怎么样？' },
@@ -897,7 +897,7 @@ function freshnessText(source) {
 }
 
 function sourceDisplayName(key) {
-  return t(key === 'digital' ? 'digitalActivity' : key === 'body' ? 'bodyStatus' : 'studyEnvironment');
+  return t(key === 'digital' ? 'digitalActivity' : key === 'body' ? 'bodyStatus' : key === 'checkin' ? 'selfReportFactorLabel' : 'studyEnvironment');
 }
 
 function connectionText(source) {
@@ -1049,6 +1049,24 @@ function computePersonalFactors(snapshot) {
                 : 0;
     if (luxBaseline !== null || impact !== 0) factors.push(factorRecord({ id: 'lux', source: 'environment', labelKey: 'factorRoom', current: lux, baseline: luxBaseline, impact, icon: '☀', unit: ' lux' }));
   }
+
+  const todaysMood = store.get('sentio-checkin-mood');
+  if (todaysMood && todaysMood !== 'skipped' && store.get('sentio-checkin-date') === vietnamDateKey()) {
+    const moodImpact = todaysMood === 'great' ? 3 : todaysMood === 'tired' ? -6 : 0;
+    const moodLabelKey = todaysMood === 'great' ? 'moodGreat' : todaysMood === 'tired' ? 'moodTired' : 'moodOkay';
+    factors.push({
+      id: 'mood',
+      source: 'checkin',
+      label: t('selfReportFactorLabel'),
+      detail: format(t('selfReportDetail'), { mood: t(moodLabelKey) }),
+      current: '',
+      baseline: '',
+      impact: moodImpact,
+      icon: '☺',
+      freshness: t('sourceFresh')
+    });
+  }
+
   return factors;
 }
 
@@ -2919,6 +2937,10 @@ function closeCheckin(mood = 'skipped') {
   panel.setAttribute('aria-hidden', 'true');
   if (state.activeModal === panel) state.activeModal = null;
   state.lastFocused?.focus?.();
+  if (state.profile === 'personal') {
+    renderProfile();
+    renderFactors(state.decision);
+  }
 }
 
 function vietnamDateKey() {
