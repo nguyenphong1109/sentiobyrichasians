@@ -1,4 +1,6 @@
 :root {
+  --font-ui: "Aptos", "Segoe UI Variable Text", "Segoe UI", "Noto Sans", Arial, sans-serif;
+  --font-display: "Aptos Display", "Segoe UI Variable Display", "Aptos", "Segoe UI", "Noto Sans", Arial, sans-serif;
   --bg: #f6f7ff;
   --surface: rgba(255,255,255,.86);
   --surface-solid: #fff;
@@ -28,7 +30,11 @@ body {
   min-height: 100vh;
   color: var(--text);
   background: var(--bg);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, "Noto Sans", "Noto Sans CJK SC", sans-serif;
+  font-family: var(--font-ui);
+  font-size: 16px;
+  line-height: 1.5;
+  font-feature-settings: "kern" 1, "liga" 1, "tnum" 1;
+  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
@@ -4404,4 +4410,54 @@ body:not(.film-active) .film-button {
   .ai-chip-dot { background: #8fb4ff; box-shadow: 0 0 0 3px rgba(120,150,255,.18); }
   .ai-status-card { background: linear-gradient(135deg, rgba(49,87,213,.10), rgba(91,46,178,.10)); border-color: rgba(120,150,255,.2); }
   .ai-explanation { color: #aab8d6; }
+}
+
+/* Presentation typography: polished on Windows, readable on every fallback. */
+body,
+button,
+select,
+input,
+textarea {
+  font-family: var(--font-ui);
+}
+
+body * {
+  letter-spacing: 0 !important;
+}
+
+:where(h1, h2, h3),
+.brand strong,
+.scene-caption h1,
+.end-logo h1,
+.decision-panel h2,
+.weekly-hero-card > strong,
+.case-study-identity strong,
+.case-action > strong {
+  font-family: var(--font-display);
+  font-weight: 650;
+  line-height: 1.12;
+}
+
+:where(.score-number, .timer-display, .person-score strong, .weekly-change-value span,
+  .weekly-stat-card > strong, .case-study-score > strong, .comparison-column strong,
+  .monitor-stat > strong) {
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums;
+  font-weight: 680;
+  line-height: 1;
+}
+
+:where(.eyebrow, .card-label, .brand-team, .decision-kicker, .checkin-kicker,
+  .scene-caption > span, .person-decision span, .case-technology small) {
+  font-weight: 700;
+}
+
+@media print {
+  body.printing-weekly-report #weeklyPrintReport {
+    font-family: var(--font-ui);
+  }
+  .weekly-print-report h1,
+  .weekly-print-report .print-report-brand {
+    font-family: var(--font-display);
+  }
 }
