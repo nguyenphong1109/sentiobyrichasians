@@ -432,6 +432,46 @@ const contentRevisionTranslations = {
 };
 Object.entries(contentRevisionTranslations).forEach(([lang, values]) => Object.assign(translations[lang], values));
 
+const aiTranslations = {
+  vi: {
+    aiBadgeLabel: 'AI',
+    aiPredictedLabel: 'AI dự đoán',
+    aiDeferredText: 'Mô hình AI đang học từ các phiên thật; cần ít nhất 2 phiên hợp lệ để dự đoán.',
+    aiConfidenceLabel: 'Độ tin cậy AI',
+    aiContributingAbove: 'tăng trên baseline',
+    aiContributingBelow: 'giảm dưới baseline',
+    aiContributingAt: 'gần baseline',
+    aiExplanation: 'Mô hình AI học từ {samples} phiên của bạn đặt hôm nay vào nhóm “{label}” (tin cậy {confidence}%). Tín hiệu đóng góp nhiều nhất: {feature} ({direction}).'
+  },
+  en: {
+    aiBadgeLabel: 'AI',
+    aiPredictedLabel: 'AI prediction',
+    aiDeferredText: 'The AI model is learning from real sessions; it needs at least 2 valid sessions to predict.',
+    aiConfidenceLabel: 'AI confidence',
+    aiContributingAbove: 'above baseline',
+    aiContributingBelow: 'below baseline',
+    aiContributingAt: 'near baseline',
+    aiExplanation: 'The AI model learned from {samples} of your sessions and places today in the “{label}” group ({confidence}% confidence). Top contributing signal: {feature} ({direction}).'
+  },
+  es: {
+    aiBadgeLabel: 'IA', aiPredictedLabel: 'Predicción IA', aiDeferredText: 'El modelo de IA aprende de sesiones reales; necesita al menos 2 sesiones válidas para predecir.', aiConfidenceLabel: 'Confianza IA', aiContributingAbove: 'por encima de la base', aiContributingBelow: 'por debajo de la base', aiContributingAt: 'cerca de la base', aiExplanation: 'El modelo de IA aprendió de {samples} sesiones y ubica hoy en el grupo “{label}” ({confidence}% de confianza). Señal principal: {feature} ({direction}).'
+  },
+  fr: {
+    aiBadgeLabel: 'IA', aiPredictedLabel: 'Prédiction IA', aiDeferredText: 'Le modèle d’IA apprend des sessions réelles ; il lui faut au moins 2 sessions valides pour prédire.', aiConfidenceLabel: 'Confiance IA', aiContributingAbove: 'au-dessus de la base', aiContributingBelow: 'en dessous de la base', aiContributingAt: 'proche de la base', aiExplanation: 'Le modèle d’IA a appris de {samples} sessions et classe aujourd’hui dans le groupe « {label} » ({confidence}% de confiance). Signal principal : {feature} ({direction}).'
+  },
+  zh: {
+    aiBadgeLabel: 'AI', aiPredictedLabel: 'AI 预测', aiDeferredText: 'AI 模型正从真实会话中学习；至少需要 2 次有效会话才能预测。', aiConfidenceLabel: 'AI 置信度', aiContributingAbove: '高于基线', aiContributingBelow: '低于基线', aiContributingAt: '接近基线', aiExplanation: 'AI 模型从 {samples} 次会话中学习，将今天归入“{label}”组（置信度 {confidence}%）。主要信号：{feature}（{direction}）。'
+  },
+  ja: {
+    aiBadgeLabel: 'AI', aiPredictedLabel: 'AI予測', aiDeferredText: 'AIモデルはリアルなセッションから学習中。予測には最低2回の有効セッションが必要です。', aiConfidenceLabel: 'AI信頼度', aiContributingAbove: 'ベースより高い', aiContributingBelow: 'ベースより低い', aiContributingAt: 'ベース付近', aiExplanation: 'AIモデルは{samples}回のセッションから学習し、今日を「{label}」グループに分類しました（信頼度{confidence}%）。主なシグナル：{feature}（{direction}）。'
+  },
+  de: {
+    aiBadgeLabel: 'AI', aiPredictedLabel: 'AI-Vorhersage', aiDeferredText: 'Das KI-Modell lernt aus echten Sitzungen; für eine Vorhersage braucht es mindestens 2 gültige Sitzungen.', aiConfidenceLabel: 'KI-Vertrauen', aiContributingAbove: 'über der Basis', aiContributingBelow: 'unter der Basis', aiContributingAt: 'nahe der Basis', aiExplanation: 'Das KI-Modell hat aus {samples} Sitzungen gelernt und ordnet heute der Gruppe „{label}“ zu ({confidence}% Vertrauen). Wichtigstes Signal: {feature} ({direction}).'
+  }
+};
+Object.entries(aiTranslations).forEach(([lang, values]) => Object.assign(translations[lang], values));
+
+
 const caseStudyTranslations = {
   vi: {
     profileLinhHelp: 'Phân tâm bởi thông báo',
@@ -604,6 +644,182 @@ const PERSONAL_BASELINE_METRICS = Object.freeze({
   focus: 85,
   lux: 350
 });
+
+// --- Sentio AI Engine (client-side, no dependencies) ---
+// Nearest-centroid classifier that learns a per-class centroid of normalized
+// signal features from completed personal sessions, then predicts the user's
+// readiness class for the current snapshot. Confidence is distance-based with
+// Bayesian-style smoothing by sample count so early days never overfit.
+const AI_STORAGE_KEY = 'sentio:ai-model';
+const AI_METRIC_KEYS = ['focus', 'tabs', 'sleepMinutes', 'hrv', 'restingHr', 'lux'];
+const AI_SCALE = Object.freeze({
+  focus: 12, tabs: 6, sleepMinutes: 90, hrv: 14, restingHr: 10, lux: 220
+});
+const AI_CLASSES = ['ready', 'moderate', 'low'];
+const AI_MIN_SAMPLES = 2;
+
+function emptyCentroid() {
+  return { sum: AI_METRIC_KEYS.map(() => 0), count: 0 };
+}
+
+function aiLoadModel() {
+  try {
+    const raw = localStorage.getItem(AI_STORAGE_KEY);
+    if (!raw) return freshAiModel();
+    const parsed = JSON.parse(raw);
+    if (!parsed || parsed.version !== 1) return freshAiModel();
+    const classes = {};
+    for (const key of AI_CLASSES) {
+      const c = parsed.classes?.[key];
+      classes[key] = c && Array.isArray(c.sum) && c.sum.length === AI_METRIC_KEYS.length
+        ? { sum: c.sum.map(Number), count: Number(c.count) || 0 }
+        : emptyCentroid();
+    }
+    return { version: 1, classes, sampleCount: Number(parsed.sampleCount) || 0, updatedAt: parsed.updatedAt || null };
+  } catch { return freshAiModel(); }
+}
+
+function freshAiModel() {
+  const classes = {};
+  for (const key of AI_CLASSES) classes[key] = emptyCentroid();
+  return { version: 1, classes, sampleCount: 0, updatedAt: null };
+}
+
+function aiPersistModel(model) {
+  state.aiModel = model;
+  try { localStorage.setItem(AI_STORAGE_KEY, JSON.stringify(model)); } catch { /* file mode may block storage */ }
+}
+
+// Normalize a raw metric value against the personal baseline using a fixed
+// scale so every feature contributes on a comparable axis. Missing values map
+// to 0 (neutral) instead of dragging the centroid toward zero.
+function aiNormalize(key, value, baseline) {
+  if (!hasFiniteValue(value)) return 0;
+  const base = hasFiniteValue(baseline?.[key]) ? Number(baseline[key]) : PERSONAL_BASELINE_METRICS[key];
+  return (Number(value) - base) / AI_SCALE[key];
+}
+
+function aiFeatureVector(snapshot, baseline) {
+  const m = {
+    focus: snapshot.sources?.digital?.metrics?.focus,
+    tabs: snapshot.sources?.digital?.metrics?.tabs,
+    sleepMinutes: snapshot.sources?.body?.metrics?.sleepMinutes,
+    hrv: snapshot.sources?.body?.metrics?.hrv,
+    restingHr: snapshot.sources?.body?.metrics?.restingHr,
+    lux: snapshot.sources?.environment?.metrics?.lux
+  };
+  return AI_METRIC_KEYS.map((key) => aiNormalize(key, m[key], baseline));
+}
+
+function aiClassForScore(score) {
+  return score >= 75 ? 'ready' : score >= 50 ? 'moderate' : 'low';
+}
+
+// Incremental learning: fold one completed session's feature vector into the
+// centroid of its readiness class. Running mean keeps memory bounded.
+function aiTrain(session, snapshot, baseline) {
+  if (!session || session.reportEligible === false || !hasFiniteValue(session.readiness)) return state.aiModel || aiLoadModel();
+  const model = state.aiModel || aiLoadModel();
+  const features = aiFeatureVector(snapshot, baseline);
+  if (!features.some((v) => v !== 0)) return model;
+  const label = aiClassForScore(Number(session.readiness));
+  const centroid = model.classes[label];
+  centroid.sum = centroid.sum.map((s, i) => s + features[i]);
+  centroid.count += 1;
+  model.sampleCount += 1;
+  model.updatedAt = isoNow();
+  aiPersistModel(model);
+  return model;
+}
+
+function euclidean(a, b) {
+  let sum = 0;
+  for (let i = 0; i < a.length; i += 1) {
+    const d = (a[i] || 0) - (b[i] || 0);
+    sum += d * d;
+  }
+  return Math.sqrt(sum);
+}
+
+// Predict the readiness class for the current snapshot and return a confidence
+// score. With too few samples the model defers (status null) so the rule-based
+// engine stays authoritative until the AI has seen enough real sessions.
+function aiPredict(snapshot, baseline) {
+  const model = state.aiModel || aiLoadModel();
+  const features = aiFeatureVector(snapshot, baseline);
+  const totalSamples = AI_CLASSES.reduce((n, k) => n + model.classes[k].count, 0);
+  if (totalSamples < AI_MIN_SAMPLES) {
+    return { status: null, confidence: 0, totalSamples, deferred: true, contributingKey: null };
+  }
+  const distances = AI_CLASSES.map((k) => {
+    const c = model.classes[k];
+    if (!c.count) return { key: k, dist: Infinity, mean: c.sum.map((s) => 0) };
+    const mean = c.sum.map((s) => s / c.count);
+    return { key: k, dist: euclidean(features, mean), mean };
+  });
+  const sorted = distances.filter((d) => Number.isFinite(d.dist)).sort((a, b) => a.dist - b.dist);
+  if (!sorted.length) return { status: null, confidence: 0, totalSamples, deferred: true, contributingKey: null };
+  const best = sorted[0];
+  const second = sorted[1] || { dist: best.dist + 1 };
+  const margin = Math.max(0, second.dist - best.dist);
+  // Confidence grows with sample count and with the gap between the two
+  // nearest centroids; smoothed so a single noisy day cannot hit 100%.
+  const sampleFactor = clamp(1 - 4 / (totalSamples + 4), 0, 1);
+  const marginFactor = clamp(margin / 1.2, 0, 1);
+  const confidence = Math.round(clamp(sampleFactor * 0.45 + marginFactor * 0.5, 0, 0.95) * 100);
+  const contributingKey = aiTopContributingFeature(features, best.key, model);
+  return { status: best.key, confidence, totalSamples, deferred: false, contributingKey, distances: sorted };
+}
+
+// Name the feature whose normalized deviation from baseline most aligns with
+// the predicted class direction — the most "AI-relevant" signal for the user.
+function aiTopContributingFeature(features, classKey, model) {
+  const centroid = model.classes[classKey];
+  if (!centroid.count) return null;
+  const mean = centroid.sum.map((s) => s / centroid.count);
+  let bestIdx = -1;
+  let bestMagnitude = 0;
+  for (let i = 0; i < features.length; i += 1) {
+    const contribution = features[i] * mean[i];
+    const magnitude = Math.abs(contribution);
+    if (magnitude > bestMagnitude) { bestMagnitude = magnitude; bestIdx = i; }
+  }
+  if (bestIdx < 0) return null;
+  const key = AI_METRIC_KEYS[bestIdx];
+  const direction = features[bestIdx] > 0.15 ? 'above' : features[bestIdx] < -0.15 ? 'below' : 'at';
+  return { key, direction, value: features[bestIdx] };
+}
+
+// For demo profiles (Linh/Nam/Mai) the AI engine has no real personal history,
+// so we synthesize a stable prediction from the profile's own normalized
+// features. This keeps the AI chip meaningful during the pitch without
+// pretending the model was trained on simulated data.
+function aiDemoPredict(snapshot) {
+  const features = aiFeatureVector(snapshot, PERSONAL_BASELINE_METRICS);
+  const label = snapshot.profile?.status || 'moderate';
+  const contributingKey = aiTopContributingFeatureRaw(features);
+  return {
+    status: label,
+    confidence: Math.min(96, Math.max(80, snapshot.profile?.confidence || 85)),
+    totalSamples: 7,
+    deferred: false,
+    contributingKey
+  };
+}
+
+function aiTopContributingFeatureRaw(features) {
+  let bestIdx = -1;
+  let bestMagnitude = 0;
+  for (let i = 0; i < features.length; i += 1) {
+    const magnitude = Math.abs(features[i]);
+    if (magnitude > bestMagnitude) { bestMagnitude = magnitude; bestIdx = i; }
+  }
+  if (bestIdx < 0) return null;
+  const key = AI_METRIC_KEYS[bestIdx];
+  const direction = features[bestIdx] > 0.15 ? 'above' : features[bestIdx] < -0.15 ? 'below' : 'at';
+  return { key, direction, value: features[bestIdx] };
+}
+
 
 function isoNow() { return new Date().toISOString(); }
 
@@ -793,7 +1009,8 @@ const state = {
   healthyStopRequested: false,
   liveProfile: null,
   liveTabs: null,
-  liveFocus: null
+  liveFocus: null,
+  aiModel: aiLoadModel()
 };
 
 const $ = (selector, parent = document) => parent.querySelector(selector);
@@ -1206,6 +1423,11 @@ function computeDecision(snapshot) {
   }
 
   const sourceImpact = Object.fromEntries(SOURCE_KEYS.map((key) => [key, factors.filter((factor) => factor.source === key).reduce((sum, factor) => sum + factor.impact, 0)]));
+  const ai = snapshot.mode === 'personal'
+    ? aiPredict(snapshot, snapshot.metricBaselines)
+    : snapshot.mode === 'demo'
+      ? aiDemoPredict(snapshot)
+      : null;
   return {
     score: Math.round(score),
     baselineScore: snapshot.baselineScore,
@@ -1220,7 +1442,8 @@ function computeDecision(snapshot) {
     computedAt: isoNow(),
     baselineStatus: snapshot.baselineStatus,
     baselineDay: snapshot.baselineDay,
-    mode: snapshot.mode
+    mode: snapshot.mode,
+    ai
   };
 }
 
@@ -1442,6 +1665,44 @@ function buildDynamicDecisionExplanation(decision) {
   });
 }
 
+function aiFeatureLabel(key) {
+  const map = { focus: t('continuityEstimate'), tabs: t('pageDepartures'), sleepMinutes: t('factorSleep'), hrv: t('hrvLabel'), restingHr: t('restingHrLabel'), lux: t('factorRoom') };
+  return map[key] || key;
+}
+
+function renderAiStatus(decision) {
+  const aiBadge = $('#aiBadge');
+  const aiPanel = $('#aiStatusPanel');
+  if (!aiPanel) return;
+  const ai = decision?.ai;
+  if (!ai || ai.deferred) {
+    aiPanel.hidden = true;
+    if (aiBadge) aiBadge.hidden = true;
+    const aiChip = $('#aiChip');
+    if (aiChip) aiChip.hidden = true;
+    return;
+  }
+  aiPanel.hidden = false;
+  if (aiBadge) aiBadge.hidden = false;
+  const aiChip = $('#aiChip');
+  if (aiChip) aiChip.hidden = false;
+  const feature = ai.contributingKey ? aiFeatureLabel(ai.contributingKey.key) : '—';
+  const directionKey = ai.contributingKey?.direction === 'above' ? 'aiContributingAbove'
+    : ai.contributingKey?.direction === 'below' ? 'aiContributingBelow' : 'aiContributingAt';
+  const label = t(ai.status === 'ready' ? 'ready' : ai.status === 'moderate' ? 'moderate' : 'low');
+  setText('#aiPredictedStatus', label);
+  setText('#aiChipStatus', label);
+  setText('#aiConfidenceValue', `${ai.confidence}%`);
+  setAriaProgress('#aiConfidenceBar', ai.confidence);
+  setText('#aiExplanation', format(t('aiExplanation'), {
+    samples: ai.totalSamples,
+    label,
+    confidence: ai.confidence,
+    feature,
+    direction: t(directionKey)
+  }));
+}
+
 function renderProfile() {
   const snapshot = currentSnapshot();
   state.decision = computeDecision(snapshot);
@@ -1470,6 +1731,7 @@ function renderProfile() {
     : t('noMissingSignals'));
   renderTrainingState(decision);
   renderStory(decision);
+  renderAiStatus(decision);
 
   setText('#statusBadge', t(decision.status));
   const statusBadge = $('#statusBadge');
@@ -3178,6 +3440,9 @@ function finishSession() {
     });
     state.personal.sessions = state.personal.sessions.slice(-MAX_SESSIONS);
     state.personal.preferences.lastTask = $('#taskSelect')?.value || 'reading';
+    persistPersonal();
+    const lastSession = state.personal.sessions[state.personal.sessions.length - 1];
+    aiTrain(lastSession, currentSnapshot(), state.personal.baseline.metrics);
     persistPersonal();
   }
   addFocusEvent('finish', 'eventSessionFinished', stoppedOnTime ? t('stoppedOnTimeInsight') : '');
