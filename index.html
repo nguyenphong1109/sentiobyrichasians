@@ -183,6 +183,11 @@
               </div>
               <div class="score-meta">
                 <span class="status-badge ready" id="statusBadge">Sẵn sàng học sâu</span>
+                <span class="ai-chip" id="aiChip" hidden aria-label="AI prediction">
+                  <span class="ai-chip-dot" aria-hidden="true"></span>
+                  <span class="ai-chip-label" id="aiChipLabel">AI</span>
+                  <span class="ai-chip-status" id="aiChipStatus">—</span>
+                </span>
                 <span class="score-delta" id="scoreDelta">+12 so với hôm qua</span><span class="updated"><i></i><span data-i18n="justUpdated">Vừa cập nhật</span></span>
               </div>
             </div>
@@ -728,6 +733,21 @@
       <p id="decisionExplanationDetail">Sentio sẽ ưu tiên yếu tố có tác động lớn nhất và cập nhật lời giải thích khi dữ liệu thay đổi.</p>
     </div>
     <div class="factor-list" id="factorList"></div>
+    <div class="ai-status-card" id="aiStatusPanel" hidden role="status" aria-live="polite" aria-label="Sentio AI prediction">
+      <div class="ai-status-head">
+        <span class="ai-badge" id="aiBadge" aria-hidden="true">AI</span>
+        <div>
+          <span class="card-label" data-i18n="aiPredictedLabel">AI dự đoán</span>
+          <strong id="aiPredictedStatus">—</strong>
+        </div>
+        <div class="ai-confidence">
+          <span class="card-label" data-i18n="aiConfidenceLabel">Độ tin cậy AI</span>
+          <strong id="aiConfidenceValue">0%</strong>
+          <span class="ai-confidence-bar" role="progressbar" id="aiConfidenceBar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span class="ai-confidence-fill"></span></span>
+        </div>
+      </div>
+      <p class="ai-explanation" id="aiExplanation">Mô hình AI đang học từ các phiên thật.</p>
+    </div>
     <p class="privacy-copy"><span aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v2"/></svg></span><span data-i18n="privacyCopy">Dữ liệu sinh trắc học thô không được hiển thị công khai và chỉ dùng để tạo chỉ số dẫn xuất.</span></p>
   </section>
 
