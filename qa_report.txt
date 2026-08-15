@@ -25,18 +25,13 @@ PASS
 - Session flow: start-state readiness, pause/restore, healthy stop, summary, and report eligibility.
 - Source cards: Digital, Body, and Environment open the correct detail view; revoke synchronizes data and controls.
 - The profile chevron opens an accessible four-option switcher for Personal, Linh, Nam, and Mai; demo options remain visibly labeled as simulated scenarios.
-- Film Mode query flow and scenes 4–7 preserved.
-- Film Mode profile cards open keyboard-accessible case studies for Linh, Nam, and Mai; each shows the problem, three signal sources, AI reasoning, action, 7-day result, and simulated-data disclosure.
-- Direct profile links support `film=1&scene=people&person=linh|nam|mai`; Escape closes an open profile before exiting Film Mode.
-- Film Mode controls participate in normal document flow and no longer cover profile content while scrolling.
-- A concise in-product guide is available from Settings and the page footer; `HUONG_DAN_SU_DUNG.md` covers onboarding, daily use, data sources, Film Mode, privacy, and the competition demo flow.
+- A concise in-product guide is available from Settings and the page footer; `HUONG_DAN_SU_DUNG.md` covers onboarding, daily use, data sources, privacy, and the competition demo flow.
 - All 10 dialogs have an accessible name; all 62 buttons declare `type`, and icon-only buttons have accessible labels.
 - Baseline desktop, tablet, and mobile screenshots reviewed; the reproduced overflow and controller-overlap causes are addressed in the V5.1 responsive CSS.
 - Modular and single-file builds are synchronized; logo, CSS, and JavaScript are embedded.
 - No external font, CSS, JavaScript, or CDN dependency.
 
 PENDING VISUAL RECHECK
-- Capture the updated Film Mode at 390 x 844 (system and week) and 1366 x 768 (people and end).
 - The current environment denied the requested Edge headless launch, so these post-fix screenshots are not claimed as passed yet.
 
 PROTOTYPE BOUNDARIES

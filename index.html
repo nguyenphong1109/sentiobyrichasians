@@ -121,10 +121,6 @@
       </button>
 
       <div class="top-actions">
-        <button class="film-button" id="filmButton" type="button" aria-label="Trình diễn Sentio" title="Trình diễn Sentio">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7Z"/></svg>
-          <span data-i18n="filmMode">Trình diễn Sentio</span>
-        </button>
         <button class="icon-button" id="settingsButton" type="button" aria-label="Settings" title="Settings">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8.3a3.7 3.7 0 1 0 0 7.4 3.7 3.7 0 0 0 0-7.4Zm8.7 3.7c0-.6-.1-1.2-.2-1.8l-2.1-.8a7.6 7.6 0 0 0-.7-1.2l.4-2.2A9.6 9.6 0 0 0 15 4.2l-1.7 1.4a7.4 7.4 0 0 0-1.4 0l-1.7-1.4A9.6 9.6 0 0 0 7.1 6l.4 2.2c-.3.4-.5.8-.7 1.2l-2.1.8A9.8 9.8 0 0 0 4.5 12c0 .6.1 1.2.2 1.8l2.1.8c.2.4.4.8.7 1.2L7.1 18a9.6 9.6 0 0 0 3.1 1.8l1.7-1.4a7.4 7.4 0 0 0 1.4 0l1.7 1.4a9.6 9.6 0 0 0 3.1-1.8l-.4-2.2c.3-.4.5-.8.7-1.2l2.1-.8c.1-.6.2-1.2.2-1.8Z"/></svg>
         </button>
@@ -544,7 +540,7 @@
         </section>
       </section>
 
-      <section class="view film-view" data-view="film" id="filmView" aria-label="Sentio Film Mode">
+      <section class="view film-view" data-view="film" id="filmView" aria-label="Sentio Film Mode" hidden>
         <div class="film-stage" id="filmStage">
           <section class="film-scene active" data-scene="system" id="sceneSystem" aria-hidden="false" aria-label="Scene 4: Sentio system">
             <div class="scene-caption">
@@ -699,7 +695,6 @@
     </div>
     <div class="sheet-actions">
       <button class="secondary-button" id="restartOnboarding" type="button">Thiết lập lại onboarding</button>
-      <button class="text-link" id="openDemoScenarios" type="button">Mở các kịch bản demo trong Film Mode</button>
     </div>
   </section>
 

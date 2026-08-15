@@ -45,10 +45,4 @@ Sau mỗi lần sửa `index.html`, `styles.css` hoặc `app.js`, chạy `node b
 
 Trong tab **Tiến trình**, nút **Lưu PDF** mở bản báo cáo A4 để chọn “Save as PDF”; nút **Tải ảnh PNG** tạo ảnh báo cáo ngay trên thiết bị, không gửi dữ liệu phiên tới dịch vụ bên ngoài.
 
-## Film Mode
-
-Nút **Trình diễn Sentio** tự chạy các cảnh 4–7 sau một lần bấm. Có thể tạm dừng, dùng phím `4`, `5`, `6`, `7`, phím mũi tên trái/phải hoặc bộ điều khiển cảnh. Thanh điều khiển nằm sau nội dung cảnh và cuộn tự nhiên cùng trang để không che thẻ. Có thể mở trực tiếp bằng `index.html?film=1&scene=system`; thay `system` bằng `people`, `week` hoặc `end` để vào đúng cảnh.
-
-Ở cảnh `people`, chạm vào Linh, Nam hoặc Mai để mở hồ sơ tình huống gồm vấn đề, ba nguồn tín hiệu, suy luận AI, hành động và kết quả sau 7 ngày. Có thể mở thẳng từng hồ sơ bằng `index.html?film=1&scene=people&person=linh`; thay `linh` bằng `nam` hoặc `mai` khi trình bày.
-
-Trong trải nghiệm chính, chạm nút hồ sơ có mũi tên để chuyển nhanh giữa tài khoản cá nhân và ba kịch bản mô phỏng Linh, Nam, Mai.
+Trong trải nghiệm chính, chạm nút hồ sơ có mũi tên để chuyển nhanh giữa tài khoản cá nhân và ba kịch bản mô phỏng Linh, Nam, Mai. Các kịch bản này luôn được ghi nhãn là dữ liệu mô phỏng.

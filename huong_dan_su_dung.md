@@ -65,19 +65,7 @@ Tab **Tiến trình** tổng hợp các phiên đã hoàn thành, số ngày đ�
 
 Sentio không tuyên bố làm tăng điểm số; mục tiêu là hỗ trợ quá trình tự học và khả năng tự nhận biết trạng thái.
 
-## 8. Film Mode dành cho trình bày
-
-Chọn **Trình diễn Sentio** để mở Film Mode. Có thể:
-
-- Dùng các nút cảnh 4, 5, 6, 7 hoặc phím số tương ứng.
-- Dùng phím mũi tên trái/phải để đổi cảnh.
-- Tạm dừng hoặc tiếp tục tự chạy.
-- Ở cảnh 5, chọn Linh, Nam hoặc Mai để mở hồ sơ tình huống chi tiết.
-- Nhấn `Escape` để đóng hồ sơ đang mở; nhấn thêm lần nữa để thoát Film Mode.
-
-Thanh điều khiển nằm cuối nội dung cảnh và cuộn cùng trang, nên không che các thẻ khi trình bày.
-
-## 9. Quyền riêng tư và dữ liệu
+## 8. Quyền riêng tư và dữ liệu
 
 Mở **Cài đặt → Quyền riêng tư và dữ liệu** để:
 
@@ -89,15 +77,14 @@ Mở **Cài đặt → Quyền riêng tư và dữ liệu** để:
 
 Các thao tác xóa hoặc đặt lại đều yêu cầu xác nhận.
 
-## 10. Luồng trình bày đề xuất cho cuộc thi
+## 9. Luồng trình bày đề xuất cho cuộc thi
 
-1. Mở Film Mode ở cảnh Hệ thống để giải thích ba nguồn dữ liệu và Readiness Engine.
-2. Chuyển sang cảnh 3 nhân vật, mở lần lượt Linh, Nam và Mai.
-3. Nhấn mạnh chuỗi: vấn đề → tín hiệu đa nguồn → giải thích theo yếu tố tác động mạnh nhất → một hành động → kết quả sau 7 ngày.
-4. Chuyển sang cảnh 1 tuần để nói về thay đổi hành vi, không hứa hẹn tăng điểm.
-5. Thoát Film Mode, mở tab Tiến trình để chỉ vào biểu đồ 7 ngày và thử xuất báo cáo PNG/PDF.
-6. Cho giám khảo thử trang Hôm nay hoặc bộ đếm Tập trung.
+1. Mở trang Hôm nay để giải thích ba nguồn dữ liệu và Readiness Score.
+2. Chạm vào một nguồn tín hiệu để cho thấy mức độ minh bạch của dữ liệu và quyền kết nối.
+3. Nhấn mạnh chuỗi: tín hiệu đa nguồn → giải thích yếu tố tác động mạnh nhất → một hành động phù hợp.
+4. Mở tab Tiến trình để chỉ vào biểu đồ 7 ngày và xuất báo cáo PNG/PDF.
+5. Cho giám khảo tự thử một phiên Tập trung hoặc kiểm tra trung tâm quyền riêng tư.
 
-## 11. Giới hạn cần nói rõ
+## 10. Giới hạn cần nói rõ
 
 Sentio là prototype hỗ trợ quyết định học tập, không phải công cụ chẩn đoán y khoa. Các kết quả 7 ngày và hồ sơ Linh, Nam, Mai là dữ liệu mô phỏng để minh họa logic sản phẩm. Bản web chưa thay thế ứng dụng điện thoại, smartwatch bridge hoặc firmware ESP32 hoàn chỉnh.

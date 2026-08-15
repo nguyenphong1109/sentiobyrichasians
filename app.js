@@ -979,11 +979,6 @@ const state = {
   personal: loadPersonal(),
   roomFixed: false,
   view: 'today',
-  filmScene: 'system',
-  filmPerson: null,
-  filmOpener: null,
-  filmAutoTimer: null,
-  filmAutoPlaying: false,
   onboardingStep: 1,
   onboardingOpen: false,
   onboardingSetup: { digital: true, body: false, environment: false },
@@ -1496,7 +1491,6 @@ function applyTranslations() {
   updateVietnamClock();
   renderProfile();
   renderProfileOptions();
-  renderFilmCards();
   renderProgressOutcomes();
   renderHealthSheet();
   updateTimerLabel();
@@ -1504,7 +1498,6 @@ function applyTranslations() {
   renderPrivacyControls();
   const signalsExpanded = $('.source-card')?.classList.contains('expanded');
   setText('#toggleSignals span', t(signalsExpanded ? 'hideSignalDetails' : 'showSignalDetails'));
-  updateFilmAutoControl();
   if (state.selectedSource) renderSourceSheet(state.selectedSource);
 }
 
@@ -3148,8 +3141,7 @@ function revokeConnections() {
 }
 
 function switchView(view) {
-  if (!['today','focus','progress','film'].includes(view)) return;
-  if (view !== 'film' && state.view === 'film') stopFilmAuto();
+  if (!['today','focus','progress'].includes(view)) return;
   state.view = view;
   $$('.view').forEach((section) => section.classList.toggle('active', section.dataset.view === view));
   $$('[data-view-link]').forEach((button) => {
@@ -3158,8 +3150,8 @@ function switchView(view) {
     if (active) button.setAttribute('aria-current', 'page');
     else button.removeAttribute('aria-current');
   });
-  document.body.classList.toggle('film-active', view === 'film');
-  if ($('.bottom-nav')) $('.bottom-nav').style.display = view === 'film' ? 'none' : '';
+  document.body.classList.remove('film-active');
+  if ($('.bottom-nav')) $('.bottom-nav').style.display = '';
   if (view === 'progress') {
     renderProgress();
     renderProgressOutcomes();
@@ -3671,7 +3663,7 @@ function runStartupExperience() {
 
 function openCheckin() {
   const panel = $('#morningCheckin');
-  if (!panel || state.onboardingOpen || !state.personal.onboardingComplete || state.view === 'film' || store.get('sentio-checkin-date') === vietnamDateKey()) return;
+  if (!panel || state.onboardingOpen || !state.personal.onboardingComplete || store.get('sentio-checkin-date') === vietnamDateKey()) return;
   setText('#checkinGreeting', t('todayQuestion'));
   panel.classList.add('show');
   panel.setAttribute('aria-hidden', 'false');
@@ -3759,14 +3751,6 @@ function bindEvents() {
     switchView('today');
     $('#primaryAction')?.focus();
   });
-  bindOptional('#filmButton', 'click', () => openFilm('system', true));
-  bindOptional('#exitFilm', 'click', exitFilm);
-  bindOptional('#toggleFilmAuto', 'click', toggleFilmAuto);
-  bindOptional('#nextScene', 'click', () => { stopFilmAuto(); nextFilmScene(); });
-  $$('[data-scene-target]').forEach((button) => button.addEventListener('click', () => {
-    stopFilmAuto();
-    setFilmScene(button.dataset.sceneTarget);
-  }));
   bindOptional('#toggleSignals', 'click', toggleSignalDetails);
   bindOptional('#toggleInsights', 'click', toggleCompanionInsights);
   bindOptional('#languageSelect', 'change', (event) => {
@@ -3776,7 +3760,6 @@ function bindEvents() {
   });
   bindOptional('#motionToggle', 'change', (event) => {
     document.body.classList.toggle('no-motion', !event.target.checked);
-    if (!event.target.checked && state.view === 'film') stopFilmAuto();
     store.set('sentio-motion', event.target.checked ? '1' : '0');
   });
   bindOptional('#resetApp', 'click', () => {
@@ -3874,11 +3857,6 @@ function bindEvents() {
     }
     openOnboarding(true);
   });
-  bindOptional('#openDemoScenarios', 'click', () => {
-    closePanels(false);
-    openFilm('people');
-  });
-
   document.addEventListener('visibilitychange', () => { if (document.hidden) simulateTabSwitch(); });
   document.addEventListener('keydown', (event) => {
     trapModalFocus(event);
@@ -3886,26 +3864,7 @@ function bindEvents() {
       if (state.onboardingOpen) return;
       if ($('#morningCheckin')?.classList.contains('show')) closeCheckin('skipped');
       else if ($('#sessionSummary')?.classList.contains('show')) closeSessionSummary();
-      else if (state.view === 'film' && state.filmPerson) closePersonCaseStudy();
-      else if (state.view === 'film') exitFilm();
       else closePanels();
-    }
-    if (state.view === 'film') {
-      if (event.key === 'ArrowRight') {
-        event.preventDefault();
-        stopFilmAuto();
-        nextFilmScene();
-      }
-      if (event.key === 'ArrowLeft') {
-        event.preventDefault();
-        stopFilmAuto();
-        previousFilmScene();
-      }
-      const shortcut = { '4': 'system', '5': 'people', '6': 'week', '7': 'end' }[event.key];
-      if (shortcut) {
-        stopFilmAuto();
-        setFilmScene(shortcut);
-      }
     }
   });
 }
@@ -3923,15 +3882,8 @@ function init() {
   resetTimerForProfile(null, { preserveStored: true });
   restoreActiveSession();
   restoreNudgeCooldown();
-  const params = new URLSearchParams(location.search);
-  if (params.get('film') === '1') {
-    openFilm(params.get('scene') || 'system');
-    if (params.get('scene') === 'people' && profileData[params.get('person')]) {
-      openPersonCaseStudy(params.get('person'), { focus: false, updateUrl: false });
-    }
-  }
   runStartupExperience();
-  if (params.get('film') !== '1' && state.profile === 'personal') {
+  if (state.profile === 'personal') {
     if (!state.personal.onboardingComplete) window.setTimeout(() => openOnboarding(), 120);
     else window.setTimeout(openCheckin, 1850);
   }
