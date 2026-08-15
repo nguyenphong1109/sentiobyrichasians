@@ -1,4 +1,4 @@
-# Sentio Prototype V5
+# Sentio Prototype
 
 Prototype sản phẩm Sentio của Rich Asians, tập trung vào một trải nghiệm học theo trạng thái cá nhân: hiểu nhịp của chính người dùng, đưa ra một bước tiếp theo rõ ràng và tạo accountability nhẹ nhàng.
 
