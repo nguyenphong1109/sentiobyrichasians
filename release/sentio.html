@@ -4471,6 +4471,125 @@ body * {
   }
 }
 
+/* Competition theme: a restrained product UI that aligns with the violet Sentio deck. */
+:root {
+  --bg: #110722;
+  --surface: rgba(35, 18, 68, .88);
+  --surface-solid: #241149;
+  --text: #f7f2ff;
+  --muted: #c6b8df;
+  --line: rgba(226, 210, 255, .17);
+  --primary: #b26cff;
+  --primary-dark: #d1a4ff;
+  --blue: #69ddff;
+  --green: #5ce0b2;
+  --amber: #ffc96b;
+  --red: #ff8ca7;
+  --shadow: 0 20px 48px rgba(3, 0, 12, .38);
+  --shadow-soft: 0 10px 30px rgba(3, 0, 12, .28);
+}
+
+body,
+body:not(.film-active) {
+  background: #110722;
+  color: var(--text);
+}
+
+.ambient { display: none; }
+
+body:not(.film-active) :where(.readiness-card, .source-card, .timer-card, .live-monitor,
+  .daily-story-card, .baseline-card, .weekly-hero-card, .weekly-stat-card, .history-card,
+  .all-outcomes, .single-insight, .settings-panel, .sheet, .onboarding-card) {
+  background: rgba(35, 18, 68, .9);
+  border-color: var(--line);
+  box-shadow: var(--shadow);
+}
+
+body:not(.film-active) .topbar,
+body:not(.film-active) .bottom-nav {
+  background: rgba(17, 7, 34, .82);
+  border-color: var(--line);
+}
+
+body:not(.film-active) .icon-button,
+body:not(.film-active) .profile-pill,
+body:not(.film-active) .secondary-button,
+body:not(.film-active) .compact-button {
+  background: rgba(48, 27, 90, .78);
+  border-color: var(--line);
+  color: var(--text);
+}
+
+body:not(.film-active) .readiness-card,
+body:not(.film-active) .source-card,
+body:not(.film-active) .timer-card,
+body:not(.film-active) .live-monitor {
+  border-radius: 12px;
+}
+
+body:not(.film-active) .score-panel {
+  background: #1b0d39;
+  border-color: var(--line);
+}
+
+body:not(.film-active) .score-number,
+body:not(.film-active) .timer-display,
+body:not(.film-active) .weekly-stat-card > strong {
+  color: #ffffff;
+}
+
+body:not(.film-active) .decision-panel,
+body:not(.film-active) .source-item,
+body:not(.film-active) .story-item,
+body:not(.film-active) .monitor-stat,
+body:not(.film-active) .monitor-grid > div,
+body:not(.film-active) .decision-confidence,
+body:not(.film-active) .weekly-win-card,
+body:not(.film-active) .score-comparison-card {
+  background: rgba(66, 39, 112, .34);
+  border-color: rgba(226, 210, 255, .12);
+}
+
+body:not(.film-active) .source-item:hover,
+body:not(.film-active) .profile-option:hover {
+  background: rgba(178, 108, 255, .13);
+}
+
+body:not(.film-active) .primary-button,
+body:not(.film-active) .play-button {
+  background: #a855f7;
+  color: #fff;
+  box-shadow: 0 12px 26px rgba(168, 85, 247, .25);
+}
+
+body:not(.film-active) .primary-button:hover,
+body:not(.film-active) .play-button:hover {
+  background: #c278ff;
+  box-shadow: 0 14px 30px rgba(168, 85, 247, .35);
+}
+
+body:not(.film-active) .bottom-nav {
+  box-shadow: 0 14px 42px rgba(3, 0, 12, .46);
+}
+
+body:not(.film-active) .nav-item { color: #c6b8df; }
+body:not(.film-active) .nav-item.active { color: #fff; background: rgba(178, 108, 255, .22); }
+
+body:not(.film-active) .source-icon { background: rgba(105, 221, 255, .12); color: var(--blue); }
+body:not(.film-active) .source-item:nth-child(2) .source-icon { background: rgba(92, 224, 178, .12); color: var(--green); }
+body:not(.film-active) .source-item:nth-child(3) .source-icon { background: rgba(255, 201, 107, .13); color: var(--amber); }
+
+body:not(.film-active) .status-badge.ready,
+body:not(.film-active) .sync-chip,
+body:not(.film-active) .live-pill { background: rgba(92, 224, 178, .14); color: #91f2d1; }
+body:not(.film-active) .status-badge.low { background: rgba(255, 140, 167, .15); color: #ffc0d0; }
+body:not(.film-active) .status-badge { background: rgba(255, 201, 107, .14); color: #ffdc98; }
+
+body:not(.film-active) .score-ring-wrap,
+body:not(.film-active) .timer-orbit { filter: drop-shadow(0 0 20px rgba(178, 108, 255, .16)); }
+
+body:not(.film-active) .app-footer { border-color: var(--line); color: var(--muted); }
+
   </style>
 </head>
 <body>
