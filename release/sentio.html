@@ -4666,6 +4666,118 @@ body:not(.film-active) .single-insight {
   box-shadow: var(--shadow);
 }
 
+/* Final color system: every product surface uses the same midnight-violet scale. */
+:root {
+  --sentio-canvas: #0d061b;
+  --sentio-surface: #1a0d36;
+  --sentio-raised: #24124a;
+  --sentio-inset: #130926;
+  --sentio-text: #fbf8ff;
+  --sentio-muted: #c0b1d8;
+  --sentio-violet: #b96cff;
+  --sentio-cyan: #7addff;
+}
+
+html { color-scheme: dark; }
+body:not(.film-active) { background: var(--sentio-canvas); color: var(--sentio-text); }
+
+body:not(.film-active) :is(h1, h2, h3, h4, strong, .hero-row h1, .decision-panel h2) {
+  color: var(--sentio-text);
+}
+
+body:not(.film-active) :is(p, small, .subcopy, .updated, .score-out-of, .source-copy small,
+  .story-item small, .health-metric-card small, .profile-pill small, .card-label) {
+  color: var(--sentio-muted);
+}
+
+body:not(.film-active) :is(.readiness-card, .source-card, .timer-card, .live-monitor,
+  .daily-story-card, .baseline-card, .weekly-hero-card, .weekly-stat-card, .history-card,
+  .all-outcomes, .single-insight, .settings-panel, .sheet, .onboarding-card, .checkin-card,
+  .session-summary-card, .source-sheet, .privacy-sheet, .guide-sheet) {
+  background: var(--sentio-surface);
+  border-color: var(--line);
+  color: var(--sentio-text);
+}
+
+body:not(.film-active) :is(.training-banner, .decision-panel, .profile-options,
+  .source-item, .story-item, .monitor-stat, .monitor-grid > div, .decision-confidence,
+  .decision-timeline > div, .weekly-win-card, .score-comparison-card, .source-metric,
+  .privacy-control-row, .health-flow-card, .health-metric-card, .health-note-card,
+  .account-summary-card, .account-baseline-card) {
+  background: var(--sentio-raised);
+  border-color: var(--line);
+  color: var(--sentio-text);
+}
+
+body:not(.film-active) :is(.source-item:hover, .story-item:hover, .profile-option:hover,
+  .weekly-win-card:hover, .source-metric:hover) {
+  background: rgba(185, 108, 255, .16);
+}
+
+body:not(.film-active) :is(.profile-pill, .profile-option, .icon-button, .secondary-button,
+  .compact-button, .settings-action, .sheet-close, .round-button, select, input, textarea) {
+  background: var(--sentio-raised);
+  border-color: var(--line);
+  color: var(--sentio-text);
+}
+
+body:not(.film-active) :is(select option, input::placeholder, textarea::placeholder) {
+  color: var(--sentio-muted);
+}
+
+body:not(.film-active) :is(.training-progress, .confidence-track, .history-track,
+  .baseline-progress, .ai-confidence-bar, .weekly-chart-track) {
+  background: rgba(255, 255, 255, .12);
+}
+
+body:not(.film-active) :is(.training-progress > i, .confidence-track i, .baseline-progress i,
+  .ai-confidence-fill, .history-fill) {
+  background: var(--sentio-violet);
+}
+
+body:not(.film-active) :is(.primary-button, .play-button, .nudge-card button) {
+  background: var(--sentio-violet);
+  border-color: transparent;
+  color: #fff;
+}
+
+body:not(.film-active) :is(.primary-button:hover, .play-button:hover, .nudge-card button:hover) {
+  background: #cb8aff;
+}
+
+body:not(.film-active) :is(.text-link, .footer-guide, .decision-kicker, .eyebrow,
+  .checkin-kicker, .card-label) { color: var(--sentio-cyan); }
+
+body:not(.film-active) :is(.bottom-nav, .topbar) {
+  background: rgba(13, 6, 27, .92);
+  border-color: var(--line);
+}
+
+body:not(.film-active) .nav-item.active {
+  background: rgba(185, 108, 255, .24);
+  color: #fff;
+}
+
+body:not(.film-active) :is(.ai-chip, .ai-status-card) {
+  background: rgba(122, 221, 255, .09);
+  border-color: rgba(122, 221, 255, .25);
+  color: var(--sentio-text);
+}
+
+body:not(.film-active) :is(.ai-chip-label, .ai-status-head strong, .ai-explanation) {
+  color: var(--sentio-text);
+}
+
+body:not(.film-active) .ai-chip-dot { background: var(--sentio-cyan); box-shadow: 0 0 0 3px rgba(122, 221, 255, .16); }
+body:not(.film-active) .ai-badge { background: var(--sentio-violet); }
+
+body:not(.film-active) .dial-spectrum::after { background: var(--sentio-inset); }
+body:not(.film-active) .decision-dial .score-number { color: #fff; }
+body:not(.film-active) .dial-zones span { color: var(--sentio-muted); }
+
+body:not(.film-active) .toast { background: #2c155b; border-color: var(--line); color: #fff; }
+body:not(.film-active) .app-footer { background: transparent; border-color: var(--line); }
+
   </style>
 </head>
 <body>
