@@ -2,7 +2,7 @@
 
 ## 1. Mở ứng dụng
 
-Mở `release/Sentio.html` bằng Microsoft Edge, Google Chrome hoặc trình duyệt hiện đại. Đây là bản phát hành một tệp, không cần cài đặt hay chạy máy chủ.
+Mở `release/sentio.html` bằng Microsoft Edge, Google Chrome hoặc trình duyệt hiện đại. Đây là bản phát hành một tệp, không cần cài đặt hay chạy máy chủ.
 
 Sentio lưu tiến trình cục bộ trong trình duyệt đang dùng. Nếu đổi trình duyệt hoặc xóa dữ liệu trang web, tiến trình cũ sẽ không còn.
 
@@ -57,7 +57,13 @@ Các hồ sơ mô phỏng không phải kết quả nghiên cứu người dùng
 
 ## 7. Xem tiến trình
 
-Tab **Tiến trình** tổng hợp các phiên đã hoàn thành, số ngày đúng nhịp và thay đổi hành vi. Sentio không tuyên bố làm tăng điểm số; mục tiêu là hỗ trợ quá trình tự học và khả năng tự nhận biết trạng thái.
+Tab **Tiến trình** tổng hợp các phiên đã hoàn thành, số ngày đúng nhịp và thay đổi hành vi. Biểu đồ Readiness Score hiển thị 7 ngày gần nhất từ các phiên thật đủ điều kiện; ngày không có phiên được để trống thay vì nội suy thành dữ liệu giả.
+
+- Chọn **Lưu PDF** rồi chọn “Save as PDF” trong hộp thoại in của trình duyệt.
+- Chọn **Tải ảnh PNG** để tải một ảnh báo cáo tuần có thể gửi cho phụ huynh hoặc giáo viên.
+- Nếu đang xem hồ sơ Linh, Nam hoặc Mai, báo cáo và biểu đồ luôn được ghi nhãn là dữ liệu mô phỏng.
+
+Sentio không tuyên bố làm tăng điểm số; mục tiêu là hỗ trợ quá trình tự học và khả năng tự nhận biết trạng thái.
 
 ## 8. Film Mode dành cho trình bày
 
@@ -87,9 +93,10 @@ Các thao tác xóa hoặc đặt lại đều yêu cầu xác nhận.
 
 1. Mở Film Mode ở cảnh Hệ thống để giải thích ba nguồn dữ liệu và Readiness Engine.
 2. Chuyển sang cảnh 3 nhân vật, mở lần lượt Linh, Nam và Mai.
-3. Nhấn mạnh chuỗi: vấn đề → tín hiệu đa nguồn → AI suy luận → một hành động → kết quả sau 7 ngày.
+3. Nhấn mạnh chuỗi: vấn đề → tín hiệu đa nguồn → giải thích theo yếu tố tác động mạnh nhất → một hành động → kết quả sau 7 ngày.
 4. Chuyển sang cảnh 1 tuần để nói về thay đổi hành vi, không hứa hẹn tăng điểm.
-5. Thoát Film Mode và cho giám khảo thử trang Hôm nay hoặc bộ đếm Tập trung.
+5. Thoát Film Mode, mở tab Tiến trình để chỉ vào biểu đồ 7 ngày và thử xuất báo cáo PNG/PDF.
+6. Cho giám khảo thử trang Hôm nay hoặc bộ đếm Tập trung.
 
 ## 11. Giới hạn cần nói rõ
 

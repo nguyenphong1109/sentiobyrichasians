@@ -1,3 +1,17 @@
+SENTIO V8 — QA UPDATE (2026-08-15)
+
+V8 PASS
+- The 7-day Readiness Score chart reads eligible sessions from local state, uses a fixed 0–100 axis, preserves missing-day gaps, and switches from preview to real data as soon as the first valid session exists.
+- Trend source, average score, eligible-session count, and active-day count are visible; simulated profiles remain explicitly labeled.
+- Dynamic reasoning names the strongest positive or negative factor and includes a meaningful counter-factor when signals conflict.
+- Weekly report export supports an A4 print layout for browser “Save as PDF” and a locally generated 1200 × 1600 PNG without an external library or upload.
+- Runtime QA covered real multi-day history, one-session history, dynamic explanations for personal and simulated profiles, print invocation, PNG download flow, and missing DOM references.
+- JavaScript syntax, HTML accessibility/static references, build generation, and whitespace checks pass; modular source and `release/sentio.html` are synchronized.
+
+PENDING MANUAL DEVICE CHECK
+- Confirm the native print dialog and downloaded PNG on the exact laptop/browser used for the final pitch.
+- Rehearse the 7-day chart with a prepared set of real sessions so the judge sees a meaningful curve instead of an empty first-run state.
+
 SENTIO V5 — FINAL QA (2026-07-22)
 
 PASS

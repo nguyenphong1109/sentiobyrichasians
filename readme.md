@@ -12,6 +12,9 @@ Prototype sản phẩm Sentio của Rich Asians, tập trung vào một trải n
 - Ba nhóm tín hiệu dùng màu nhất quán và chỉ mở số liệu chi tiết khi người dùng yêu cầu.
 - Phiên Tập trung theo dõi nhẹ nhàng, chỉ nhắc khi tín hiệu lệch khỏi nhịp cá nhân đủ lâu.
 - Báo cáo tuần nhấn mạnh thay đổi hành vi, giữ đúng nhịp và cả những lần dừng đúng lúc.
+- Biểu đồ Readiness Score 7 ngày lấy trực tiếp từ các phiên đủ điều kiện đã lưu, giữ nguyên ngày trống và phân biệt rõ dữ liệu thật với hồ sơ mô phỏng.
+- Phần giải thích động ưu tiên yếu tố đang tác động mạnh nhất, đồng thời nêu lực bù trừ đáng kể nếu có.
+- Báo cáo tuần có thể lưu thành PDF qua hộp thoại in hoặc tải trực tiếp thành ảnh PNG để chia sẻ.
 - Trung tâm quyền riêng tư cho phép quản lý consent, thời gian lưu, xuất dữ liệu, thu hồi kết nối và xóa dữ liệu cục bộ.
 - Nội dung cốt lõi vẫn có bảy ngôn ngữ. Luồng mới ưu tiên tiếng Việt; các chuỗi đã quốc tế hóa có tiếng Anh dự phòng, còn một số panel chi tiết vẫn giữ nội dung tiếng Việt trong prototype này.
 
@@ -34,11 +37,13 @@ Prototype sản phẩm Sentio của Rich Asians, tập trung vào một trải n
 
 Mở `index.html` để chạy bản modular hiện tại (`styles.css` + `app.js`). Ở lần đầu, hoàn tất onboarding hoặc chọn xem trước bảng điều khiển. Để chạy lại luồng 7 ngày từ đầu, mở **Cài đặt → Đặt lại bản demo** hoặc chọn **Thiết lập lại onboarding** trong hồ sơ.
 
-`release/Sentio.html` là bản phát hành gọn nhất: một tệp duy nhất đã chứa markup, style, logic và logo, có thể mở trực tiếp hoặc gửi cho ban tổ chức.
+`release/sentio.html` là bản phát hành gọn nhất: một tệp duy nhất đã chứa markup, style, logic và logo, có thể mở trực tiếp hoặc gửi cho ban tổ chức.
 
 Hướng dẫn đầy đủ cho người dùng và luồng trình bày cuộc thi nằm trong `HUONG_DAN_SU_DUNG.md`. Trong ứng dụng, có thể mở bản hướng dẫn ngắn từ **Cài đặt → Hướng dẫn sử dụng** hoặc nút **Hướng dẫn sử dụng** ở cuối trang.
 
-Sau mỗi lần sửa `index.html`, `styles.css` hoặc `app.js`, chạy `node build-single-file.mjs` để dựng lại `release/Sentio.html` trước khi gửi hoặc trình chiếu.
+Sau mỗi lần sửa `index.html`, `styles.css` hoặc `app.js`, chạy `node build-single-file.mjs` để dựng lại `release/sentio.html` trước khi gửi hoặc trình chiếu.
+
+Trong tab **Tiến trình**, nút **Lưu PDF** mở bản báo cáo A4 để chọn “Save as PDF”; nút **Tải ảnh PNG** tạo ảnh báo cáo ngay trên thiết bị, không gửi dữ liệu phiên tới dịch vụ bên ngoài.
 
 ## Film Mode
 

@@ -4121,3 +4121,260 @@ body:not(.film-active) .guide-boundary p {
   body:not(.film-active) .footer-guide,
   body:not(.film-active) .footer-contact { font-size: 11px; }
 }
+
+/* V8: real-session trend, factor-led reasoning, and shareable weekly report. */
+body:not(.film-active) .fusion-summary > div { min-width: 0; }
+body:not(.film-active) .fusion-summary[data-tone="attention"] {
+  border-color: rgba(190, 107, 24, .18);
+  background: linear-gradient(135deg, #fff7e7, #f4f7ff);
+}
+
+body:not(.film-active) .dynamic-reasoning-detail {
+  margin: 12px 0 16px;
+  border: 1px solid rgba(23, 104, 229, .14);
+  border-left: 4px solid var(--primary);
+  border-radius: 16px;
+  background: #f3f7ff;
+  padding: 15px 17px;
+}
+
+body:not(.film-active) .dynamic-reasoning-detail p {
+  margin: 7px 0 0;
+  color: var(--v6-text-muted);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+body:not(.film-active) .progress-heading-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+body:not(.film-active) .report-export-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+body:not(.film-active) .compact-button {
+  min-height: 40px;
+  padding: 0 13px;
+  gap: 7px;
+  font-size: 12px;
+}
+
+body:not(.film-active) .compact-button svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+}
+
+body:not(.film-active) .readiness-trend-card {
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 94% 0%, rgba(33, 185, 138, .10), transparent 34%),
+    rgba(255, 255, 255, .94);
+}
+
+body:not(.film-active) .trend-card-badges {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+body:not(.film-active) .data-source-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  border: 1px solid rgba(33, 185, 138, .18);
+  border-radius: 999px;
+  padding: 0 11px;
+  color: #126b51;
+  background: #eaf9f3;
+  font-size: 11px;
+  font-weight: 850;
+}
+
+body:not(.film-active) .trend-chart-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 22px;
+}
+
+body:not(.film-active) .trend-chart-summary > div {
+  min-width: 0;
+  border: 1px solid rgba(16, 33, 58, .07);
+  border-radius: 14px;
+  background: #f6f9fc;
+  padding: 12px 14px;
+}
+
+body:not(.film-active) .trend-chart-summary span,
+body:not(.film-active) .trend-chart-summary strong { display: block; }
+body:not(.film-active) .trend-chart-summary span {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+body:not(.film-active) .trend-chart-summary strong {
+  margin-top: 5px;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -.04em;
+}
+
+body:not(.film-active) .readiness-chart {
+  position: relative;
+  min-height: 280px;
+  margin-top: 18px;
+  border: 1px solid rgba(23, 104, 229, .10);
+  border-radius: 20px;
+  background: linear-gradient(180deg, #fbfdff, #f4f8fc);
+  padding: 10px 12px 4px;
+  overflow: hidden;
+}
+
+body:not(.film-active) #trendChart {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 250px;
+  overflow: visible;
+}
+
+body:not(.film-active) .chart-grid line {
+  stroke: rgba(48, 75, 106, .10);
+  stroke-width: 1;
+}
+
+body:not(.film-active) .chart-axis-labels text {
+  fill: #7b8da2;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+body:not(.film-active) .chart-line {
+  fill: none;
+  stroke: #1768e5;
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 7px 8px rgba(23, 104, 229, .18));
+}
+
+body:not(.film-active) .chart-area { fill: url(#chartFill); }
+body:not(.film-active) .chart-dot {
+  fill: #fff;
+  stroke: #1768e5;
+  stroke-width: 5;
+}
+
+body:not(.film-active) .chart-average-line {
+  stroke: #21a878;
+  stroke-width: 2;
+  stroke-dasharray: 8 8;
+}
+
+body:not(.film-active) .chart-average-label {
+  fill: #16815f;
+  font-size: 11px;
+  font-weight: 850;
+  text-anchor: end;
+}
+
+body:not(.film-active) .chart-empty-state {
+  margin: 16px 0 0;
+  border-radius: 14px;
+  background: #f6f9fc;
+  padding: 15px;
+  color: var(--muted);
+  text-align: center;
+  font-size: 13px;
+}
+
+body:not(.film-active) .readiness-trend-card .history-list {
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 7px;
+  margin-top: 12px;
+}
+
+body:not(.film-active) .readiness-trend-card .history-row {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  border-radius: 10px;
+  background: #f6f9fc;
+  padding: 8px 4px;
+}
+
+body:not(.film-active) .readiness-trend-card .history-row.missing { opacity: .55; }
+body:not(.film-active) .readiness-trend-card .history-row strong { text-align: center; }
+body:not(.film-active) .readiness-trend-card .history-track { display: none; }
+
+.weekly-print-report { display: none; }
+
+@media (max-width: 700px) {
+  body:not(.film-active) .progress-heading-actions { align-items: flex-start; }
+  body:not(.film-active) .report-export-actions { justify-content: flex-start; }
+  body:not(.film-active) .trend-card-badges { justify-content: flex-start; }
+  body:not(.film-active) .readiness-trend-card .section-title-row { align-items: flex-start; }
+  body:not(.film-active) .trend-chart-summary { grid-template-columns: repeat(3, minmax(78px, 1fr)); }
+  body:not(.film-active) .trend-chart-summary > div { padding: 10px; }
+  body:not(.film-active) .trend-chart-summary strong { font-size: 20px; }
+  body:not(.film-active) .readiness-chart { min-height: 220px; padding: 4px 2px 0; }
+  body:not(.film-active) #trendChart { min-height: 210px; }
+  body:not(.film-active) .readiness-trend-card .history-list { gap: 4px; }
+  body:not(.film-active) .readiness-trend-card .history-row { padding: 7px 2px; }
+}
+
+@media (max-width: 430px) {
+  body:not(.film-active) .report-export-actions { display: grid; grid-template-columns: 1fr 1fr; width: 100%; }
+  body:not(.film-active) .compact-button { justify-content: center; padding: 0 8px; }
+  body:not(.film-active) .trend-chart-summary { grid-template-columns: 1fr; }
+  body:not(.film-active) .readiness-trend-card .history-row :where(span, strong) { font-size: 9px; }
+}
+
+body:not(.film-active) .film-button {
+  background: #14202b;
+  color: #fff;
+}
+
+@media print {
+  @page { size: A4 portrait; margin: 12mm; }
+  body.printing-weekly-report { background: #fff !important; }
+  body.printing-weekly-report > *:not(#weeklyPrintReport) { display: none !important; }
+  body.printing-weekly-report #weeklyPrintReport {
+    display: block !important;
+    color: #10213a;
+    background: #fff;
+    font-family: Arial, sans-serif;
+  }
+  .weekly-print-report .print-report-shell { border: 1px solid #dce6f0; border-radius: 18px; padding: 24px; }
+  .weekly-print-report .print-report-header { display: flex; justify-content: space-between; gap: 20px; border-bottom: 2px solid #1768e5; padding-bottom: 16px; }
+  .weekly-print-report .print-report-brand { color: #1768e5; font-size: 14px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+  .weekly-print-report h1 { margin: 7px 0 4px; font-size: 28px; }
+  .weekly-print-report p { margin: 0; color: #5f7288; line-height: 1.5; }
+  .weekly-print-report .print-report-range { text-align: right; font-weight: 700; }
+  .weekly-print-report .print-report-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 20px 0; }
+  .weekly-print-report .print-report-stat { border-radius: 12px; background: #f1f6fb; padding: 13px; }
+  .weekly-print-report .print-report-stat span,
+  .weekly-print-report .print-report-stat strong { display: block; }
+  .weekly-print-report .print-report-stat span { color: #6c7e91; font-size: 10px; }
+  .weekly-print-report .print-report-stat strong { margin-top: 5px; font-size: 22px; }
+  .weekly-print-report .print-report-chart { width: 100%; border: 1px solid #e0e8f0; border-radius: 14px; background: #fbfdff; }
+  .weekly-print-report .print-report-insights { margin: 18px 0; padding-left: 20px; }
+  .weekly-print-report .print-report-insights li { margin: 8px 0; }
+  .weekly-print-report .print-report-footer { border-top: 1px solid #dce6f0; padding-top: 12px; font-size: 10px; }
+}

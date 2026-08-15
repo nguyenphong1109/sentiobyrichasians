@@ -270,7 +270,10 @@
 
             <div class="fusion-summary" id="fusionSummary" role="status" aria-live="polite">
               <span class="fusion-mark" aria-hidden="true">S</span>
-              <p id="fusionSummaryText">Thể trạng gần nhịp tham chiếu và ánh sáng phù hợp đang hỗ trợ bạn; hoạt động số chưa cho thấy dấu hiệu gián đoạn đáng kể.</p>
+              <div>
+                <strong data-i18n="dynamicReasoningLabel">Giải thích động</strong>
+                <p id="fusionSummaryText">Thể trạng gần nhịp tham chiếu và ánh sáng phù hợp đang hỗ trợ bạn; hoạt động số chưa cho thấy dấu hiệu gián đoạn đáng kể.</p>
+              </div>
             </div>
 
             <button class="text-link" id="howItWorksButton" type="button">
@@ -422,7 +425,19 @@
             <h1 data-i18n="progressTitleNew">Bạn đang học đúng nhịp hơn.</h1>
             <p class="subcopy" data-i18n="progressSubtitleNew">Những thay đổi nhỏ trong quá trình học, không phải lời hứa về điểm số.</p>
           </div>
-          <span class="week-chip"><span id="weekRange">15–21 tháng 7</span><small> · 7 <span data-i18n="days">ngày</span></small></span>
+          <div class="progress-heading-actions">
+            <span class="week-chip"><span id="weekRange">15–21 tháng 7</span><small> · 7 <span data-i18n="days">ngày</span></small></span>
+            <div class="report-export-actions" aria-label="Xuất báo cáo tuần">
+              <button class="secondary-button compact-button" id="exportWeeklyPdf" type="button">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h9l4 4v16H6zM14 2v5h5M9 13h6M9 17h6"/></svg>
+                <span data-i18n="exportWeeklyPdf">Lưu PDF</span>
+              </button>
+              <button class="secondary-button compact-button" id="exportWeeklyPng" type="button">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m4 18 5-5 4 4 3-3 4 4"/></svg>
+                <span data-i18n="exportWeeklyPng">Tải ảnh PNG</span>
+              </button>
+            </div>
+          </div>
         </div>
 
         <div class="weekly-summary-grid reveal delay-1">
@@ -469,18 +484,43 @@
           </article>
         </section>
 
-        <section class="history-card reveal delay-2">
+        <section class="history-card readiness-trend-card reveal delay-2" aria-labelledby="readinessTrendTitle">
           <div class="section-title-row">
             <div>
-              <span class="card-label" data-i18n="recentRhythm">Nhịp gần đây</span>
-              <h2 id="progressProfileTitle">Nhịp học của bạn</h2>
+              <span class="card-label" data-i18n="readinessTrendLabel">Readiness Score 7 ngày</span>
+              <h2 id="readinessTrendTitle" data-i18n="readinessTrendTitle">Xu hướng từ các phiên đã hoàn thành</h2>
             </div>
-            <span class="trend-up" id="historyTrend">Ổn định hơn</span>
+            <div class="trend-card-badges">
+              <span class="data-source-chip" id="trendDataSource">Dữ liệu phiên thật</span>
+              <span class="trend-up" id="historyTrend">Ổn định hơn</span>
+            </div>
           </div>
-          <div class="history-list" id="historyList"></div>
-          <div class="chart-wrap legacy-chart" aria-hidden="true">
-            <svg id="trendChart" viewBox="0 0 700 260"><path class="chart-area" id="chartArea"></path><path class="chart-line" id="chartLine"></path><g id="chartDots"></g></svg>
+          <div class="trend-chart-summary" aria-label="Tóm tắt dữ liệu biểu đồ">
+            <div><span data-i18n="chartAverage">Trung bình</span><strong id="trendAverageScore">—</strong></div>
+            <div><span data-i18n="chartSessions">Phiên hợp lệ</span><strong id="trendSessionCount">0</strong></div>
+            <div><span data-i18n="chartActiveDays">Ngày có dữ liệu</span><strong id="trendActiveDays">0 / 7</strong></div>
           </div>
+          <div class="chart-wrap readiness-chart" id="readinessChartWrap" role="img" aria-label="Biểu đồ Readiness Score trong 7 ngày">
+            <svg id="trendChart" viewBox="0 0 700 320" aria-hidden="true">
+              <defs>
+                <linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#1768e5" stop-opacity=".24"/>
+                  <stop offset="100%" stop-color="#21b98a" stop-opacity=".02"/>
+                </linearGradient>
+              </defs>
+              <g class="chart-grid" id="chartGrid"></g>
+              <g class="chart-axis-labels" id="chartYAxisLabels"></g>
+              <path class="chart-area" id="chartArea"></path>
+              <line class="chart-average-line" id="chartAverageLine" x1="0" x2="0" y1="0" y2="0"></line>
+              <text class="chart-average-label" id="chartAverageLabel" x="0" y="0"></text>
+              <path class="chart-line" id="chartLine"></path>
+              <g id="chartDots"></g>
+              <g class="chart-axis-labels chart-x-labels" id="chartXAxisLabels"></g>
+            </svg>
+          </div>
+          <p class="chart-empty-state" id="chartEmptyState" hidden data-i18n="chartEmptyState">Hoàn thành một phiên có Readiness Score để bắt đầu biểu đồ.</p>
+          <div class="history-list" id="historyList" aria-label="Dữ liệu Readiness theo từng ngày"></div>
+          <h2 id="progressProfileTitle" class="sr-only">Nhịp học của bạn</h2>
           <span id="afterLabel" class="sr-only"></span>
         </section>
 
@@ -683,6 +723,10 @@
     <div class="baseline-box"><span data-i18n="personalBaselineLabel">Nhịp tham chiếu cá nhân</span><strong id="baselineValue">88</strong><small data-i18n="baselineHelp">Sentio so sánh hôm nay với nhịp thường ngày của chính bạn, không dùng một chuẩn chung cho tất cả.</small></div>
     <div class="decision-coverage-card"><span>Độ phủ dữ liệu cho quyết định này</span><strong id="decisionDataCoverage">3 / 3 nguồn</strong><small>Độ phủ cao hơn giúp gợi ý đáng tin cậy hơn, nhưng không biến Sentio thành công cụ chẩn đoán.</small></div>
     <p class="missing-signals-note" id="missingSignalsNote" role="status">Không có nguồn nào bị thiếu trong lần cập nhật gần nhất.</p>
+    <div class="dynamic-reasoning-detail">
+      <span class="card-label" data-i18n="dynamicReasoningLabel">Giải thích động</span>
+      <p id="decisionExplanationDetail">Sentio sẽ ưu tiên yếu tố có tác động lớn nhất và cập nhật lời giải thích khi dữ liệu thay đổi.</p>
+    </div>
     <div class="factor-list" id="factorList"></div>
     <p class="privacy-copy"><span aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v2"/></svg></span><span data-i18n="privacyCopy">Dữ liệu sinh trắc học thô không được hiển thị công khai và chỉ dùng để tạo chỉ số dẫn xuất.</span></p>
   </section>

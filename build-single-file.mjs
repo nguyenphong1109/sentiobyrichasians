@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 const root = dirname(fileURLToPath(import.meta.url));
 const releaseDir = join(root, 'release');
-const releaseFile = join(releaseDir, 'Sentio.html');
+const releaseFile = join(releaseDir, 'sentio.html');
 const read = (name, encoding = 'utf8') => readFileSync(join(root, name), encoding);
 
 const css = read('styles.css');

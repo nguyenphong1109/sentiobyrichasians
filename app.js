@@ -194,6 +194,62 @@ const productTranslations = {
   ja: { quickCheckin:'クイックチェックイン', checkinHelp:'ワンタップで、今日の主観的な状態を Sentio に伝えられます。', moodGreat:'とても良い', moodOkay:'普通', moodTired:'少し疲れた', skipForNow:'後で', currentMission:'現在のミッション', stayWithOneThing:'一つのことに集中しましょう。', thisWeek:'今週', progressTitleNew:'より良いリズムで学べています。', progressSubtitleNew:'点数の保証ではなく、学習過程の小さな変化です。', biggestChange:'最も大きな変化', averageReadiness:'平均 Readiness', consistentDays:'良いリズムの日', outOfSeven:'7日中', recentRhythm:'最近のリズム', stableMore:'より安定', analyzingSignals:'今日のシグナルを確認中…', readyResult:'準備完了。', todayQuestion:'今日はどんな気分ですか？' },
   de: { quickCheckin:'Kurzer Check-in', checkinHelp:'Ein Tipp hilft Sentio, dein heutiges Gefühl besser zu verstehen.', moodGreat:'Sehr gut', moodOkay:'Okay', moodTired:'Müde', skipForNow:'Später', currentMission:'Aktuelle Mission', stayWithOneThing:'Bleib bei einer Sache.', thisWeek:'Diese Woche', progressTitleNew:'Du lernst in einem besseren Rhythmus.', progressSubtitleNew:'Kleine Verbesserungen im Lernprozess, keine Notenversprechen.', biggestChange:'Größte Veränderung', averageReadiness:'Durchschnittliche Readiness', consistentDays:'Gut getimte Tage', outOfSeven:'von 7 Tagen', recentRhythm:'Letzter Rhythmus', stableMore:'Stabiler', analyzingSignals:'Heutige Signale werden gelesen…', readyResult:'Bereit.', todayQuestion:'Wie fühlst du dich heute?' }
 };
+Object.assign(productTranslations.vi, {
+  dynamicReasoningLabel: 'Giải thích động',
+  reasoningNoData: 'Sentio chưa có đủ dữ liệu mới để giải thích quyết định. Hệ thống không tự điền tín hiệu còn thiếu.',
+  reasoningNeutral: 'Các tín hiệu đang có đều gần nhịp tham chiếu; chưa có yếu tố nào làm Readiness Score thay đổi đáng kể.',
+  reasoningSingleNegative: '{primary} là yếu tố kéo điểm xuống mạnh nhất ({primaryPoints} điểm). Vì vậy Sentio ưu tiên “{action}”.',
+  reasoningTwoNegative: '{primary} ({primaryPoints} điểm) và {secondary} ({secondaryPoints} điểm) là hai yếu tố kéo điểm xuống mạnh nhất. Vì vậy Sentio ưu tiên “{action}”.',
+  reasoningSinglePositive: '{primary} đang hỗ trợ điểm mạnh nhất (+{primaryPoints} điểm). Các tín hiệu còn lại chưa lệch đáng kể, nên Sentio ưu tiên “{action}”.',
+  reasoningMixed: '{negative} đang kéo điểm xuống {negativePoints} điểm, trong khi {positive} bù lại +{positivePoints} điểm. Yếu tố chi phối vẫn là {negative}, nên Sentio ưu tiên “{action}”.',
+  reasoningMixedPositive: '{positive} đang hỗ trợ +{positivePoints} điểm, trong khi {negative} làm giảm {negativePoints} điểm. Tác động tích cực vẫn chi phối, nên Sentio ưu tiên “{action}”.',
+  readinessTrendLabel: 'Readiness Score 7 ngày',
+  readinessTrendTitle: 'Xu hướng từ các phiên đã hoàn thành',
+  realSessionData: 'Dữ liệu phiên thật',
+  previewSessionData: 'Dữ liệu mô phỏng',
+  chartAverage: 'Trung bình',
+  chartSessions: 'Phiên hợp lệ',
+  chartActiveDays: 'Ngày có dữ liệu',
+  chartEmptyState: 'Hoàn thành một phiên có Readiness Score để bắt đầu biểu đồ.',
+  exportWeeklyPdf: 'Lưu PDF',
+  exportWeeklyPng: 'Tải ảnh PNG',
+  reportNoData: 'Chưa có phiên hợp lệ để xuất báo cáo tuần.',
+  reportPdfReady: 'Hộp thoại in đã mở — chọn “Lưu dưới dạng PDF”.',
+  reportPngReady: 'Đã tạo ảnh báo cáo tuần.',
+  weeklyReportTitle: 'Báo cáo nhịp học 7 ngày',
+  weeklyReportSubtitle: 'Readiness Score và thay đổi trong quá trình tự học',
+  reportSourceReal: 'Tổng hợp từ các phiên Sentio đã hoàn thành.',
+  reportSourcePreview: 'Báo cáo dùng dữ liệu mô phỏng để minh họa.',
+  reportDisclaimer: 'Sentio hỗ trợ quá trình tự học và không phải công cụ chẩn đoán y khoa.'
+});
+Object.assign(productTranslations.en, {
+  dynamicReasoningLabel: 'Dynamic explanation',
+  reasoningNoData: 'Sentio does not have enough fresh data to explain this decision and will not invent missing signals.',
+  reasoningNeutral: 'Available signals are close to your reference rhythm; no factor materially changed the Readiness Score.',
+  reasoningSingleNegative: '{primary} is the strongest drag on the score ({primaryPoints} points), so Sentio prioritizes “{action}”.',
+  reasoningTwoNegative: '{primary} ({primaryPoints} points) and {secondary} ({secondaryPoints} points) are the two strongest drags, so Sentio prioritizes “{action}”.',
+  reasoningSinglePositive: '{primary} provides the strongest support (+{primaryPoints} points). Other signals are not materially off rhythm, so Sentio prioritizes “{action}”.',
+  reasoningMixed: '{negative} lowers the score by {negativePoints} points while {positive} offsets +{positivePoints}. {negative} still dominates, so Sentio prioritizes “{action}”.',
+  reasoningMixedPositive: '{positive} adds +{positivePoints} points while {negative} lowers {negativePoints}. The positive effect still dominates, so Sentio prioritizes “{action}”.',
+  readinessTrendLabel: '7-day Readiness Score',
+  readinessTrendTitle: 'Trend from completed sessions',
+  realSessionData: 'Real session data',
+  previewSessionData: 'Simulated data',
+  chartAverage: 'Average',
+  chartSessions: 'Eligible sessions',
+  chartActiveDays: 'Days with data',
+  chartEmptyState: 'Complete a session with a Readiness Score to start the chart.',
+  exportWeeklyPdf: 'Save PDF',
+  exportWeeklyPng: 'Download PNG',
+  reportNoData: 'There are no eligible sessions to export yet.',
+  reportPdfReady: 'The print dialog is open — choose “Save as PDF”.',
+  reportPngReady: 'Weekly report image created.',
+  weeklyReportTitle: '7-day learning rhythm report',
+  weeklyReportSubtitle: 'Readiness Score and changes in the self-study process',
+  reportSourceReal: 'Aggregated from completed Sentio sessions.',
+  reportSourcePreview: 'This report uses simulated data for demonstration.',
+  reportDisclaimer: 'Sentio supports self-study and is not a medical diagnostic tool.'
+});
 Object.entries(productTranslations).forEach(([lang, values]) => Object.assign(translations[lang] || (translations[lang] = {}), values));
 
 const v6Translations = {
@@ -1341,6 +1397,51 @@ function resetLiveMetrics(profile = getProfile()) {
   state.sessionStartTabs = state.liveTabs;
 }
 
+function buildDynamicDecisionExplanation(decision) {
+  if (!decision || decision.status === 'insufficient' || !decision.factors.length) return t('reasoningNoData');
+  const meaningful = [...decision.factors]
+    .filter((factor) => Number.isFinite(Number(factor.impact)) && Math.abs(Number(factor.impact)) >= 1)
+    .sort((a, b) => Math.abs(Number(b.impact)) - Math.abs(Number(a.impact)));
+  if (!meaningful.length) return t('reasoningNeutral');
+
+  const negatives = meaningful.filter((factor) => Number(factor.impact) < 0);
+  const positives = meaningful.filter((factor) => Number(factor.impact) > 0);
+  const action = t(decision.recommendation.titleKey);
+  if (negatives.length && positives.length) {
+    const negative = negatives[0];
+    const positive = positives[0];
+    const negativeDominates = Math.abs(Number(negative.impact)) >= Math.abs(Number(positive.impact));
+    return format(t(negativeDominates ? 'reasoningMixed' : 'reasoningMixedPositive'), {
+      negative: negative.label,
+      negativePoints: Math.abs(Math.round(negative.impact)),
+      positive: positive.label,
+      positivePoints: Math.round(positive.impact),
+      action
+    });
+  }
+  if (negatives.length > 1) {
+    return format(t('reasoningTwoNegative'), {
+      primary: negatives[0].label,
+      primaryPoints: Math.round(negatives[0].impact),
+      secondary: negatives[1].label,
+      secondaryPoints: Math.round(negatives[1].impact),
+      action
+    });
+  }
+  if (negatives.length) {
+    return format(t('reasoningSingleNegative'), {
+      primary: negatives[0].label,
+      primaryPoints: Math.round(negatives[0].impact),
+      action
+    });
+  }
+  return format(t('reasoningSinglePositive'), {
+    primary: positives[0].label,
+    primaryPoints: Math.round(positives[0].impact),
+    action
+  });
+}
+
 function renderProfile() {
   const snapshot = currentSnapshot();
   state.decision = computeDecision(snapshot);
@@ -1399,9 +1500,11 @@ function renderProfile() {
   setText('#browserImpact', impactText(decision.sourceImpact.digital));
   setText('#wearableImpact', impactText(decision.sourceImpact.body));
   setText('#deskImpact', impactText(decision.sourceImpact.environment));
-  setText('#fusionSummaryText', decision.missingSources.length
-    ? format(t('fusionPartial'), { count: 3 - decision.missingSources.length })
-    : t('fusionComplete'));
+  const dynamicExplanation = buildDynamicDecisionExplanation(decision);
+  setText('#fusionSummaryText', dynamicExplanation);
+  setText('#decisionExplanationDetail', dynamicExplanation);
+  const fusionSummary = $('#fusionSummary');
+  if (fusionSummary) fusionSummary.dataset.tone = decision.factors.some((factor) => factor.impact < 0) ? 'attention' : 'supportive';
 
   if (state.liveProfile !== state.profile || !Number.isFinite(state.liveTabs) || !Number.isFinite(state.liveFocus)) resetLiveMetrics(p);
   setText('#liveTabsValue', state.liveTabs);
@@ -1677,6 +1780,10 @@ function renderProgress() {
   setText('#weeklyAverage', p.average);
   setText('#consistentDaysValue', p.streak);
   setText('#historyTrend', t('stableMore'));
+  setText('#trendDataSource', t('previewSessionData'));
+  setText('#trendAverageScore', p.average);
+  setText('#trendSessionCount', '7');
+  setText('#trendActiveDays', '7 / 7');
   renderHistory(p.chart);
   drawChart(p.chart);
 }
@@ -1699,6 +1806,8 @@ function previewWeeklyData() {
     rhythm: 71,
     healthyStops: 2,
     sessions: 7,
+    days: 7,
+    consistentDays: 5,
     before: 7,
     after: 3
   };
@@ -1740,18 +1849,27 @@ function aggregateWeeklyData(sessions) {
   };
 }
 
-function renderPersonalProgress() {
+function getWeeklyProgressModel({ allowPreview = true } = {}) {
   const now = startOfLocalDay(new Date());
   const start = new Date(now);
   start.setDate(start.getDate() - 6);
+  const sessions = recentSessions(7);
+  const eligibleSessions = sessions.filter((session) => session.readiness !== null && session.readiness !== undefined && session.readiness !== '' && Number.isFinite(Number(session.readiness)));
+  const data = eligibleSessions.length
+    ? aggregateWeeklyData(sessions)
+    : allowPreview && state.personal.previewMode
+      ? previewWeeklyData()
+      : null;
+  return { now, start, sessions, eligibleSessions, data };
+}
+
+function renderPersonalProgress() {
+  const { now, start, data } = getWeeklyProgressModel();
   const locale = ({ vi: 'vi-VN', en: 'en-US', es: 'es-ES', fr: 'fr-FR', zh: 'zh-CN', ja: 'ja-JP', de: 'de-DE' })[state.language] || 'en-US';
   const rangeFormatter = new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'short' });
-  const sessions = recentSessions(7);
-  const sessionsWithReadiness = sessions.filter((session) => session.readiness !== null && session.readiness !== undefined && session.readiness !== '' && Number.isFinite(Number(session.readiness)));
-  const enough = new Set(sessionsWithReadiness.map((session) => localDateKey(session.time || session.startedAt)).filter(Boolean)).size >= 3;
-  const data = enough ? aggregateWeeklyData(sessions) : state.personal.previewMode ? previewWeeklyData() : null;
   setText('#weekRange', `${rangeFormatter.format(start)} – ${rangeFormatter.format(now)}${data?.sample ? ` · ${t('previewData')}` : ''}`);
   setText('#progressProfileTitle', `${t('recentRhythm')} · ${state.personal.name || t('personalAccount')}`);
+  setText('#trendDataSource', data?.sample ? t('previewSessionData') : t('realSessionData'));
 
   if (!data) {
     setText('#trendValue', '—');
@@ -1767,6 +1885,10 @@ function renderPersonalProgress() {
     setText('#weeklyInterruptions', '—');
     setText('#weeklyRhythm', '—');
     setText('#weeklyHealthyStops', '0');
+    setText('#trendAverageScore', '—');
+    setText('#trendSessionCount', '0');
+    setText('#trendActiveDays', '0 / 7');
+    setText('#trendDataSource', t('realSessionData'));
     setText('#selfAwarenessInsights', t('noInsightYet'));
     const history = $('#historyList');
     if (history) history.innerHTML = `<p class="empty-state">${escapeHtml(t('collectingWeeklyText'))}</p>`;
@@ -1775,6 +1897,8 @@ function renderPersonalProgress() {
   }
 
   const trend = data.before > data.after ? `−${Math.round((data.before - data.after) * 10) / 10}` : '→';
+  const finiteScores = data.values.filter((value) => value !== null && value !== undefined && value !== '' && Number.isFinite(Number(value))).map(Number);
+  const scoreTrend = finiteScores.length > 1 ? Math.round(finiteScores.at(-1) - finiteScores[0]) : 0;
   setText('#trendValue', data.sample ? t('previewData') : trend);
   setText('#changeHeadline', data.before > data.after ? t('departuresHeadline') : t('progressTitleNew'));
   setText('#beforeValue', data.before);
@@ -1788,6 +1912,10 @@ function renderPersonalProgress() {
   setText('#weeklyInterruptions', data.interruptions);
   setText('#weeklyRhythm', `${data.rhythm}%`);
   setText('#weeklyHealthyStops', data.healthyStops);
+  setText('#trendAverageScore', data.average ?? '—');
+  setText('#trendSessionCount', data.sessions ?? 0);
+  setText('#trendActiveDays', `${data.days ?? finiteScores.length} / 7`);
+  setText('#historyTrend', data.sample ? t('previewData') : scoreTrend > 0 ? `+${scoreTrend}` : scoreTrend < 0 ? `${scoreTrend}` : '→');
   const insightStrings = [
     format(t('insightTabs'), { value: data.interruptions }),
     format(t('insightRhythm'), { value: data.rhythm }),
@@ -1824,20 +1952,151 @@ function renderHistory(values) {
 function drawChart(values) {
   const sourceValues = Array.isArray(values) ? values : [];
   const finiteValues = sourceValues.filter((value) => value !== null && value !== undefined && value !== '' && Number.isFinite(Number(value))).map(Number);
-  if (finiteValues.length < 2) {
-    if ($('#chartLine')) $('#chartLine').setAttribute('d', '');
-    if ($('#chartArea')) $('#chartArea').setAttribute('d', '');
-    if ($('#chartDots')) $('#chartDots').innerHTML = '';
-    return;
-  }
-  const width = 700, height = 260, padX = 18, padY = 24;
-  const min = Math.min(...finiteValues) - 6;
-  const max = Math.max(...finiteValues) + 5;
+  const empty = $('#chartEmptyState');
+  if (empty) empty.hidden = finiteValues.length > 0;
+  const width = 700, height = 320, padLeft = 48, padRight = 24, padTop = 24, padBottom = 46;
+  const plotWidth = width - padLeft - padRight;
+  const plotHeight = height - padTop - padBottom;
+  const yFor = (value) => padTop + (100 - clamp(value, 0, 100)) / 100 * plotHeight;
   const points = sourceValues.map((value, index) => {
     if (value === null || value === undefined || value === '' || !Number.isFinite(Number(value))) return null;
-    const x = padX + index * ((width - padX * 2) / Math.max(1, sourceValues.length - 1));
-    const y = height - padY - ((Number(value) - min) / (max - min)) * (height - padY * 2);
-    return [x, y];
+    const x = padLeft + index * (plotWidth / Math.max(1, sourceValues.length - 1));
+    return [x, yFor(value), clamp(value, 0, 100), index];
+  });
+
+  let drawing = false;
+  const line = points.map((point) => {
+    if (!point) { drawing = false; return ''; }
+    const command = drawing ? 'L' : 'M';
+    drawing = true;
+    return `${command} ${point[0]} ${point[1]}`;
+  }).join(' ');
+  const segments = [];
+  let segment = [];
+  points.forEach((point) => {
+    if (point) segment.push(point);
+    else if (segment.length) { segments.push(segment); segment = []; }
+  });
+  if (segment.length) segments.push(segment);
+  const baselineY = padTop + plotHeight;
+  const area = segments.filter((items) => items.length > 1).map((items) => {
+    const [first] = items;
+    const last = items.at(-1);
+    return `M ${first[0]} ${baselineY} L ${items.map((point) => `${point[0]} ${point[1]}`).join(' L ')} L ${last[0]} ${baselineY} Z`;
+  }).join(' ');
+
+  if ($('#chartLine')) $('#chartLine').setAttribute('d', line);
+  if ($('#chartArea')) $('#chartArea').setAttribute('d', area);
+  if ($('#chartDots')) $('#chartDots').innerHTML = points.filter(Boolean).map(([x, y, value, index]) => `<circle class="chart-dot" cx="${x}" cy="${y}" r="7"><title>${escapeHtml(String(value))} / 100 · ${escapeHtml(String(index + 1))}/7</title></circle>`).join('');
+
+  const gridValues = [100, 75, 50, 25, 0];
+  if ($('#chartGrid')) $('#chartGrid').innerHTML = gridValues.map((value) => `<line x1="${padLeft}" x2="${width - padRight}" y1="${yFor(value)}" y2="${yFor(value)}"></line>`).join('');
+  if ($('#chartYAxisLabels')) $('#chartYAxisLabels').innerHTML = gridValues.map((value) => `<text x="${padLeft - 12}" y="${yFor(value) + 4}" text-anchor="end">${value}</text>`).join('');
+
+  const locale = ({ vi: 'vi-VN', en: 'en-US', es: 'es-ES', fr: 'fr-FR', zh: 'zh-CN', ja: 'ja-JP', de: 'de-DE' })[state.language] || 'en-US';
+  const dayFormatter = new Intl.DateTimeFormat(locale, { weekday: 'short' });
+  const labels = sourceValues.map((_, index) => {
+    const date = new Date();
+    date.setDate(date.getDate() - (sourceValues.length - 1 - index));
+    return dayFormatter.format(date);
+  });
+  if ($('#chartXAxisLabels')) $('#chartXAxisLabels').innerHTML = labels.map((label, index) => {
+    const x = padLeft + index * (plotWidth / Math.max(1, labels.length - 1));
+    return `<text x="${x}" y="${height - 12}" text-anchor="middle">${escapeHtml(label)}</text>`;
+  }).join('');
+
+  const average = finiteValues.length ? Math.round(finiteValues.reduce((sum, value) => sum + value, 0) / finiteValues.length) : null;
+  const averageLine = $('#chartAverageLine');
+  const averageLabel = $('#chartAverageLabel');
+  if (averageLine) {
+    const averageY = average === null ? 0 : yFor(average);
+    averageLine.setAttribute('x1', String(padLeft));
+    averageLine.setAttribute('x2', String(width - padRight));
+    averageLine.setAttribute('y1', String(averageY));
+    averageLine.setAttribute('y2', String(averageY));
+    averageLine.hidden = average === null;
+  }
+  if (averageLabel) {
+    averageLabel.textContent = average === null ? '' : `${t('chartAverage')} ${average}`;
+    averageLabel.setAttribute('x', String(width - padRight));
+    averageLabel.setAttribute('y', String(yFor(average ?? 0) - 8));
+  }
+  const wrap = $('#readinessChartWrap');
+  if (wrap) wrap.setAttribute('aria-label', finiteValues.length ? `${t('readinessTrendLabel')}: ${finiteValues.join(', ')}` : t('chartEmptyState'));
+}
+
+function buildWeeklyReportModel() {
+  const locale = ({ vi: 'vi-VN', en: 'en-US', es: 'es-ES', fr: 'fr-FR', zh: 'zh-CN', ja: 'ja-JP', de: 'de-DE' })[state.language] || 'en-US';
+  const rangeFormatter = new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'short', year: 'numeric' });
+  let data;
+  let name;
+  let changeLabel;
+  let before;
+  let after;
+  if (state.profile === 'personal') {
+    const weekly = getWeeklyProgressModel();
+    data = weekly.data;
+    if (!data) return null;
+    name = state.personal.name || t('personalAccount');
+    changeLabel = t('weeklyInterruptionsLabel');
+    before = data.before;
+    after = data.after;
+  } else {
+    const profile = getProfile();
+    data = {
+      sample: true,
+      values: [...profile.chart],
+      average: profile.average,
+      interruptions: profile.after,
+      rhythm: Math.round(profile.streak / 7 * 100),
+      healthyStops: profile.status === 'ready' ? 0 : 2,
+      sessions: 7,
+      days: 7,
+      consistentDays: profile.streak,
+      before: profile.before,
+      after: profile.after
+    };
+    name = profile.name;
+    changeLabel = t(profile.unitKey);
+    before = profile.before;
+    after = profile.after;
+  }
+  const now = startOfLocalDay(new Date());
+  const start = new Date(now);
+  start.setDate(start.getDate() - 6);
+  return {
+    name,
+    range: `${rangeFormatter.format(start)} – ${rangeFormatter.format(now)}`,
+    sourceLabel: data.sample ? t('reportSourcePreview') : t('reportSourceReal'),
+    sample: Boolean(data.sample),
+    values: data.values,
+    average: data.average ?? '—',
+    sessions: data.sessions ?? 0,
+    activeDays: data.days ?? data.values.filter((value) => hasFiniteValue(value)).length,
+    rhythm: data.rhythm ?? 0,
+    healthyStops: data.healthyStops ?? 0,
+    interruptions: data.interruptions ?? '—',
+    changeLabel,
+    before,
+    after,
+    insights: [
+      format(t('insightTabs'), { value: data.interruptions ?? '—' }),
+      format(t('insightRhythm'), { value: data.rhythm ?? 0 }),
+      format(t('insightStops'), { value: data.healthyStops ?? 0 })
+    ]
+  };
+}
+
+function weeklyReportChartSvg(model, { width = 900, height = 340 } = {}) {
+  const padLeft = 58, padRight = 28, padTop = 32, padBottom = 52;
+  const plotWidth = width - padLeft - padRight;
+  const plotHeight = height - padTop - padBottom;
+  const values = Array.isArray(model.values) ? model.values : [];
+  const yFor = (value) => padTop + (100 - clamp(value, 0, 100)) / 100 * plotHeight;
+  const points = values.map((value, index) => {
+    if (!hasFiniteValue(value)) return null;
+    const x = padLeft + index * (plotWidth / Math.max(1, values.length - 1));
+    return [x, yFor(value), clamp(value, 0, 100)];
   });
   let drawing = false;
   const line = points.map((point) => {
@@ -1846,9 +2105,237 @@ function drawChart(values) {
     drawing = true;
     return `${command} ${point[0]} ${point[1]}`;
   }).join(' ');
-  $('#chartLine').setAttribute('d', line);
-  $('#chartArea').setAttribute('d', '');
-  $('#chartDots').innerHTML = points.filter(Boolean).map(([x,y]) => `<circle class="chart-dot" cx="${x}" cy="${y}" r="7"></circle>`).join('');
+  const locale = ({ vi: 'vi-VN', en: 'en-US', es: 'es-ES', fr: 'fr-FR', zh: 'zh-CN', ja: 'ja-JP', de: 'de-DE' })[state.language] || 'en-US';
+  const formatter = new Intl.DateTimeFormat(locale, { weekday: 'short' });
+  const labels = values.map((_, index) => {
+    const date = new Date();
+    date.setDate(date.getDate() - (values.length - 1 - index));
+    return formatter.format(date);
+  });
+  const grid = [100, 75, 50, 25, 0].map((value) => `<line x1="${padLeft}" x2="${width - padRight}" y1="${yFor(value)}" y2="${yFor(value)}" stroke="#dfe8f1"/><text x="${padLeft - 12}" y="${yFor(value) + 4}" text-anchor="end" fill="#718399" font-size="12">${value}</text>`).join('');
+  const xLabels = labels.map((label, index) => `<text x="${padLeft + index * (plotWidth / Math.max(1, labels.length - 1))}" y="${height - 14}" text-anchor="middle" fill="#718399" font-size="12">${escapeHtml(label)}</text>`).join('');
+  const dots = points.filter(Boolean).map(([x, y, value]) => `<circle cx="${x}" cy="${y}" r="7" fill="#fff" stroke="#1768e5" stroke-width="5"/><text x="${x}" y="${y - 15}" text-anchor="middle" fill="#10213a" font-size="12" font-weight="700">${Math.round(value)}</text>`).join('');
+  return `<svg class="print-report-chart" viewBox="0 0 ${width} ${height}" role="img" aria-label="${escapeHtml(t('readinessTrendLabel'))}">${grid}<path d="${line}" fill="none" stroke="#1768e5" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>${dots}${xLabels}</svg>`;
+}
+
+function printWeeklyReport() {
+  const model = buildWeeklyReportModel();
+  if (!model) {
+    showToast(t('reportNoData'), 'error');
+    return;
+  }
+  $('#weeklyPrintReport')?.remove();
+  const report = document.createElement('section');
+  report.id = 'weeklyPrintReport';
+  report.className = 'weekly-print-report';
+  report.setAttribute('aria-hidden', 'true');
+  report.innerHTML = `<div class="print-report-shell">
+    <header class="print-report-header">
+      <div><span class="print-report-brand">Sentio · Rich Asians</span><h1>${escapeHtml(t('weeklyReportTitle'))}</h1><p>${escapeHtml(t('weeklyReportSubtitle'))}</p></div>
+      <div class="print-report-range"><strong>${escapeHtml(model.name)}</strong><p>${escapeHtml(model.range)}</p><p>${escapeHtml(model.sourceLabel)}</p></div>
+    </header>
+    <div class="print-report-stats">
+      <div class="print-report-stat"><span>${escapeHtml(t('chartAverage'))}</span><strong>${escapeHtml(model.average)}</strong></div>
+      <div class="print-report-stat"><span>${escapeHtml(t('chartSessions'))}</span><strong>${escapeHtml(model.sessions)}</strong></div>
+      <div class="print-report-stat"><span>${escapeHtml(t('chartActiveDays'))}</span><strong>${escapeHtml(`${model.activeDays} / 7`)}</strong></div>
+      <div class="print-report-stat"><span>${escapeHtml(t('weeklyRhythmLabel'))}</span><strong>${escapeHtml(`${model.rhythm}%`)}</strong></div>
+    </div>
+    ${weeklyReportChartSvg(model)}
+    <div class="print-report-change"><strong>${escapeHtml(model.changeLabel)}</strong><p>${escapeHtml(`${model.before} → ${model.after}`)}</p></div>
+    <ul class="print-report-insights">${model.insights.map((insight) => `<li>${escapeHtml(insight)}</li>`).join('')}</ul>
+    <footer class="print-report-footer"><p>${escapeHtml(t('reportDisclaimer'))}</p><p>${escapeHtml(model.sourceLabel)}</p></footer>
+  </div>`;
+  document.body.appendChild(report);
+  document.body.classList.add('printing-weekly-report');
+  const cleanup = () => {
+    document.body.classList.remove('printing-weekly-report');
+    report.remove();
+  };
+  window.addEventListener('afterprint', cleanup, { once: true });
+  showToast(t('reportPdfReady'), 'success');
+  window.setTimeout(() => window.print(), 80);
+  window.setTimeout(() => { if (report.isConnected) cleanup(); }, 15000);
+}
+
+function fillRoundRect(ctx, x, y, width, height, radius, color) {
+  ctx.beginPath();
+  if (typeof ctx.roundRect === 'function') {
+    ctx.roundRect(x, y, width, height, radius);
+  } else {
+    const safeRadius = Math.min(radius, width / 2, height / 2);
+    ctx.moveTo(x + safeRadius, y);
+    ctx.arcTo(x + width, y, x + width, y + height, safeRadius);
+    ctx.arcTo(x + width, y + height, x, y + height, safeRadius);
+    ctx.arcTo(x, y + height, x, y, safeRadius);
+    ctx.arcTo(x, y, x + width, y, safeRadius);
+    ctx.closePath();
+  }
+  ctx.fillStyle = color;
+  ctx.fill();
+}
+
+function drawWrappedCanvasText(ctx, text, x, y, maxWidth, lineHeight, maxLines = 4) {
+  const words = String(text).split(/\s+/);
+  const lines = [];
+  let line = '';
+  words.forEach((word) => {
+    const candidate = line ? `${line} ${word}` : word;
+    if (ctx.measureText(candidate).width > maxWidth && line) {
+      lines.push(line);
+      line = word;
+    } else line = candidate;
+  });
+  if (line) lines.push(line);
+  lines.slice(0, maxLines).forEach((value, index) => ctx.fillText(value, x, y + index * lineHeight));
+  return y + Math.min(lines.length, maxLines) * lineHeight;
+}
+
+function downloadBlob(blob, filename) {
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  window.setTimeout(() => URL.revokeObjectURL(url), 0);
+}
+
+function exportWeeklyReportPng() {
+  const model = buildWeeklyReportModel();
+  if (!model) {
+    showToast(t('reportNoData'), 'error');
+    return;
+  }
+  const canvas = document.createElement('canvas');
+  canvas.width = 1200;
+  canvas.height = 1600;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+  ctx.fillStyle = '#eef4fa';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  fillRoundRect(ctx, 60, 50, 1080, 1500, 34, '#ffffff');
+
+  fillRoundRect(ctx, 100, 95, 68, 68, 18, '#1768e5');
+  ctx.fillStyle = '#ffffff';
+  ctx.font = '800 36px Arial';
+  ctx.textAlign = 'center';
+  ctx.fillText('S', 134, 141);
+  ctx.textAlign = 'left';
+  ctx.fillStyle = '#1768e5';
+  ctx.font = '800 22px Arial';
+  ctx.fillText('SENTIO · RICH ASIANS', 190, 122);
+  ctx.fillStyle = '#10213a';
+  ctx.font = '700 46px Arial';
+  ctx.fillText(t('weeklyReportTitle'), 100, 225);
+  ctx.fillStyle = '#60758c';
+  ctx.font = '24px Arial';
+  ctx.fillText(model.name, 100, 270);
+  ctx.textAlign = 'right';
+  ctx.fillText(model.range, 1100, 125);
+  ctx.font = '18px Arial';
+  ctx.fillText(model.sourceLabel, 1100, 160);
+  ctx.textAlign = 'left';
+
+  const stats = [
+    [t('chartAverage'), model.average],
+    [t('chartSessions'), model.sessions],
+    [t('chartActiveDays'), `${model.activeDays} / 7`],
+    [t('weeklyRhythmLabel'), `${model.rhythm}%`]
+  ];
+  stats.forEach(([label, value], index) => {
+    const x = 100 + index * 250;
+    fillRoundRect(ctx, x, 320, 225, 135, 18, '#f1f6fb');
+    ctx.fillStyle = '#708399';
+    ctx.font = '700 17px Arial';
+    ctx.fillText(String(label).toUpperCase(), x + 18, 355);
+    ctx.fillStyle = '#10213a';
+    ctx.font = '700 42px Arial';
+    ctx.fillText(String(value), x + 18, 420);
+  });
+
+  const chartX = 100, chartY = 520, chartW = 1000, chartH = 420;
+  fillRoundRect(ctx, chartX, chartY, chartW, chartH, 22, '#f8fbfe');
+  const left = chartX + 70, right = chartX + chartW - 30, top = chartY + 35, bottom = chartY + chartH - 65;
+  const plotWidth = right - left, plotHeight = bottom - top;
+  const yFor = (value) => top + (100 - clamp(value, 0, 100)) / 100 * plotHeight;
+  ctx.font = '16px Arial';
+  [100, 75, 50, 25, 0].forEach((value) => {
+    const y = yFor(value);
+    ctx.strokeStyle = '#dce6ef';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(left, y);
+    ctx.lineTo(right, y);
+    ctx.stroke();
+    ctx.fillStyle = '#718399';
+    ctx.textAlign = 'right';
+    ctx.fillText(String(value), left - 14, y + 5);
+  });
+  const values = model.values;
+  const points = values.map((value, index) => hasFiniteValue(value) ? [left + index * (plotWidth / Math.max(1, values.length - 1)), yFor(value), Number(value)] : null);
+  ctx.strokeStyle = '#1768e5';
+  ctx.lineWidth = 7;
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+  let drawing = false;
+  ctx.beginPath();
+  points.forEach((point) => {
+    if (!point) { drawing = false; return; }
+    if (drawing) ctx.lineTo(point[0], point[1]);
+    else ctx.moveTo(point[0], point[1]);
+    drawing = true;
+  });
+  ctx.stroke();
+  const dayFormatter = new Intl.DateTimeFormat(state.language === 'vi' ? 'vi-VN' : 'en-US', { weekday: 'short' });
+  points.forEach((point, index) => {
+    const x = left + index * (plotWidth / Math.max(1, values.length - 1));
+    const date = new Date();
+    date.setDate(date.getDate() - (values.length - 1 - index));
+    ctx.fillStyle = '#718399';
+    ctx.textAlign = 'center';
+    ctx.font = '16px Arial';
+    ctx.fillText(dayFormatter.format(date), x, bottom + 42);
+    if (!point) return;
+    ctx.fillStyle = '#ffffff';
+    ctx.strokeStyle = '#1768e5';
+    ctx.lineWidth = 6;
+    ctx.beginPath();
+    ctx.arc(point[0], point[1], 10, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+    ctx.fillStyle = '#10213a';
+    ctx.font = '700 16px Arial';
+    ctx.fillText(String(Math.round(point[2])), point[0], point[1] - 20);
+  });
+
+  ctx.textAlign = 'left';
+  ctx.fillStyle = '#10213a';
+  ctx.font = '700 28px Arial';
+  ctx.fillText(`${model.changeLabel}: ${model.before} → ${model.after}`, 100, 1015);
+  ctx.fillStyle = '#1768e5';
+  ctx.font = '800 18px Arial';
+  ctx.fillText(t('dynamicReasoningLabel').toUpperCase(), 100, 1080);
+  ctx.fillStyle = '#324a62';
+  ctx.font = '23px Arial';
+  let insightY = 1120;
+  model.insights.forEach((insight) => {
+    ctx.fillStyle = '#21a878';
+    ctx.beginPath();
+    ctx.arc(112, insightY - 7, 5, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = '#324a62';
+    insightY = drawWrappedCanvasText(ctx, insight, 135, insightY, 900, 33, 2) + 18;
+  });
+
+  ctx.fillStyle = '#718399';
+  ctx.font = '18px Arial';
+  drawWrappedCanvasText(ctx, t('reportDisclaimer'), 100, 1450, 980, 28, 2);
+  canvas.toBlob((blob) => {
+    if (!blob) return;
+    downloadBlob(blob, `sentio-weekly-report-${localDateKey()}.png`);
+    showToast(t('reportPngReady'), 'success');
+  }, 'image/png');
 }
 
 function renderProgressOutcomes() {
@@ -3103,6 +3590,8 @@ function bindEvents() {
     renderNudge();
   });
   bindOptional('#exportDataButton', 'click', exportAggregateData);
+  bindOptional('#exportWeeklyPdf', 'click', printWeeklyReport);
+  bindOptional('#exportWeeklyPng', 'click', exportWeeklyReportPng);
   bindOptional('#revokeConnectionsButton', 'click', revokeConnections);
   bindOptional('#deleteMyDataButton', 'click', () => {
     const confirmed = window.confirm(state.language === 'vi' ? 'Xóa toàn bộ dữ liệu Sentio đã lưu trong trình duyệt này?' : 'Delete all Sentio data stored in this browser?');
