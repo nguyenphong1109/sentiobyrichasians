@@ -1,38 +1,38 @@
 # Sentio
 
-Sentio is a lightweight static web demo for healthier study routines. It includes a focus dashboard, readiness insights, a session timer, and a BH1750 light-sensor simulation.
+Sentio là web hỗ trợ theo dõi nhịp học, phiên tập trung và môi trường ánh sáng. Dự án gồm dashboard chính và bản mô phỏng cảm biến BH1750.
 
-## Live site
+## Truy cập
 
-- Main dashboard: https://sentiobyrichasians.netlify.app/
-- Light sensor demo: https://sentiobyrichasians.netlify.app/bh1750.html
+- Dashboard: https://sentiobyrichasians.netlify.app/
+- Mô phỏng BH1750: https://sentiobyrichasians.netlify.app/bh1750.html
 
-## Using the demo
+## Cách sử dụng
 
-1. Open the main dashboard and choose **Tap trung**.
-2. Set a session duration and start the timer.
-3. Use the check-in and progress sections to review your routine.
-4. Open **Coco** to visit the BH1750 sensor simulation.
-5. In the sensor demo, toggle the light state and open the data view to inspect sample readings or download a CSV.
+1. Mở dashboard và chọn **Tập trung**.
+2. Chọn thời lượng, bắt đầu phiên học và sử dụng check-in khi cần.
+3. Mở tab **Tiến trình** để xem điểm sẵn sàng, biểu đồ và các thay đổi trong tuần.
+4. Chọn **Coco** để mở trang mô phỏng cảm biến ánh sáng.
+5. Trong trang BH1750, bật/tắt đèn để xem giá trị lux thay đổi, mở dữ liệu để xem mẫu đo hoặc tải CSV.
 
-## Important note
+## Chạy trên máy
 
-This is a front-end prototype. The BH1750 page uses simulated readings and does not claim a real hardware connection. The sensor concept is based on BH1750 over I2C with an ESP32; the sample wiring and thresholds are for demonstration only.
-
-## Run locally
-
-Serve the project from a local web server instead of opening the HTML files directly:
+Không nên mở trực tiếp file HTML vì dự án dùng nhiều file JavaScript và CSS. Hãy chạy một web server trong thư mục dự án:
 
 ```bash
 python -m http.server 8000
 ```
 
-Then open http://127.0.0.1:8000/.
+Sau đó mở http://127.0.0.1:8000/.
 
-## Project structure
+## Cấu trúc chính
 
-- `index.html`: Sentio dashboard and onboarding flow
-- `bh1750.html`: BH1750 light-sensor simulation
-- `styles.css` and feature CSS files: visual system and responsive layout
-- `app.js`, `sentio-timer.js`, `bh1750.js`, and feature scripts: interactions and demo state
-- `sentio-logo.jpg`, `coco.png.png`: visual assets
+- `index.html`: dashboard, onboarding, check-in và tiến trình
+- `bh1750.html`: mô phỏng cảm biến BH1750
+- `styles.css` và các file CSS tính năng: giao diện và responsive
+- `app.js`, `sentio-timer.js`, `bh1750.js` và các script tính năng: tương tác
+- `sentio-logo.jpg`, `coco.png.png`: hình ảnh sử dụng trong giao diện
+
+## Lưu ý
+
+Đây là prototype frontend. Dữ liệu BH1750 là dữ liệu mô phỏng, chưa kết nối phần cứng thật. Phần cảm biến minh họa BH1750 giao tiếp I2C với ESP32 và chỉ phục vụ mục đích trình diễn.
