@@ -1,0 +1,435 @@
+/* Sentio: compact settings and unified progress view */
+.settings-panel {
+  background: #170c2d !important;
+  color: #faf7ff !important;
+  border-left: 1px solid #49336c !important;
+  box-shadow: -24px 0 60px rgba(7, 3, 18, .42) !important;
+}
+.settings-panel .settings-heading { border-bottom-color: #49336c !important; }
+.settings-panel .settings-heading h2,
+.settings-panel .setting-row strong { color: #fff !important; }
+.settings-panel .setting-row {
+  border-bottom-color: #49336c !important;
+  background: transparent !important;
+}
+.settings-panel .setting-row small { color: #b9add2 !important; }
+.settings-panel select {
+  background: #241544 !important;
+  border-color: #553b79 !important;
+  color: #fff !important;
+}
+.settings-panel label:has(#motionToggle),
+.settings-panel .settings-note { display: none !important; }
+.settings-panel .danger-link { color: #ff9dc0 !important; }
+
+#progressView { color: #faf7ff; color-scheme: dark; }
+#progressView .progress-evidence-note {
+  margin: -4px 0 18px;
+  padding: 10px 14px;
+  border: 1px solid #49336c;
+  border-radius: 12px;
+  background: #1a1034;
+  color: #b9add2 !important;
+  font-size: 12px;
+}
+#progressView .progress-evidence-note span { color: #63dcc0; }
+#progressView :is(.weekly-hero-card, .weekly-stat-card, .weekly-win-card,
+  .history-card, .self-awareness-card) {
+  background: #1d1139 !important;
+  border: 1px solid #49336c !important;
+  color: #faf7ff !important;
+  box-shadow: 0 18px 48px rgba(6, 2, 18, .25) !important;
+}
+#progressView :is(h1, h2, h3, strong) { color: #faf7ff !important; }
+#progressView :is(.subcopy, .card-label, small, p, .self-awareness-insights span) {
+  color: #b9add2 !important;
+}
+#progressView .weekly-stat-card small,
+#progressView .trend-up { color: #63dcc0 !important; }
+#progressView .weekly-change-value span { color: #d39aff !important; }
+#progressView .week-chip,
+#progressView .trend-card-badges span,
+#progressView .data-source-chip {
+  background: #241544 !important;
+  border-color: #49336c !important;
+  color: #d9c8ef !important;
+}
+#progressView .readiness-chart {
+  background: #211440 !important;
+  border: 1px solid #49336c !important;
+}
+#progressView .chart-grid line { stroke: #49336c !important; }
+#progressView .chart-axis-labels text { fill: #b9add2 !important; }
+#progressView #chartLine { stroke: #b878f3 !important; }
+#progressView #chartArea { fill: rgba(167, 104, 239, .2) !important; }
+#progressView #chartAverageLine { stroke: #63dcc0 !important; }
+#progressView #chartAverageLabel { fill: #63dcc0 !important; }
+#progressView #chartDots circle {
+  fill: #211440 !important;
+  stroke: #d39aff !important;
+}
+#progressView .history-list { border-color: #49336c !important; }
+#progressView .history-item {
+  background: #241544 !important;
+  border-color: #49336c !important;
+  color: #faf7ff !important;
+}
+#progressView .chart-empty-state {
+  background: #241544 !important;
+  color: #b9add2 !important;
+  border-color: #49336c !important;
+}
+#progressView .self-awareness-insights li { border-color: #49336c !important; }
+
+/* Friendly data accents keep the progress numbers distinct from body copy. */
+#progressView .trend-chart-summary > div:nth-child(1) strong { color: #e4b1ff !important; }
+#progressView .trend-chart-summary > div:nth-child(2) strong { color: #ffabd2 !important; }
+#progressView .trend-chart-summary > div:nth-child(3) strong { color: #8cefd0 !important; }
+#progressView .trend-chart-summary strong {
+  text-shadow: 0 3px 16px rgba(185, 108, 255, .18);
+}
+#progressView .chart-axis-labels text { fill: #cdbce6 !important; }
+#progressView #chartAverageLabel { fill: #8cefd0 !important; }
+#progressView .self-awareness-insights > li {
+  background: #241544 !important;
+  border: 1px solid #49336c !important;
+  color: #e4d5f4 !important;
+}
+#progressView .self-awareness-insights > li strong { color: #f5ecff !important; }
+#progressView .self-awareness-insights > li span { color: #b9add2 !important; }
+#progressView .readiness-trend-card .history-row {
+  background: #241544 !important;
+  border: 1px solid #49336c !important;
+  border-radius: 12px;
+  padding: 10px 6px !important;
+}
+#progressView .readiness-trend-card .history-row span {
+  color: #cdbce6 !important;
+  font-weight: 700;
+}
+#progressView .readiness-trend-card .history-row strong {
+  color: #e4b1ff !important;
+  font-size: 13px;
+  font-weight: 850;
+}
+#progressView .readiness-trend-card .history-track {
+  background: rgba(255, 255, 255, .12) !important;
+}
+
+/* IELTS-style reporting chart: neutral grid, thin line, values visible at a glance. */
+#progressView .readiness-chart {
+  background: #1b1037 !important;
+  padding: 14px 16px 8px !important;
+}
+#progressView .chart-grid line {
+  stroke: #5a467d !important;
+  stroke-width: 1 !important;
+  stroke-dasharray: 3 5;
+}
+#progressView #chartLine {
+  stroke: #d19bff !important;
+  stroke-width: 3.5 !important;
+  filter: none !important;
+}
+#progressView #chartArea { fill: transparent !important; }
+#progressView #chartAverageLine {
+  stroke: #63dcc0 !important;
+  stroke-width: 1.8 !important;
+  stroke-dasharray: 8 7;
+}
+#progressView #chartDots circle {
+  fill: #211440 !important;
+  stroke: #d19bff !important;
+  stroke-width: 3 !important;
+}
+#progressView .chart-axis-labels text {
+  fill: #cdbce6 !important;
+  font-size: 10px;
+  font-weight: 650;
+}
+#progressView .chart-average-label {
+  fill: #8cefd0 !important;
+  font-size: 10px;
+  font-weight: 750;
+  paint-order: stroke;
+  stroke: #1b1037;
+  stroke-width: 3px;
+}
+
+/* Readiness dial: crisp contrast instead of the washed-out legacy palette. */
+body:not(.film-active) .score-panel {
+  background: #120826 !important;
+  border-right-color: #49336c !important;
+}
+body:not(.film-active) .dial-spectrum {
+  background: conic-gradient(from -90deg, #ff5f8f 0 34%, #ffbd45 34% 67%, #2ed9b0 67% 100%) !important;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.14), 0 0 28px rgba(185,108,255,.24), 0 14px 34px rgba(0,0,0,.46) !important;
+}
+body:not(.film-active) .dial-spectrum::after {
+  background: #0d051d !important;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.16), inset 0 0 32px rgba(185,108,255,.14) !important;
+}
+body:not(.film-active) .decision-dial .score-number {
+  color: #fff !important;
+  text-shadow: 0 2px 18px rgba(185,108,255,.25);
+}
+body:not(.film-active) .decision-dial .score-out-of {
+  color: #e2d5f4 !important;
+  font-weight: 800;
+}
+body:not(.film-active) .dial-zones span { color: #eee4fa !important; }
+body:not(.film-active) .dial-zones small { font-weight: 700; }
+body:not(.film-active) .score-meta { gap: 10px; }
+body:not(.film-active) .score-delta { color: #d8c2f4 !important; }
+body:not(.film-active) .score-meta .updated { color: #bda9d8 !important; }
+body:not(.film-active) .status-badge {
+  background: #392047 !important;
+  color: #ffd47e !important;
+  border: 1px solid #6f4568 !important;
+}
+body:not(.film-active) .status-badge.ready {
+  background: #123f3a !important;
+  color: #7ef0cf !important;
+  border-color: #237a6b !important;
+}
+body:not(.film-active) .dial-marker {
+  background: #fff !important;
+  border-color: #0d051d !important;
+  box-shadow: 0 0 0 2px rgba(255,255,255,.22), 0 0 13px rgba(255,255,255,.85) !important;
+}
+
+/* Profile sheet palette */
+body:not(.film-active) #profileSheet {
+  background: #170b34 !important;
+  color: #fbf8ff !important;
+  border-left-color: #49336c !important;
+}
+body:not(.film-active) #profileSheet .sheet-heading h2,
+body:not(.film-active) #profileSheet .profile-settings-label span,
+body:not(.film-active) #profileSheet .account-summary-card strong,
+body:not(.film-active) #profileSheet .account-baseline-card h3 {
+  color: #fff !important;
+}
+body:not(.film-active) #profileSheet .sheet-intro,
+body:not(.film-active) #profileSheet .profile-settings-label small,
+body:not(.film-active) #profileSheet .account-summary-card small,
+body:not(.film-active) #profileSheet .account-summary-card > div > span,
+body:not(.film-active) #profileSheet .account-baseline-card p {
+  color: #cbb9e8 !important;
+}
+body:not(.film-active) #profileSheet .profile-options { gap: 10px; }
+body:not(.film-active) #profileSheet .profile-option {
+  background: #211044 !important;
+  border: 1px solid #49336c !important;
+  color: #fbf8ff !important;
+  border-radius: 12px !important;
+}
+body:not(.film-active) #profileSheet .profile-option:hover {
+  background: #30205b !important;
+  border-color: #8d5de0 !important;
+}
+body:not(.film-active) #profileSheet .profile-option.active {
+  background: #3a236d !important;
+  border-color: #b878f3 !important;
+  box-shadow: inset 4px 0 0 #b878f3 !important;
+}
+body:not(.film-active) #profileSheet .profile-option strong { color: #fff !important; }
+body:not(.film-active) #profileSheet .profile-option small { color: #cbb9e8 !important; }
+body:not(.film-active) #profileSheet .profile-option .mini-score { color: #b878f3 !important; }
+body:not(.film-active) #profileSheet .profile-settings-label { border-top-color: #49336c !important; }
+body:not(.film-active) #profileSheet .account-summary-card,
+body:not(.film-active) #profileSheet .account-baseline-card {
+  background: #211044 !important;
+  border-color: #49336c !important;
+  color: #fbf8ff !important;
+}
+body:not(.film-active) #profileSheet .account-summary-card .avatar {
+  background: linear-gradient(145deg, #7565f3, #4f9bff) !important;
+}
+body:not(.film-active) #profileSheet .baseline-status {
+  background: #123f3a !important;
+  color: #7ef0cf !important;
+}
+body:not(.film-active) #profileSheet .account-baseline-card .baseline-progress {
+  background: #39245d !important;
+}
+body:not(.film-active) #profileSheet .account-baseline-card .baseline-progress i {
+  background: linear-gradient(90deg, #a768ef, #63dcc0) !important;
+}
+body:not(.film-active) #profileSheet .sheet-actions { border-top-color: #49336c !important; }
+
+/* Quiet nudge dismissal: collapse the card so the layout closes the gap. */
+body:not(.film-active) #nudgeCard {
+  max-height: 220px;
+  overflow: hidden;
+  transition: max-height .38s ease, opacity .28s ease, transform .38s ease,
+    margin-top .38s ease, padding .38s ease, border-color .28s ease;
+}
+body:not(.film-active) #nudgeCard.is-dismissed {
+  max-height: 0;
+  margin-top: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  border-color: transparent !important;
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+}
+
+/* Progress summary cards were still using the legacy white surface. */
+#progressView .trend-chart-summary > div {
+  background: #241544 !important;
+  border: 1px solid #49336c !important;
+  color: #faf7ff !important;
+}
+#progressView .trend-chart-summary span { color: #b9add2 !important; }
+#progressView .trend-chart-summary strong { color: #faf7ff !important; }
+#progressView .readiness-trend-card {
+  background: #1d1139 !important;
+  background-image: radial-gradient(circle at 94% 0%, rgba(99,220,192,.08), transparent 34%) !important;
+}
+#progressView .chart-wrap,
+#progressView .readiness-chart { background-color: #211440 !important; }
+
+/* Focus timer dialog */
+#timerOrbit[role="button"] { cursor: pointer; }
+#timerOrbit[role="button"]:focus-visible {
+  outline: 3px solid #d39aff;
+  outline-offset: 7px;
+}
+.task-controls { display: flex; align-items: center; gap: 8px; }
+.timer-open-button {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 42px;
+  padding: 0 12px; border: 1px solid #65458f; border-radius: 12px;
+  background: #30205b; color: #f4eaff; cursor: pointer; font: 700 12px "DM Sans", sans-serif;
+}
+.timer-open-button svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; }
+.timer-open-button:hover, .timer-open-button:focus-visible { background: #4a2b78; border-color: #b878f3; outline: none; }
+@media (max-width: 620px) { .task-row { align-items: flex-start; flex-direction: column; } .task-controls { width: 100%; } .task-controls select { flex: 1; } }
+.timer-modal[hidden] { display: none !important; }
+.timer-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+.timer-modal-backdrop { position: absolute; inset: 0; background: rgba(7,3,18,.76); backdrop-filter: blur(8px); }
+.timer-modal-card {
+  position: relative;
+  width: min(460px, 100%);
+  padding: 28px;
+  border: 1px solid #553b79;
+  border-radius: 24px;
+  background: #1d1139;
+  box-shadow: 0 24px 80px rgba(0,0,0,.45);
+}
+.timer-modal-card h2 { margin: 8px 0 5px; color: #fff; font-size: 25px; }
+.timer-modal-card p { margin: 0; color: #b9add2; font-size: 13px; line-height: 1.55; }
+.timer-modal-close {
+  position: absolute; top: 15px; right: 15px; width: 38px; height: 38px;
+  border: 1px solid #49336c; border-radius: 12px; background: #241544; color: #fff;
+  font-size: 23px; cursor: pointer;
+}
+.timer-presets { display: grid; grid-template-columns: repeat(4, 1fr); gap: 9px; margin: 22px 0 16px; }
+.timer-presets button {
+  min-height: 75px; border: 1px solid #49336c; border-radius: 15px; background: #241544; color: #d9c8ef; cursor: pointer;
+}
+.timer-presets button strong, .timer-presets button span { display: block; }
+.timer-presets button strong { color: #fff; font: 700 22px "Fira Code", monospace; }
+.timer-presets button span { margin-top: 3px; color: #b9add2; font-size: 11px; }
+.timer-presets button.selected, .timer-presets button:hover { border-color: #b878f3; background: #39205e; }
+.timer-confirm { width: 100%; min-height: 48px; border: 0; cursor: pointer; }
+/* Scroll-wheel duration picker */
+.time-picker {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  height: 214px;
+  margin: 22px 0 18px;
+  padding: 0 8px;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #1a0d35;
+  border: 1px solid #5a3b82;
+  box-shadow: inset 0 18px 24px rgba(0,0,0,.38), inset 0 -18px 24px rgba(0,0,0,.38);
+}
+.time-wheel {
+  position: relative;
+  z-index: 2;
+  height: 214px;
+  overflow: hidden;
+  min-width: 0;
+}
+.wheel-viewport {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 25%, #000 75%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 25%, #000 75%, transparent 100%);
+  touch-action: none;
+  cursor: grab;
+}
+.wheel-viewport.dragging { cursor: grabbing; }
+.time-wheel.dragging { cursor: grabbing; }
+.wheel-viewport.dragging { scroll-behavior: auto; }
+.wheel-arrow {
+  position: absolute;
+  z-index: 5;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 30px;
+  transform: translateX(-50%);
+  border: 0;
+  border-radius: 9px;
+  background: rgba(71, 43, 112, .72);
+  color: #e7d8fb;
+  cursor: pointer;
+  opacity: .96;
+  transition: background .18s ease, border-color .18s ease, color .18s ease, transform .18s ease, box-shadow .18s ease;
+}
+.wheel-arrow svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2.6; pointer-events: none; }
+.wheel-arrow:hover { background: rgba(124, 75, 192, .9); color: #fff; }
+.wheel-arrow:focus-visible { background: rgba(124, 75, 192, .9); color: #fff; outline: 2px solid #d4a5ff; outline-offset: 2px; }
+.wheel-arrow:active { transform: translateX(-50%) scale(.92); }
+.wheel-up { top: 10px; }
+.wheel-down { bottom: 10px; }
+.wheel-viewport::-webkit-scrollbar { display: none; }
+.wheel-list { padding: 86px 0; }
+.wheel-item {
+  display: grid;
+  place-items: center;
+  height: 42px;
+  scroll-snap-align: center;
+  color: #aa97c7;
+  font: 500 17px/1 "Fira Code", monospace;
+  opacity: .7;
+  transform: scale(.88);
+  transition: color .18s ease, opacity .18s ease, transform .18s ease;
+  user-select: none;
+}
+.wheel-item.selected { color: #fff; opacity: 1; transform: scale(1.08); font-weight: 700; }
+.wheel-item span { margin-left: 4px; color: #c6b4df; font: 500 13px "DM Sans", sans-serif; }
+.wheel-selection {
+  position: absolute;
+  z-index: 1;
+  left: 16px;
+  right: 16px;
+  top: 86px;
+  height: 42px;
+  border-radius: 999px;
+  background: rgba(213,174,255,.16);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 0 0 1px rgba(255,255,255,.03);
+  pointer-events: none;
+}
+.timer-confirm { margin-top: 2px; }
+.timer-confirm:disabled { opacity: .45; cursor: not-allowed; box-shadow: none; }
+@media (max-width: 520px) { .timer-modal-card { padding: 24px 18px; } .time-picker { gap: 2px; padding: 0 3px; } .wheel-item { font-size: 15px; } }

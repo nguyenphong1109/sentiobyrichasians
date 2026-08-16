@@ -1,0 +1,2 @@
+'use strict';
+const demoCard=document.querySelector('.demo-card');if(demoCard){const eyebrow=demoCard.querySelector('.eyebrow');const title=demoCard.querySelector('h2');const copy=demoCard.querySelector('.section-copy');const badge=demoCard.querySelector('.planned-label');if(eyebrow)eyebrow.textContent='ĐÁNH GIÁ ÁNH SÁNG';if(title)title.textContent='Lux đang nói gì về góc học của bạn?';if(copy)copy.textContent='BH1750 đo độ rọi, sau đó hệ thống đánh giá môi trường đang đủ sáng, hơi tối hay rất tối.';if(badge)badge.remove()}

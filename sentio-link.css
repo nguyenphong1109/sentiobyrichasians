@@ -1,0 +1,2 @@
+.sensor-link{display:inline-flex;align-items:center;min-height:42px;padding:0 13px;border:1px solid rgba(111,99,246,.24);border-radius:14px;background:rgba(111,99,246,.1);color:#5147d6;text-decoration:none;font-size:12px;font-weight:800;transition:background .2s ease,transform .2s ease}.sensor-link:hover{background:rgba(111,99,246,.18);transform:translateY(-1px)}
+@media(max-width:560px){.sensor-link{font-size:0;width:42px;padding:0;justify-content:center}.sensor-link::before{content:'☼';font-size:19px}}

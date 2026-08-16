@@ -2298,7 +2298,7 @@ body:not(.film-active) #focusEventTimeline > li {
   min-width: 0;
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0,1fr) auto;
+  grid-template-columns: auto minmax(0,1fr);
   gap: 5px 12px;
   padding: 11px 0 11px 25px;
 }
@@ -2336,6 +2336,10 @@ body:not(.film-active) #focusEventTimeline > li :where(span, small, time, p) {
   color: var(--v6-text-muted);
   font-size: 11px;
   line-height: 1.45;
+}
+body:not(.film-active) #focusEventTimeline > li time {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
 }
 
 body:not(.film-active) #focusEventEmpty {
@@ -3318,6 +3322,7 @@ body:not(.film-active) .score-panel::after { display: none; }
   position: absolute;
   inset: 7px;
   border-radius: 50%;
+  z-index: 1;
   background: conic-gradient(from -90deg, #d4525e 0 34%, #d58a18 34% 67%, #168568 67% 100%);
   box-shadow: 0 10px 28px rgba(20, 32, 43, .12);
 }
@@ -3329,6 +3334,20 @@ body:not(.film-active) .score-panel::after { display: none; }
   border-radius: 50%;
   background: #fff;
   box-shadow: inset 0 0 0 1px rgba(20, 32, 43, .08);
+}
+
+.dial-fill {
+  position: absolute;
+  inset: 7px;
+  z-index: 2;
+  border-radius: 50%;
+  pointer-events: none;
+  background: conic-gradient(from -90deg, rgba(255,255,255,.86) 0 calc(var(--score) * 1%), transparent 0 100%);
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 14px), #000 calc(100% - 13px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 14px), #000 calc(100% - 13px));
+  opacity: .72;
+  filter: drop-shadow(0 0 6px rgba(255,255,255,.42));
+  transition: opacity .25s ease;
 }
 
 .dial-marker {
@@ -4775,6 +4794,11 @@ body:not(.film-active) .dial-spectrum {
   box-shadow: 0 0 0 1px rgba(255,255,255,.12), 0 0 24px rgba(185,108,255,.25), 0 14px 34px rgba(0,0,0,.42);
 }
 
+body:not(.film-active) .dial-fill {
+  opacity: .62;
+  filter: drop-shadow(0 0 8px rgba(255,255,255,.55));
+}
+
 body:not(.film-active) .dial-spectrum::after {
   background: #180a31;
   box-shadow: inset 0 0 0 1px rgba(255,255,255,.12), inset 0 0 28px rgba(185,108,255,.10);
@@ -4824,4 +4848,544 @@ body:not(.film-active) .self-awareness-card {
   background: #24124a;
   border-color: var(--line);
   color: var(--sentio-text);
+}
+
+/* Progress view: calmer hierarchy and tighter scan-friendly spacing. */
+body:not(.film-active) #progressView .view-heading {
+  align-items: center;
+  gap: 24px;
+  padding: 24px 4px 18px;
+}
+
+body:not(.film-active) #progressView .view-heading h1 {
+  max-width: 760px;
+  margin: 0;
+  font-size: 52px;
+  line-height: 1.06;
+}
+
+body:not(.film-active) #progressView .view-heading .subcopy {
+  max-width: 58ch;
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+body:not(.film-active) #progressView .progress-heading-actions {
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+body:not(.film-active) #progressView .week-chip {
+  min-width: 126px;
+  min-height: 52px;
+  border-radius: 12px;
+  padding: 8px 12px;
+  box-shadow: none;
+}
+
+body:not(.film-active) #progressView .report-export-actions { gap: 6px; }
+body:not(.film-active) #progressView .compact-button {
+  min-height: 40px;
+  border-radius: 10px;
+  padding-inline: 11px;
+}
+
+body:not(.film-active) #progressView .progress-evidence-note {
+  margin: 0 0 14px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+body:not(.film-active) #progressView .weekly-summary-grid {
+  gap: 12px;
+}
+
+body:not(.film-active) #progressView :is(.weekly-hero-card, .weekly-stat-card) {
+  border-radius: 14px;
+  padding: 22px;
+  box-shadow: none !important;
+}
+
+body:not(.film-active) #progressView .weekly-hero-card > strong {
+  margin-top: 10px;
+  font-size: 36px;
+  line-height: 1.1;
+}
+
+body:not(.film-active) #progressView .weekly-change-value {
+  gap: 12px;
+  margin: 16px 0 6px;
+}
+
+body:not(.film-active) #progressView .weekly-change-value span { font-size: 42px; }
+body:not(.film-active) #progressView .weekly-hero-card > p { margin-top: 14px; line-height: 1.55; }
+body:not(.film-active) #progressView .weekly-stat-card { min-height: 176px; }
+body:not(.film-active) #progressView .weekly-stat-card > strong { font-size: 50px; }
+
+body:not(.film-active) #progressView .weekly-wins-grid {
+  gap: 10px;
+  margin-top: 14px;
+}
+
+body:not(.film-active) #progressView .weekly-win-card {
+  border-radius: 14px;
+  padding: 15px;
+}
+
+body:not(.film-active) #progressView .weekly-win-card :where(small, p) {
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+body:not(.film-active) #progressView .readiness-trend-card,
+body:not(.film-active) #progressView .self-awareness-card {
+  border-radius: 14px;
+  box-shadow: none !important;
+}
+
+body:not(.film-active) #progressView .readiness-trend-card { margin-top: 14px; padding: 22px; }
+body:not(.film-active) #progressView .self-awareness-card { margin-top: 14px; padding: 22px; }
+
+@media (max-width: 900px) {
+  body:not(.film-active) #progressView .view-heading h1 { font-size: 44px; }
+  body:not(.film-active) #progressView .progress-heading-actions { align-items: flex-end; flex-direction: column; }
+}
+
+@media (max-width: 700px) {
+  body:not(.film-active) #progressView .view-heading {
+    align-items: flex-start;
+    gap: 14px;
+    padding: 22px 0 16px;
+  }
+
+  body:not(.film-active) #progressView .view-heading h1 { font-size: 34px; }
+  body:not(.film-active) #progressView .progress-heading-actions { align-items: flex-start; flex-direction: row; flex-wrap: wrap; }
+  body:not(.film-active) #progressView .weekly-summary-grid,
+  body:not(.film-active) #progressView .weekly-wins-grid { gap: 10px; }
+}
+
+@media (max-width: 430px) {
+  body:not(.film-active) #progressView .progress-heading-actions,
+  body:not(.film-active) #progressView .report-export-actions { width: 100%; }
+  body:not(.film-active) #progressView .report-export-actions { display: grid; grid-template-columns: 1fr 1fr; }
+  body:not(.film-active) #progressView .week-chip { flex: 1; }
+}
+
+/* Unified product toolbar: one shell on desktop, touch dock on mobile. */
+@media (min-width: 760px) {
+  body:not(.film-active) .topbar {
+    width: min(1280px, calc(100% - 32px));
+    min-height: 76px;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 18px;
+    padding: 8px 10px;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: rgba(26, 13, 54, .96);
+    box-shadow: 0 14px 36px rgba(3, 0, 12, .24);
+  }
+
+  body:not(.film-active) .topbar .bottom-nav {
+    position: static;
+    inset: auto;
+    transform: none;
+    justify-self: center;
+    width: max-content;
+    max-width: 100%;
+    padding: 4px;
+    gap: 4px;
+    border: 1px solid rgba(226, 210, 255, .2);
+    border-radius: 16px;
+    background: rgba(36, 18, 74, .9);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 8px 24px rgba(3,0,12,.2);
+    backdrop-filter: none;
+  }
+
+  body:not(.film-active) .topbar .nav-item {
+    min-width: 106px;
+    height: 50px;
+    border-radius: 12px;
+    color: #e2d7f2;
+    font-size: 13px;
+    font-weight: 850;
+    transition: background .18s ease, color .18s ease, transform .18s ease, box-shadow .18s ease;
+  }
+
+  body:not(.film-active) .topbar .nav-item.active {
+    background: #a85cf1;
+    color: #fff;
+    box-shadow: 0 7px 18px rgba(168, 92, 241, .35), inset 0 1px 0 rgba(255,255,255,.16);
+  }
+
+  body:not(.film-active) .topbar .nav-item:hover:not(.active) {
+    background: rgba(185, 108, 255, .18);
+    color: #fff;
+    transform: translateY(-1px);
+  }
+
+  body:not(.film-active) .topbar .nav-item svg { width: 20px; height: 20px; stroke-width: 1.9; }
+  body:not(.film-active) .topbar .nav-item:focus-visible {
+    outline: 2px solid #7addff;
+    outline-offset: 2px;
+  }
+
+  body:not(.film-active) .topbar .top-actions { justify-self: end; }
+}
+
+@media (max-width: 759px) {
+  body:not(.film-active) .topbar {
+    width: calc(100% - 20px);
+    min-height: 68px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 10px;
+    padding: 7px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: rgba(26, 13, 54, .96);
+  }
+
+  body:not(.film-active) .topbar .bottom-nav {
+    position: fixed;
+    z-index: 60;
+    left: 50%;
+    right: auto;
+    top: auto;
+    bottom: max(10px, env(safe-area-inset-bottom));
+    transform: translateX(-50%);
+    padding: 4px;
+    border: 1px solid rgba(226, 210, 255, .2);
+    border-radius: 16px;
+    background: rgba(36, 18, 74, .96);
+    box-shadow: 0 10px 28px rgba(3,0,12,.36);
+  }
+
+  body:not(.film-active) .topbar .nav-item {
+    color: #e2d7f2;
+    font-weight: 850;
+  }
+
+  body:not(.film-active) .topbar .nav-item.active {
+    background: #a85cf1;
+    color: #fff;
+    box-shadow: 0 6px 16px rgba(168, 92, 241, .32);
+  }
+}
+
+/* Source sheets: keep status and supporting data readable in every state. */
+body:not(.film-active) :is(#sourceSheet, #healthSheet) .connection-status-card {
+  border: 1px solid #5b3b83 !important;
+  background: #24124a !important;
+  color: var(--sentio-text) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+}
+
+body:not(.film-active) :is(#sourceSheet, #healthSheet) .connection-status-card span {
+  color: #c9b9e0 !important;
+}
+
+body:not(.film-active) :is(#sourceSheet, #healthSheet) .connection-status-card strong {
+  color: #f7efff !important;
+}
+
+body:not(.film-active) :is(#sourceSheet, #healthSheet):is([data-connection="connected"], [data-connection="paired"], [data-connection="live"]) .connection-status-card {
+  border-color: rgba(95, 232, 194, .45) !important;
+  background: #183b3b !important;
+}
+
+body:not(.film-active) :is(#sourceSheet, #healthSheet):is([data-connection="connected"], [data-connection="paired"], [data-connection="live"]) .connection-status-card strong {
+  color: #8ff1d1 !important;
+}
+
+body:not(.film-active) :is(#sourceSheet, #healthSheet):is([data-connection="connecting"], [data-connection="syncing"]) .connection-status-card {
+  border-color: rgba(255, 211, 126, .5) !important;
+  background: #3b2b31 !important;
+}
+
+body:not(.film-active) :is(#sourceSheet, #healthSheet):is([data-connection="connecting"], [data-connection="syncing"]) .connection-status-card strong {
+  color: #ffd98d !important;
+}
+
+body:not(.film-active) :is(#sourceSheet, #healthSheet):is([data-connection="offline"], [data-connection="error"]) .connection-status-card {
+  border-color: rgba(255, 145, 174, .48) !important;
+  background: #3b203d !important;
+}
+
+body:not(.film-active) :is(#sourceSheet, #healthSheet):is([data-connection="offline"], [data-connection="error"]) .connection-status-card strong {
+  color: #ffb4ca !important;
+}
+
+body:not(.film-active) :is(#sourceSheet, #healthSheet) :is(.source-metrics-grid > div, .health-flow-card, .health-metric-card, .health-note-card) {
+  border-color: #49336c !important;
+  background: #24124a !important;
+  color: var(--sentio-text) !important;
+}
+
+body:not(.film-active) :is(#sourceSheet, #healthSheet) :is(.source-metrics-grid > div, .health-flow-card, .health-metric-card, .health-note-card) :is(h3, strong) {
+  color: #f7efff !important;
+}
+
+body:not(.film-active) :is(#sourceSheet, #healthSheet) :is(.source-metrics-grid > div, .health-flow-card, .health-metric-card, .health-note-card) :is(span, small, p) {
+  color: #c9b9e0 !important;
+}
+
+body:not(.film-active) :is(#sourceSheet, #healthSheet) .health-flow-icon {
+  background: #352060 !important;
+  color: #d19bff !important;
+}
+
+body:not(.film-active) :is(#sourceSheet, #healthSheet) .health-flow-arrow {
+  color: #d19bff !important;
+}
+
+body:not(.film-active) :is(#sourceSheet, #healthSheet) .connection-actions .secondary-button {
+  background: #30205b !important;
+  border-color: #5b3b83 !important;
+  color: #f7efff !important;
+}
+
+/* Transparent-score sheet: restore contrast for every data block. */
+body:not(.film-active) #whySheet :is(.score-comparison-grid > div, .baseline-box, .decision-coverage-card, .missing-signals-note, .dynamic-reasoning-detail, .factor-row, .ai-status-card) {
+  border: 1px solid #49336c !important;
+  background: #24124a !important;
+  color: #f7efff !important;
+}
+
+body:not(.film-active) #whySheet .score-comparison-grid > div {
+  min-height: 132px;
+}
+
+body:not(.film-active) #whySheet :is(.score-comparison-grid, .baseline-box, .decision-coverage-card, .missing-signals-note, .dynamic-reasoning-detail, .factor-row, .ai-status-card) :is(span, small, p) {
+  color: #c9b9e0 !important;
+}
+
+body:not(.film-active) #whySheet :is(.score-comparison-grid, .baseline-box, .decision-coverage-card, .dynamic-reasoning-detail, .factor-row, .ai-status-card) strong {
+  color: #f7efff !important;
+}
+
+body:not(.film-active) #whySheet .score-comparison-grid strong,
+body:not(.film-active) #whySheet #baselineValue {
+  color: #d19bff !important;
+}
+
+body:not(.film-active) #whySheet .baseline-box {
+  border-color: #65428e !important;
+  background: #2a1653 !important;
+}
+
+body:not(.film-active) #whySheet .decision-coverage-card {
+  border-color: rgba(95, 232, 194, .36) !important;
+  background: #183b3b !important;
+}
+
+body:not(.film-active) #whySheet .decision-coverage-card strong {
+  color: #8ff1d1 !important;
+}
+
+body:not(.film-active) #whySheet .missing-signals-note {
+  border-color: rgba(122, 221, 255, .3) !important;
+  background: #172b48 !important;
+  color: #a9ddff !important;
+}
+
+body:not(.film-active) #whySheet .dynamic-reasoning-detail {
+  border-left: 4px solid #7addff !important;
+  background: #211044 !important;
+}
+
+body:not(.film-active) #whySheet .dynamic-reasoning-detail .card-label {
+  color: #7addff !important;
+}
+
+body:not(.film-active) #whySheet .factor-row {
+  background: #211044 !important;
+}
+
+body:not(.film-active) #whySheet .factor-icon {
+  background: #352060 !important;
+  color: #d19bff !important;
+}
+
+body:not(.film-active) #whySheet .factor-points {
+  color: #8ff1d1 !important;
+}
+
+body:not(.film-active) #whySheet .factor-points.negative {
+  color: #ffb4ca !important;
+}
+
+body:not(.film-active) #whySheet .ai-status-card {
+  border-color: rgba(122, 221, 255, .3) !important;
+  background: #172b48 !important;
+}
+
+body:not(.film-active) #whySheet .ai-status-card :is(.card-label, .ai-explanation) {
+  color: #b8dfff !important;
+}
+
+/* Onboarding: remove legacy pale panels that made the copy disappear. */
+body:not(.film-active) #onboardingFlow :is(.onboarding-principles > div, .onboarding-source-list .onboarding-source, .privacy-consent-row, .privacy-summary) {
+  border-color: #49336c !important;
+  background: #24124a !important;
+  color: #f7efff !important;
+}
+
+body:not(.film-active) #onboardingFlow :is(.onboarding-principles, .onboarding-source-list, .privacy-consent-row, .privacy-summary) :is(strong, span) {
+  color: #f7efff !important;
+}
+
+body:not(.film-active) #onboardingFlow :is(.onboarding-principles, .onboarding-source-list, .privacy-consent-row, .privacy-summary) :is(small, p) {
+  color: #c9b9e0 !important;
+}
+
+body:not(.film-active) #onboardingFlow .onboarding-principles > div {
+  background: #2a1653 !important;
+}
+
+body:not(.film-active) #onboardingFlow .onboarding-source-list .onboarding-source[aria-pressed="true"],
+body:not(.film-active) #onboardingFlow .onboarding-source-list .onboarding-source.selected {
+  border-color: rgba(122, 221, 255, .45) !important;
+  background: linear-gradient(135deg, #26335f, #234c54) !important;
+}
+
+body:not(.film-active) #onboardingFlow .onboarding-source-list .onboarding-source[aria-pressed="false"] {
+  background: #211044 !important;
+}
+
+body:not(.film-active) #onboardingFlow .onboarding-field input {
+  border-color: #49336c !important;
+  background: #130926 !important;
+  color: #f7efff !important;
+}
+
+body:not(.film-active) #onboardingFlow .onboarding-field input::placeholder {
+  color: #9c8bb8 !important;
+}
+
+/* Check-in mood cards: expressive icons with readable, playful color cues. */
+body:not(.film-active) .morning-checkin .checkin-card {
+  background: #1a0d36 !important;
+  border: 1px solid #49336c !important;
+  color: #f7efff !important;
+  box-shadow: 0 28px 80px rgba(3, 0, 12, .5) !important;
+}
+
+body:not(.film-active) .morning-checkin .checkin-options button {
+  min-height: 128px;
+  border: 1px solid #49336c !important;
+  background: #24124a !important;
+  color: #f7efff !important;
+  transition: transform .2s ease, border-color .2s ease, background .2s ease, box-shadow .2s ease;
+}
+
+body:not(.film-active) .morning-checkin .checkin-options button > span {
+  width: 54px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 12px;
+  border-radius: 18px;
+}
+
+body:not(.film-active) .morning-checkin .checkin-options button > span svg {
+  width: 31px;
+  height: 31px;
+  stroke-width: 1.8;
+}
+
+body:not(.film-active) .morning-checkin .checkin-options button strong {
+  color: #f7efff !important;
+  font-size: 13px;
+}
+
+body:not(.film-active) .morning-checkin .checkin-options button:nth-child(1) > span {
+  background: rgba(95, 232, 194, .14);
+  color: #8ff1d1;
+}
+
+body:not(.film-active) .morning-checkin .checkin-options button:nth-child(2) > span {
+  background: rgba(122, 221, 255, .14);
+  color: #9ce5ff;
+}
+
+body:not(.film-active) .morning-checkin .checkin-options button:nth-child(3) > span {
+  background: rgba(255, 145, 174, .14);
+  color: #ffb4ca;
+}
+
+body:not(.film-active) .morning-checkin .checkin-options button:nth-child(1):hover,
+body:not(.film-active) .morning-checkin .checkin-options button:nth-child(1):focus-visible {
+  border-color: rgba(95, 232, 194, .65) !important;
+  background: #1d3c3c !important;
+  box-shadow: 0 12px 28px rgba(95, 232, 194, .12);
+}
+
+body:not(.film-active) .morning-checkin .checkin-options button:nth-child(2):hover,
+body:not(.film-active) .morning-checkin .checkin-options button:nth-child(2):focus-visible {
+  border-color: rgba(122, 221, 255, .65) !important;
+  background: #1d3350 !important;
+  box-shadow: 0 12px 28px rgba(122, 221, 255, .12);
+}
+
+body:not(.film-active) .morning-checkin .checkin-options button:nth-child(3):hover,
+body:not(.film-active) .morning-checkin .checkin-options button:nth-child(3):focus-visible {
+  border-color: rgba(255, 145, 174, .65) !important;
+  background: #3d203f !important;
+  box-shadow: 0 12px 28px rgba(255, 145, 174, .12);
+}
+
+body:not(.film-active) .morning-checkin .checkin-options button:hover {
+  transform: translateY(-3px);
+}
+
+body:not(.film-active) .morning-checkin .checkin-skip {
+  color: #c9b9e0 !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+@media (hover: hover) and (pointer: fine) {
+  body:not(.film-active) .pointer-trail {
+    display: block;
+    position: fixed;
+    z-index: 20;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    mix-blend-mode: screen;
+  }
+
+  body:not(.film-active) .pointer-trail-dot {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 1px;
+    background: #7addff;
+    box-shadow: 0 0 10px rgba(122, 221, 255, .62), 0 0 22px rgba(122, 221, 255, .24);
+    will-change: transform, opacity;
+  }
+}
+
+.pointer-trail { display: none; }
+
+@media (hover: hover) and (pointer: fine) {
+  body:not(.film-active) .pointer-trail { display: block; }
+}
+
+/* Keep the loading dash compact without changing the real score size. */
+body:not(.film-active) .decision-dial .score-number.is-placeholder {
+  font-size: 42px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+body:not(.film-active) .decision-dial .score-number.is-placeholder + .score-out-of {
+  margin-top: 17px;
+  font-size: 16px;
 }

@@ -1,0 +1,11 @@
+.intro{position:relative;isolation:isolate;overflow:hidden;border-radius:22px;padding:30px!important;background:rgba(33,20,64,.72);border:1px solid #3c2b5a}
+.intro:before{content:"";position:absolute;z-index:-1;inset:-35px;background:url('coco.png.png') center/cover no-repeat;filter:blur(24px);opacity:.08;transform:scale(1.08)}
+.intro h1{max-width:620px!important;font-size:clamp(34px,4.1vw,49px)!important;line-height:1.05!important;margin-bottom:13px!important}
+.intro p{max-width:500px!important;font-size:14px!important}
+.coco-visual{position:relative;width:min(300px,31vw);min-width:210px;margin:0;align-self:stretch;display:grid;place-items:center;isolation:isolate}
+.coco-visual:before{content:"";position:absolute;inset:13% 4%;z-index:-1;border-radius:50%;background:#8b5bc7;filter:blur(34px);opacity:.14}
+.coco-visual img{display:block;width:100%;height:auto;max-height:220px;object-fit:contain;filter:drop-shadow(0 18px 24px rgba(0,0,0,.3));border-radius:14px}
+.coco-visual figcaption{position:absolute;bottom:7px;left:10%;right:10%;padding:6px;border-radius:8px;background:rgba(18,11,37,.74);backdrop-filter:blur(6px);color:#f5eaff;text-align:center;font:700 8px/1.2 "DM Sans",sans-serif;letter-spacing:.08em}
+.lamp{display:none!important}
+@media(max-width:740px){.intro{padding:24px 20px!important}.intro:before{opacity:.05}.coco-visual{width:35vw;min-width:155px}.coco-visual img{max-height:160px}}
+@media(max-width:540px){.intro{display:grid;grid-template-columns:1fr;border-radius:18px}.intro h1{font-size:32px!important}.coco-visual{width:min(100%,260px);min-width:0;justify-self:center;margin-top:12px}.coco-visual img{max-height:190px}.coco-visual figcaption{left:8%;right:8%;bottom:3px;padding:5px 2px;font-size:7px}}

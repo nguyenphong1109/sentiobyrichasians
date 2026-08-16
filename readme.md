@@ -1,48 +1,33 @@
-# Sentio Prototype
+# Sentio x Coco · BH1750–ESP32 demo
 
-Prototype sản phẩm Sentio của Rich Asians, tập trung vào một trải nghiệm học theo trạng thái cá nhân: hiểu nhịp của chính người dùng, đưa ra một bước tiếp theo rõ ràng và tạo accountability nhẹ nhàng.
+## Phạm vi bản nộp
 
-## Trải nghiệm chính
+Đây là prototype web cho kịch bản: BH1750 đo độ rọi, ESP32 nhận dữ liệu qua I²C, rồi hệ thống nhắc người học điều chỉnh môi trường. Trang `bh1750.html` là mô phỏng nên không tuyên bố đã kết nối phần cứng thật.
 
-- Onboarding ba bước và giai đoạn thiết lập nhịp tham chiếu cá nhân trong 7 ngày.
-- Điểm sẵn sàng so sánh trạng thái hiện tại với nhịp thường ngày của chính người dùng, không dùng một chuẩn chung.
-- Ba nhóm tín hiệu Hành vi số, Cơ thể và Môi trường với trạng thái kết nối, mức ảnh hưởng và độ phủ dữ liệu minh bạch.
-- Trang Hôm nay có một quyết định ưu tiên, phần giải thích nguyên nhân và tiến trình thiết lập nhịp tham chiếu.
-- Decision Dial chia điểm sẵn sàng thành ba vùng hành động: nghỉ, học nhẹ và tập trung sâu.
-- Ba nhóm tín hiệu dùng màu nhất quán và chỉ mở số liệu chi tiết khi người dùng yêu cầu.
-- Phiên Tập trung theo dõi nhẹ nhàng, chỉ nhắc khi tín hiệu lệch khỏi nhịp cá nhân đủ lâu.
-- Báo cáo tuần nhấn mạnh thay đổi hành vi, giữ đúng nhịp và cả những lần dừng đúng lúc.
-- Biểu đồ Readiness Score 7 ngày lấy trực tiếp từ các phiên đủ điều kiện đã lưu, giữ nguyên ngày trống và phân biệt rõ dữ liệu thật với hồ sơ mô phỏng.
-- Phần giải thích động ưu tiên yếu tố đang tác động mạnh nhất, đồng thời nêu lực bù trừ đáng kể nếu có.
-- Báo cáo tuần có thể lưu thành PDF qua hộp thoại in hoặc tải trực tiếp thành ảnh PNG để chia sẻ.
-- Trung tâm quyền riêng tư cho phép quản lý consent, thời gian lưu, xuất dữ liệu, thu hồi kết nối và xóa dữ liệu cục bộ.
-- Nội dung cốt lõi vẫn có bảy ngôn ngữ. Luồng mới ưu tiên tiếng Việt; các chuỗi đã quốc tế hóa có tiếng Anh dự phòng, còn một số panel chi tiết vẫn giữ nội dung tiếng Việt trong prototype này.
+## Kịch bản trình diễn 90 giây
 
-## Trạng thái các nguồn dữ liệu
+1. Mở `index.html`, chọn **Tập trung**, bấm **Hẹn giờ** và vuốt bánh xe để đặt thời lượng.
+2. Chuyển sang **Coco ↗** để mở `bh1750.html`.
+3. Bấm **Đèn bình thường**: mô phỏng khoảng 300 lux, trạng thái `NORMAL`.
+4. Bấm **Tắt đèn**: lux giảm về 20–30, trạng thái `DARK`; giữ dưới 30 lux trong 3 giây để kích hoạt cảnh báo.
+5. Mở **Cơ sở dữ liệu** để xem mẫu lux, trạng thái và tải CSV.
+6. Bấm **Bật đèn lại**: lux tăng dần về vùng học, trạng thái trở lại `NORMAL`.
 
-| Nguồn | Trạng thái trong bản web | Giới hạn / yêu cầu |
+## Mạch dự kiến
+
+| BH1750 | ESP32 | Ý nghĩa |
 | --- | --- | --- |
-| Digital | Live in-page | Ghi nhận trạng thái hiện/ẩn, số lần rời trang và một ước tính duy trì tập trung khi phiên Sentio đang mở; đây không phải lịch sử tab hay đo “tập trung thật” bên ngoài phiên. |
-| Cơ thể / đồng hồ | Kết nối mô phỏng | Trình duyệt không đọc trực tiếp Apple Health hoặc Health Connect. Tích hợp thật cần kết nối qua ứng dụng điện thoại và quyền do người dùng cấp. Các số liệu hiện có là dữ liệu minh họa. |
-| Environment / ESP32 | Pairing prototype | Có thể ghép đôi bằng Web Bluetooth khi trình duyệt và ESP32 tương thích. Prototype chưa cấu hình UUID/service để đọc lux trực tiếp; dữ liệu mẫu luôn được ghi nhãn rõ. |
+| VCC | 3V3 | Nguồn logic 3.3 V |
+| GND | GND | Mass chung |
+| SDA | GPIO21 | Dữ liệu I²C |
+| SCL | GPIO22 | Xung I²C |
+| ADDR | GND | Địa chỉ 7-bit `0x23` |
 
-## Dữ liệu và quyền riêng tư
+## Số liệu và giới hạn
 
-- Tín hiệu thô chỉ được xử lý tại nguồn kết nối và không được hiển thị công khai.
-- Prototype lưu cục bộ các chỉ số tổng hợp, tiến trình nhịp tham chiếu và lựa chọn giao diện cần thiết.
-- Thiếu một nguồn không chặn trải nghiệm; Sentio phải hiển thị nguồn bị thiếu và giảm độ tin cậy của quyết định tương ứng.
-- Đây là prototype hỗ trợ người dùng hiểu nhịp của bản thân, không phải công cụ chẩn đoán y khoa.
+- Dải `1–65.535 lux`, độ phân giải `1 lux` và địa chỉ `0x23` được ghi theo tài liệu BH1750FVI của ROHM.
+- GPIO21/GPIO22 là cấu hình I²C dùng trong bản demo ESP32; chân I²C có thể cấu hình trong ESP-IDF.
+- Chu kỳ 2 giây, giá trị 300 lux và ngưỡng cảnh báo 30 lux là lựa chọn mô phỏng để trình diễn, không phải dữ liệu phần cứng đã đo.
+- Sentio không dùng ánh sáng để chẩn đoán buồn ngủ; hệ thống chỉ phát hiện môi trường thiếu sáng và đưa ra lời nhắc.
 
-## Khởi chạy và đặt lại
-
-Mở `index.html` để chạy bản modular hiện tại (`styles.css` + `app.js`). Ở lần đầu, hoàn tất onboarding hoặc chọn xem trước bảng điều khiển. Để chạy lại luồng 7 ngày từ đầu, mở **Cài đặt → Đặt lại bản demo** hoặc chọn **Thiết lập lại onboarding** trong hồ sơ.
-
-`release/sentio.html` là bản phát hành gọn nhất: một tệp duy nhất đã chứa markup, style, logic và logo, có thể mở trực tiếp hoặc gửi cho ban tổ chức.
-
-Hướng dẫn đầy đủ cho người dùng và luồng trình bày cuộc thi nằm trong `HUONG_DAN_SU_DUNG.md`. Trong ứng dụng, có thể mở bản hướng dẫn ngắn từ **Cài đặt → Hướng dẫn sử dụng** hoặc nút **Hướng dẫn sử dụng** ở cuối trang.
-
-Sau mỗi lần sửa `index.html`, `styles.css` hoặc `app.js`, chạy `node build-single-file.mjs` để dựng lại `release/sentio.html` trước khi gửi hoặc trình chiếu.
-
-Trong tab **Tiến trình**, nút **Lưu PDF** mở bản báo cáo A4 để chọn “Save as PDF”; nút **Tải ảnh PNG** tạo ảnh báo cáo ngay trên thiết bị, không gửi dữ liệu phiên tới dịch vụ bên ngoài.
-
-Trong trải nghiệm chính, chạm nút hồ sơ có mũi tên để chuyển nhanh giữa tài khoản cá nhân và ba kịch bản mô phỏng Linh, Nam, Mai. Các kịch bản này luôn được ghi nhãn là dữ liệu mô phỏng.
+Nguồn: [ROHM BH1750FVI](https://www.rohm.com/products/sensor-ics/ambient-light-sensor-ics/bh1750fvi) · [Espressif I²C API](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/i2c.html)

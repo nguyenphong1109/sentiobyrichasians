@@ -989,6 +989,7 @@ const state = {
   toastTimer: null,
   focusEvents: [],
   activeNudge: null,
+  nudgeCardDismissed: false,
   nudgeCooldowns: {},
   lowLightSince: 0,
   bluetoothDevice: null,
@@ -1538,6 +1539,11 @@ function renderHealthSheet() {
   const p = getProfile();
   const body = snapshot.sources.body;
   const available = sourceHasMetrics('body', body);
+  const healthSheet = $('#healthSheet');
+  if (healthSheet) {
+    healthSheet.dataset.connection = body.connection || (available ? 'connected' : 'disconnected');
+    healthSheet.dataset.mode = body.mode || '';
+  }
   setText('#healthSleepMetric', available ? p.sleep : '—');
   setText('#healthHrMetric', available ? p.restingHr : '—');
   setText('#healthHrvMetric', available ? p.hrv : '—');
@@ -1707,6 +1713,7 @@ function renderProfile() {
   if ($('#profileAvatar')) $('#profileAvatar').style.background = p.accent;
   const displayScore = decision.status === 'insufficient' ? '—' : decision.score;
   setText('#scoreNumber', displayScore);
+  $('#scoreNumber')?.classList.toggle('is-placeholder', decision.status === 'insufficient');
   updateRing(decision.status === 'insufficient' ? 0 : decision.score);
   setText('#confidenceValue', `${decision.confidence}%`);
   setAriaProgress('#confidenceBar', decision.confidence);
@@ -1901,6 +1908,19 @@ function addFocusEvent(type, textKey, detail = '') {
   renderFocusTimeline();
 }
 
+function seedFocusEvents() {
+  if (state.focusEvents.length) return;
+  const now = Date.now();
+  const sample = t('previewData');
+  const metric = (focus, tabs) => format(t('digitalProxyMetric'), { focus, tabs });
+  state.focusEvents = [
+    { id: 'sample-start', type: 'start', textKey: 'eventSessionStarted', detail: `${sample} - ${metric(88, 0)}`, at: new Date(now - 48 * 60000).toISOString() },
+    { id: 'sample-tab', type: 'tab', textKey: 'eventTabSwitch', detail: metric(84, 1), at: new Date(now - 34 * 60000).toISOString() },
+    { id: 'sample-nudge', type: 'nudge', textKey: 'eventNudge', detail: `${sourceDisplayName('environment')} - 286 lux`, at: new Date(now - 21 * 60000).toISOString() },
+    { id: 'sample-dismiss', type: 'dismiss', textKey: 'eventDismissed', detail: t('nudgeQuietReason'), at: new Date(now - 19 * 60000).toISOString() }
+  ];
+}
+
 function renderFocusTimeline() {
   const timeline = $('#focusEventTimeline');
   const empty = $('#focusEventEmpty');
@@ -1986,6 +2006,13 @@ function renderNudge() {
   const nudge = evaluateNudge(false);
   const card = $('#nudgeCard');
   if (!card) return;
+  if (state.nudgeCardDismissed && !nudge) {
+    card.className = 'nudge-card is-dismissed';
+    card.setAttribute('aria-hidden', 'true');
+    return;
+  }
+  state.nudgeCardDismissed = false;
+  card.removeAttribute('aria-hidden');
   card.className = 'nudge-card';
   const icon = $('.nudge-emoji', card);
   const dismiss = $('#nudgeDismiss');
@@ -2055,15 +2082,15 @@ function recentSessions(days = 7) {
 function previewWeeklyData() {
   return {
     sample: true,
-    values: [68, 72, 70, 76, 79, 81, 83],
-    average: 76,
-    interruptions: 3.4,
-    rhythm: 71,
+    values: [78, 81, 84, 80, 88, 90, 87],
+    average: 84,
+    interruptions: 3,
+    rhythm: 86,
     healthyStops: 2,
     sessions: 7,
     days: 7,
-    consistentDays: 5,
-    before: 7,
+    consistentDays: 6,
+    before: 9,
     after: 3
   };
 }
@@ -2112,7 +2139,7 @@ function getWeeklyProgressModel({ allowPreview = true } = {}) {
   const eligibleSessions = sessions.filter((session) => session.readiness !== null && session.readiness !== undefined && session.readiness !== '' && Number.isFinite(Number(session.readiness)));
   const data = eligibleSessions.length
     ? aggregateWeeklyData(sessions)
-    : allowPreview && state.personal.previewMode
+    : allowPreview
       ? previewWeeklyData()
       : null;
   return { now, start, sessions, eligibleSessions, data };
@@ -2127,23 +2154,23 @@ function renderPersonalProgress() {
   setText('#trendDataSource', data?.sample ? t('previewSessionData') : t('realSessionData'));
 
   if (!data) {
-    setText('#trendValue', '—');
+    setText('#trendValue', '0 phiên');
     setText('#changeHeadline', t('collectingWeekly'));
-    setText('#beforeValue', '—');
-    setText('#afterValue', '—');
+    setText('#beforeValue', '0');
+    setText('#afterValue', '0');
     setText('#beforeLabel', t('weeklyInterruptionsLabel'));
     setText('#afterLabel', t('weeklyInterruptionsLabel'));
     setText('#progressNote', t('collectingWeeklyText'));
-    setText('#weeklyAverage', '—');
+    setText('#weeklyAverage', '0');
     setText('#consistentDaysValue', '0');
     setText('#historyTrend', t('collectingWeekly'));
-    setText('#weeklyInterruptions', '—');
-    setText('#weeklyRhythm', '—');
+    setText('#weeklyInterruptions', '0');
+    setText('#weeklyRhythm', '0%');
     setText('#weeklyHealthyStops', '0');
-    setText('#trendAverageScore', '—');
+    setText('#trendAverageScore', '0');
     setText('#trendSessionCount', '0');
     setText('#trendActiveDays', '0 / 7');
-    setText('#trendDataSource', t('realSessionData'));
+    setText('#trendDataSource', 'Chưa có phiên thật');
     setText('#selfAwarenessInsights', t('noInsightYet'));
     const history = $('#historyList');
     if (history) history.innerHTML = `<p class="empty-state">${escapeHtml(t('collectingWeeklyText'))}</p>`;
@@ -2242,7 +2269,12 @@ function drawChart(values) {
 
   if ($('#chartLine')) $('#chartLine').setAttribute('d', line);
   if ($('#chartArea')) $('#chartArea').setAttribute('d', area);
-  if ($('#chartDots')) $('#chartDots').innerHTML = points.filter(Boolean).map(([x, y, value, index]) => `<circle class="chart-dot" cx="${x}" cy="${y}" r="7"><title>${escapeHtml(String(value))} / 100 · ${escapeHtml(String(index + 1))}/7</title></circle>`).join('');
+  if ($('#chartDots')) {
+    $('#chartDots').innerHTML = points.filter(Boolean).map(([x, y, value, index]) => `
+      <g class="chart-point">
+        <circle class="chart-dot" cx="${x}" cy="${y}" r="5"><title>${escapeHtml(String(value))} / 100 - ${escapeHtml(String(index + 1))}/7</title></circle>
+      </g>`).join('');
+  }
 
   const gridValues = [100, 75, 50, 25, 0];
   if ($('#chartGrid')) $('#chartGrid').innerHTML = gridValues.map((value) => `<line x1="${padLeft}" x2="${width - padRight}" y1="${yFor(value)}" y2="${yFor(value)}"></line>`).join('');
@@ -2273,8 +2305,9 @@ function drawChart(values) {
   }
   if (averageLabel) {
     averageLabel.textContent = average === null ? '' : `${t('chartAverage')} ${average}`;
-    averageLabel.setAttribute('x', String(width - padRight));
-    averageLabel.setAttribute('y', String(yFor(average ?? 0) - 8));
+    averageLabel.setAttribute('x', String(padLeft + 10));
+    averageLabel.setAttribute('y', String(yFor(average ?? 0) - 9));
+    averageLabel.setAttribute('text-anchor', 'start');
   }
   const wrap = $('#readinessChartWrap');
   if (wrap) wrap.setAttribute('aria-label', finiteValues.length ? `${t('readinessTrendLabel')}: ${finiteValues.join(', ')}` : t('chartEmptyState'));
@@ -3385,7 +3418,10 @@ function startTimer() {
       evaluateNudge(true);
       renderNudge();
     }
-    if (state.remaining <= 0) finishSession();
+    if (state.remaining <= 0) {
+      window.dispatchEvent(new CustomEvent('sentio:timer-complete'));
+      finishSession();
+    }
   }, 1000);
 }
 
@@ -3469,7 +3505,10 @@ function finishSession() {
 
 function handleNudgeAction() {
   const nudge = state.activeNudge || getNudgeCandidate();
-  if (!nudge) return;
+  if (!nudge) {
+    collapseNudgeCard();
+    return;
+  }
   if (nudge.kind === 'environment') {
     fixRoomEnvironment();
     return;
@@ -3480,6 +3519,15 @@ function handleNudgeAction() {
   }
   state.healthyStopRequested = true;
   finishSession();
+}
+
+function collapseNudgeCard() {
+  state.nudgeCardDismissed = true;
+  const card = $('#nudgeCard');
+  if (card) {
+    card.classList.add('is-dismissed');
+    card.setAttribute('aria-hidden', 'true');
+  }
 }
 
 function dismissActiveNudge() {
@@ -3498,6 +3546,7 @@ function dismissActiveNudge() {
   }
   addFocusEvent('dismiss', 'eventDismissed');
   state.activeNudge = null;
+  state.nudgeCardDismissed = true;
   showToast(t('nudgeDismissed'));
   renderNudge();
 }
@@ -3696,6 +3745,63 @@ function bindOptional(selector, eventName, handler) {
   if (element) element.addEventListener(eventName, handler);
 }
 
+function bindPointerSpotlight() {
+  const pointerQuery = window.matchMedia?.('(hover: hover) and (pointer: fine)');
+  if (!pointerQuery?.matches) return;
+  const trail = document.querySelector('.pointer-trail');
+  if (!trail) return;
+  const dots = Array.from({ length: 20 }, () => {
+    const dot = document.createElement('i');
+    dot.className = 'pointer-trail-dot';
+    trail.appendChild(dot);
+    return dot;
+  });
+  const positions = dots.map(() => ({ x: window.innerWidth * .5, y: window.innerHeight * .3 }));
+  const gridSize = 28;
+  let frame = 0;
+  let x = window.innerWidth * .5;
+  let y = window.innerHeight * .3;
+  let active = false;
+  let stepsRemaining = 0;
+
+  const paint = () => {
+    frame = 0;
+    for (let index = positions.length - 1; index >= 0; index -= 1) {
+      const position = positions[index];
+      const target = index === 0 ? { x, y } : positions[index - 1];
+      position.x = target.x;
+      position.y = target.y;
+      dots[index].style.transform = `translate3d(${position.x}px, ${position.y}px, 0) translate(-50%, -50%) scale(${1 - index * .045})`;
+      dots[index].style.opacity = active ? Math.max(.08, 1 - index * .105) : 0;
+    }
+    stepsRemaining -= 1;
+    if (active && stepsRemaining > 0) frame = window.requestAnimationFrame(paint);
+  };
+
+  const move = (event) => {
+    const nextX = Math.round(event.clientX / gridSize) * gridSize;
+    const nextY = Math.round(event.clientY / gridSize) * gridSize;
+    if (nextX === x && nextY === y && stepsRemaining <= 0) return;
+    x = nextX;
+    y = nextY;
+    active = true;
+    stepsRemaining = positions.length;
+    if (!frame) frame = window.requestAnimationFrame(paint);
+  };
+
+  const clear = () => {
+    active = false;
+    stepsRemaining = 0;
+    dots.forEach((dot) => { dot.style.opacity = 0; });
+  };
+
+  document.addEventListener('pointermove', move, { passive: true });
+  window.addEventListener('blur', clear);
+  document.addEventListener('pointerout', (event) => {
+    if (!event.relatedTarget) clear();
+  }, { passive: true });
+}
+
 function closeSessionSummary(restoreFocus = true) {
   const summary = $('#sessionSummary');
   if (!summary) return;
@@ -3883,10 +3989,12 @@ function init() {
   restoreActiveSession();
   restoreNudgeCooldown();
   runStartupExperience();
+  bindPointerSpotlight();
   if (state.profile === 'personal') {
     if (!state.personal.onboardingComplete) window.setTimeout(() => openOnboarding(), 120);
     else window.setTimeout(openCheckin, 1850);
   }
+  seedFocusEvents();
   renderFocusTimeline();
 }
 

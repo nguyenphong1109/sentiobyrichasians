@@ -7,8 +7,12 @@
   <meta name="description" content="Sentio — Study when you're ready.">
   <title>Sentio — Study when you're ready</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="sentio-link.css">
+  <link rel="stylesheet" href="sentio-theme.css">
+  <link rel="stylesheet" href="sentio-progress.css">
 </head>
 <body>
+  <div class="pointer-trail" aria-hidden="true"></div>
   <div class="startup-overlay" id="startupOverlay" aria-live="polite">
     <div class="startup-mark">S</div>
     <p id="startupLabel">Đang đọc tín hiệu hôm nay…</p>
@@ -120,7 +124,23 @@
         </span>
       </button>
 
+      <nav class="bottom-nav" aria-label="Primary navigation">
+        <button class="nav-item active" type="button" data-view-link="today">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11 12 4l8 7v9H4v-9Z"/><path d="M9 20v-6h6v6"/></svg>
+          <span data-i18n="today">Hôm nay</span>
+        </button>
+        <button class="nav-item" type="button" data-view-link="focus">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>
+          <span data-i18n="focus">Tập trung</span>
+        </button>
+        <button class="nav-item" type="button" data-view-link="progress">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/></svg>
+          <span data-i18n="progress">Tiến trình</span>
+        </button>
+      </nav>
+
       <div class="top-actions">
+        <a class="sensor-link" href="bh1750.html">Coco ↗</a>
         <button class="icon-button" id="settingsButton" type="button" aria-label="Settings" title="Settings">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8.3a3.7 3.7 0 1 0 0 7.4 3.7 3.7 0 0 0 0-7.4Zm8.7 3.7c0-.6-.1-1.2-.2-1.8l-2.1-.8a7.6 7.6 0 0 0-.7-1.2l.4-2.2A9.6 9.6 0 0 0 15 4.2l-1.7 1.4a7.4 7.4 0 0 0-1.4 0l-1.7-1.4A9.6 9.6 0 0 0 7.1 6l.4 2.2c-.3.4-.5.8-.7 1.2l-2.1.8A9.8 9.8 0 0 0 4.5 12c0 .6.1 1.2.2 1.8l2.1.8c.2.4.4.8.7 1.2L7.1 18a9.6 9.6 0 0 0 3.1 1.8l1.7-1.4a7.4 7.4 0 0 0 1.4 0l1.7 1.4a9.6 9.6 0 0 0 3.1-1.8l-.4-2.2c.3-.4.5-.8.7-1.2l2.1-.8c.1-.6.2-1.2.2-1.8Z"/></svg>
         </button>
@@ -163,6 +183,7 @@
             <div class="score-panel">
               <div class="score-ring-wrap decision-dial" id="decisionDial" role="meter" aria-label="Điểm sẵn sàng" aria-valuemin="0" aria-valuemax="100" aria-valuenow="92" style="--score:92">
                 <div class="dial-spectrum" aria-hidden="true"></div>
+                <div class="dial-fill" aria-hidden="true"></div>
                 <span class="dial-marker" aria-hidden="true"></span>
                 <svg class="score-ring legacy-progress" viewBox="0 0 200 200" aria-hidden="true">
                   <circle class="ring-progress" id="ringProgress" cx="100" cy="100" r="79"></circle>
@@ -342,15 +363,21 @@
           <article class="timer-card reveal delay-1">
             <div class="task-row">
               <label for="taskSelect" data-i18n="currentTask">Việc đang làm</label>
+              <div class="task-controls">
               <select id="taskSelect">
                 <option value="reading" data-i18n-option="reading">Đọc và ôn nhẹ</option>
                 <option value="coding" data-i18n-option="coding">Lập trình</option>
                 <option value="economics" data-i18n-option="economics">Kinh tế học</option>
                 <option value="language" data-i18n-option="languageStudy">Ngoại ngữ</option>
               </select>
+              <button class="timer-open-button" id="openTimerSettings" type="button" aria-label="Chọn thời lượng học">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7v5l3 2"></path></svg>
+                <span>Hẹn giờ</span>
+              </button>
+              </div>
             </div>
 
-            <div class="timer-orbit" id="timerOrbit">
+            <div class="timer-orbit" id="timerOrbit" role="button" tabindex="0" aria-label="Chỉnh thời lượng bộ đếm">
               <span class="orbit-dot dot-a"></span>
               <span class="orbit-dot dot-b"></span>
               <span class="orbit-dot dot-c"></span>
@@ -440,6 +467,7 @@
             </div>
           </div>
         </div>
+        <p class="progress-evidence-note"><span aria-hidden="true">●</span> Minh họa 7 phiên: Readiness 84/100 · 6/7 ngày ổn định · 3 lần gián đoạn mỗi phiên. Thông số BH1750/I²C có nguồn trong trang Coco.</p>
 
         <div class="weekly-summary-grid reveal delay-1">
           <article class="weekly-hero-card">
@@ -660,20 +688,6 @@
 
     </main>
 
-    <nav class="bottom-nav" aria-label="Primary navigation">
-      <button class="nav-item active" type="button" data-view-link="today">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11 12 4l8 7v9H4v-9Z"/><path d="M9 20v-6h6v6"/></svg>
-        <span data-i18n="today">Hôm nay</span>
-      </button>
-      <button class="nav-item" type="button" data-view-link="focus">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>
-        <span data-i18n="focus">Tập trung</span>
-      </button>
-      <button class="nav-item" type="button" data-view-link="progress">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/></svg>
-        <span data-i18n="progress">Tiến trình</span>
-      </button>
-    </nav>
   </div>
 
   <div class="backdrop" id="backdrop"></div>
@@ -900,6 +914,24 @@
 
   <div class="app-toast" id="appToast" role="status" aria-live="polite" aria-atomic="true" hidden></div>
 
+  <div class="timer-modal" id="timerModal" hidden>
+    <div class="timer-modal-backdrop" data-close-timer></div>
+    <section class="timer-modal-card" role="dialog" aria-modal="true" aria-labelledby="timerModalTitle">
+      <button class="timer-modal-close" type="button" data-close-timer aria-label="Đóng">×</button>
+      <span class="card-label">THỜI LƯỢNG PHIÊN</span>
+      <h2 id="timerModalTitle">Bạn muốn học trong bao lâu?</h2>
+      <p>Chọn một mốc ngắn để bắt đầu. Bạn vẫn có thể tạm dừng hoặc kết thúc sớm.</p>
+      <div class="time-picker" id="timePicker" role="group" aria-label="Chọn giờ, phút và giây">
+        <div class="time-wheel" data-unit="hours" aria-label="Giờ"><button class="wheel-arrow wheel-up" type="button" aria-label="Giảm giờ"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 14 6-6 6 6"/></svg></button><div class="wheel-viewport"><div class="wheel-list"></div></div><button class="wheel-arrow wheel-down" type="button" aria-label="Tăng giờ"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 10 6 6 6-6"/></svg></button></div>
+        <div class="time-wheel" data-unit="minutes" aria-label="Phút"><button class="wheel-arrow wheel-up" type="button" aria-label="Giảm phút"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 14 6-6 6 6"/></svg></button><div class="wheel-viewport"><div class="wheel-list"></div></div><button class="wheel-arrow wheel-down" type="button" aria-label="Tăng phút"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 10 6 6 6-6"/></svg></button></div>
+        <div class="time-wheel" data-unit="seconds" aria-label="Giây"><button class="wheel-arrow wheel-up" type="button" aria-label="Giảm giây"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 14 6-6 6 6"/></svg></button><div class="wheel-viewport"><div class="wheel-list"></div></div><button class="wheel-arrow wheel-down" type="button" aria-label="Tăng giây"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 10 6 6 6-6"/></svg></button></div>
+        <div class="wheel-selection" aria-hidden="true"></div>
+      </div>
+      <button class="primary-button timer-confirm" id="confirmTimer" type="button">Đặt thời lượng</button>
+    </section>
+  </div>
+
   <script src="app.js"></script>
+  <script src="sentio-timer.js"></script>
 </body>
 </html>

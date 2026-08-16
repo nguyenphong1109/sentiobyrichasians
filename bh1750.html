@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#110b24">
+  <title>Lightie | Mô phỏng BH1750 – ESP32</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fira+Code:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="bh1750-clean.css"><link rel="stylesheet" href="bh1750-telemetry.css"><link rel="stylesheet" href="coco.css"><link rel="stylesheet" href="wellbeing.css"><link rel="stylesheet" href="bh1750-threshold.css"><link rel="stylesheet" href="bh1750-evidence.css">
+  <script defer src="bh1750.js"></script><script defer src="wellbeing.js"></script><script defer src="bh1750-threshold.js"></script><script defer src="demo-copy.js"></script><script defer src="spotlight.js"></script>
+</head>
+<body>
+  <div class="pointer-trail" aria-hidden="true"></div>
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="Lightie trang đầu"><span class="brand-mark">☼</span><span><strong>lightie</strong><small>BH1750 · ESP32</small></span></a>
+      <nav class="header-actions" aria-label="Điều hướng">
+        <button class="outline-button" id="openProof" type="button">▦ Cơ sở dữ liệu</button>
+        <a class="outline-button" href="index.html">Sentio ↗</a>
+      </nav>
+    </header>
+
+    <section class="intro" id="top">
+      <div><p class="eyebrow">Demo khoa học kỹ thuật THPT</p><h1>Khi đèn phía sau tắt,<br><span>BH1750 nhìn thấy gì?</span></h1><p>Đây là mô phỏng trực quan cách cảm biến ánh sáng BH1750 gửi giá trị lux về ESP32 qua I²C.</p></div>
+      <figure class="coco-visual">
+        <img src="coco.png.png" alt="Coco Desk Hub, thiết bị đặt trên bàn học">
+        <figcaption>COCO · DESK HUB / BH1750</figcaption>
+      </figure>
+    </section>
+
+    <section class="live-card" aria-labelledby="liveTitle">
+      <div class="live-heading"><div><p class="eyebrow">Kết quả trực tiếp</p><h2 id="liveTitle">Độ rọi hiện tại</h2></div><span class="mode-chip" id="modeChip">NORMAL</span></div>
+      <div class="live-value"><output id="luxValue">320</output><span>lux</span></div>
+      <div class="lux-track" aria-hidden="true"><i id="luxMeter"></i></div>
+      <p class="live-copy" id="liveCopy">Ánh sáng ổn định, mô phỏng mức phù hợp để học tập.</p>
+    </section>
+
+    <section class="demo-card" aria-labelledby="demoTitle">
+      <div class="section-heading"><div><p class="eyebrow">Kịch bản trình diễn</p><h2 id="demoTitle">Thử tắt đèn phía sau</h2></div><span class="planned-label">Mô hình dự kiến</span></div>
+      
+      <div class="demo-actions" role="group" aria-label="Điều khiển đèn mô phỏng">
+        <button class="light-button active" type="button" data-light="normal">Đèn bình thường</button>
+        <button class="light-button" type="button" data-light="off">Tắt đèn</button>
+        <button class="light-button" type="button" data-light="restore">Bật đèn lại</button>
+      </div>
+      <div class="demo-state"><span id="demoNarrative">Đèn đang bật · mục tiêu khoảng 300 lux.</span><span id="darkTimer">Chưa có cảnh báo</span></div>
+      <div class="alert-box" id="darkAlert" hidden role="alert"><strong>Thiếu sáng kéo dài</strong><span>Lux dưới 30 liên tục 3 giây. Hệ thống nhắc kiểm tra nguồn đèn.</span></div>
+    </section>
+
+    <section class="two-column">
+      <article class="panel chart-panel"><div class="section-heading"><div><p class="eyebrow">Biểu đồ đơn giản</p><h2>Lux theo thời gian</h2></div><span class="sample-tag">Mỗi 2 giây</span></div><svg class="chart" viewBox="0 0 640 190" role="img" aria-label="Biểu đồ lux mô phỏng"><path class="chart-grid" d="M0 35H640M0 95H640M0 155H640"/><path id="chartArea" class="chart-area" d=""/><path id="chartLine" class="chart-line" d=""/></svg><div class="chart-axis"><span>Trước đó</span><span>Bây giờ</span></div></article>
+      <article class="panel wiring-panel"><div class="section-heading"><div><p class="eyebrow">Sơ đồ mạch dự kiến</p><h2>BH1750 ↔ ESP32</h2></div><span class="sample-tag">I²C</span></div><div class="wiring-visual"><div class="board">ESP32<small>logic 3.3V</small></div><div class="connection-lines" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div><div class="sensor">BH1750<small>đo lux</small></div></div><table class="pin-table"><thead><tr><th>Chân BH1750</th><th>Nối tới ESP32</th><th>Ý nghĩa</th></tr></thead><tbody><tr><td>VCC</td><td>3V3</td><td>Nguồn 3.3V</td></tr><tr><td>GND</td><td>GND</td><td>Mass chung</td></tr><tr><td>SDA</td><td>GPIO21</td><td>Dữ liệu I²C</td></tr><tr><td>SCL</td><td>GPIO22</td><td>Xung I²C</td></tr><tr><td>ADDR</td><td>GND</td><td>Địa chỉ 0x23</td></tr></tbody></table></article>
+    </section>
+
+    <section class="evidence-card" aria-labelledby="evidenceTitle">
+      <div class="section-heading"><div><p class="eyebrow">Thông số có nguồn</p><h2 id="evidenceTitle">Cơ sở kỹ thuật của mô hình</h2></div><span class="sample-tag">Datasheet + demo</span></div>
+      <div class="evidence-grid">
+        <article><strong>1–65.535 lux</strong><span>Dải đo danh định BH1750FVI</span></article>
+        <article><strong>1 lux</strong><span>Độ phân giải ở chế độ H-resolution</span></article>
+        <article><strong>0x23</strong><span>Địa chỉ I²C khi ADDR nối GND</span></article>
+        <article><strong>2 giây</strong><span>Chu kỳ mẫu của mô phỏng web, do nhóm chọn</span></article>
+      </div>
+      <p class="evidence-note">GPIO21 (SDA) và GPIO22 (SCL) là cấu hình I²C được dùng trong bản demo ESP32. Giá trị lux trên trang là dữ liệu mô phỏng; khi lắp mạch, ESP32 sẽ đọc mẫu thật từ BH1750.</p>
+      <div class="evidence-links"><a href="https://www.rohm.com/products/sensor-ics/ambient-light-sensor-ics/bh1750fvi" target="_blank" rel="noopener noreferrer">ROHM · BH1750FVI</a><a href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/i2c.html" target="_blank" rel="noopener noreferrer">Espressif · I²C API</a></div>
+    </section>
+
+    <section class="wellbeing-card" aria-labelledby="wellbeingTitle"><div class="section-heading"><div><p class="eyebrow">Hỗ trợ người học</p><h2 id="wellbeingTitle">Hôm nay bạn đang thấy thế nào?</h2></div><span class="sample-tag">Tự chọn</span></div><p class="section-copy">Chọn biểu hiện gần nhất để nhận một gợi ý học tập phù hợp. Phần này không dùng camera và không chẩn đoán sức khỏe.</p><div class="wellbeing-actions" role="group" aria-label="Trạng thái người học"><button type="button" data-wellbeing="alert">Tỉnh táo</button><button type="button" data-wellbeing="yawn">Hay ngáp</button><button type="button" data-wellbeing="bored">Chán nản</button><button type="button" data-wellbeing="eyes">Mỏi mắt</button></div><div class="wellbeing-result" id="wellbeingResult" aria-live="polite"><strong>Chọn một trạng thái để xem gợi ý.</strong><span>Lightie sẽ đề xuất học sâu, ôn nhẹ, nghỉ ngắn hoặc vận động.</span></div></section><aside class="scope-note"><strong>Giới hạn dự án:</strong> Hệ thống phát hiện môi trường thiếu sáng và đưa ra lời nhắc. Không dùng ánh sáng để kết luận người dùng buồn ngủ hoặc chẩn đoán sức khỏe.</aside>
+  </main>
+
+  <div class="proof-modal" id="proofModal" hidden>
+    <div class="modal-backdrop" data-close-proof></div>
+    <section class="proof-card" role="dialog" aria-modal="true" aria-labelledby="proofTitle">
+      <button class="close-button" id="closeProof" type="button" aria-label="Đóng">×</button>
+      <p class="eyebrow">Bằng chứng mô phỏng</p><h2 id="proofTitle">Dữ liệu ghi nhận từ BH1750</h2>
+      <p>ESP32 dự kiến lưu một mẫu lux sau mỗi 2 giây. Bản demo này tạo bản ghi theo đúng kịch bản đèn bật/tắt trên màn hình.</p>
+      <div class="proof-stats"><div><strong>2 giây</strong><span>Chu kỳ lưu mẫu</span></div><div><strong id="proofCount">0</strong><span>Mẫu trong demo</span></div><div><strong>0x23</strong><span>Địa chỉ I²C</span></div></div>
+      <div class="proof-table-wrap"><table><thead><tr><th>Thời điểm</th><th>Lux</th><th>Trạng thái</th></tr></thead><tbody id="proofRows"></tbody></table></div>
+      <div class="proof-footer"><span>BH1750 · ESP32 · GPIO21/22</span><button class="download-button" id="downloadCsv" type="button">Tải CSV mẫu ↓</button></div>
+      <small>Dữ liệu trên trang này là mô phỏng phục vụ trình diễn, chưa phải bản ghi phần cứng thật.</small>
+    </section>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
