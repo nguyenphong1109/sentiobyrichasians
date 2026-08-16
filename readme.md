@@ -1,33 +1,38 @@
-# Sentio x Coco · BH1750–ESP32 demo
+# Sentio
 
-## Phạm vi bản nộp
+Sentio is a lightweight static web demo for healthier study routines. It includes a focus dashboard, readiness insights, a session timer, and a BH1750 light-sensor simulation.
 
-Đây là prototype web cho kịch bản: BH1750 đo độ rọi, ESP32 nhận dữ liệu qua I²C, rồi hệ thống nhắc người học điều chỉnh môi trường. Trang `bh1750.html` là mô phỏng nên không tuyên bố đã kết nối phần cứng thật.
+## Live site
 
-## Kịch bản trình diễn 90 giây
+- Main dashboard: https://sentiobyrichasians.netlify.app/
+- Light sensor demo: https://sentiobyrichasians.netlify.app/bh1750.html
 
-1. Mở `index.html`, chọn **Tập trung**, bấm **Hẹn giờ** và vuốt bánh xe để đặt thời lượng.
-2. Chuyển sang **Coco ↗** để mở `bh1750.html`.
-3. Bấm **Đèn bình thường**: mô phỏng khoảng 300 lux, trạng thái `NORMAL`.
-4. Bấm **Tắt đèn**: lux giảm về 20–30, trạng thái `DARK`; giữ dưới 30 lux trong 3 giây để kích hoạt cảnh báo.
-5. Mở **Cơ sở dữ liệu** để xem mẫu lux, trạng thái và tải CSV.
-6. Bấm **Bật đèn lại**: lux tăng dần về vùng học, trạng thái trở lại `NORMAL`.
+## Using the demo
 
-## Mạch dự kiến
+1. Open the main dashboard and choose **Tap trung**.
+2. Set a session duration and start the timer.
+3. Use the check-in and progress sections to review your routine.
+4. Open **Coco** to visit the BH1750 sensor simulation.
+5. In the sensor demo, toggle the light state and open the data view to inspect sample readings or download a CSV.
 
-| BH1750 | ESP32 | Ý nghĩa |
-| --- | --- | --- |
-| VCC | 3V3 | Nguồn logic 3.3 V |
-| GND | GND | Mass chung |
-| SDA | GPIO21 | Dữ liệu I²C |
-| SCL | GPIO22 | Xung I²C |
-| ADDR | GND | Địa chỉ 7-bit `0x23` |
+## Important note
 
-## Số liệu và giới hạn
+This is a front-end prototype. The BH1750 page uses simulated readings and does not claim a real hardware connection. The sensor concept is based on BH1750 over I2C with an ESP32; the sample wiring and thresholds are for demonstration only.
 
-- Dải `1–65.535 lux`, độ phân giải `1 lux` và địa chỉ `0x23` được ghi theo tài liệu BH1750FVI của ROHM.
-- GPIO21/GPIO22 là cấu hình I²C dùng trong bản demo ESP32; chân I²C có thể cấu hình trong ESP-IDF.
-- Chu kỳ 2 giây, giá trị 300 lux và ngưỡng cảnh báo 30 lux là lựa chọn mô phỏng để trình diễn, không phải dữ liệu phần cứng đã đo.
-- Sentio không dùng ánh sáng để chẩn đoán buồn ngủ; hệ thống chỉ phát hiện môi trường thiếu sáng và đưa ra lời nhắc.
+## Run locally
 
-Nguồn: [ROHM BH1750FVI](https://www.rohm.com/products/sensor-ics/ambient-light-sensor-ics/bh1750fvi) · [Espressif I²C API](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/i2c.html)
+Serve the project from a local web server instead of opening the HTML files directly:
+
+```bash
+python -m http.server 8000
+```
+
+Then open http://127.0.0.1:8000/.
+
+## Project structure
+
+- `index.html`: Sentio dashboard and onboarding flow
+- `bh1750.html`: BH1750 light-sensor simulation
+- `styles.css` and feature CSS files: visual system and responsive layout
+- `app.js`, `sentio-timer.js`, `bh1750.js`, and feature scripts: interactions and demo state
+- `sentio-logo.jpg`, `coco.png.png`: visual assets
