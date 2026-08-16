@@ -15,16 +15,6 @@ Sentio là web hỗ trợ theo dõi nhịp học, phiên tập trung và môi tr
 4. Chọn **Coco** để mở trang mô phỏng cảm biến ánh sáng.
 5. Trong trang BH1750, bật/tắt đèn để xem giá trị lux thay đổi, mở dữ liệu để xem mẫu đo hoặc tải CSV.
 
-## Chạy trên máy
-
-Không nên mở trực tiếp file HTML vì dự án dùng nhiều file JavaScript và CSS. Hãy chạy một web server trong thư mục dự án:
-
-```bash
-python -m http.server 8000
-```
-
-Sau đó mở http://127.0.0.1:8000/.
-
 ## Cấu trúc chính
 
 - `index.html`: dashboard, onboarding, check-in và tiến trình
